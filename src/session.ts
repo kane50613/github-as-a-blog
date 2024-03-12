@@ -9,7 +9,7 @@ export interface IronSessionData {
 }
 
 export const ironOptions = {
-  cookieName: "gaas",
+  cookieName: "github-as-a-blog",
   password: env.JWT_SECRET,
   cookieOptions: {
     secure: true,
