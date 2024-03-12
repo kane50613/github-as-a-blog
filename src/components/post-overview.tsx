@@ -23,12 +23,17 @@ export const PostOverview = ({ post }: { post: Post }) => (
             #{post.number} • @{post.user?.login}
           </span>
         </div>
-        <CardTitle className="text-lg md:text-xl h-full line-clamp-2 break-all">
+        <CardTitle className="text-lg md:text-lg h-full line-clamp-2 break-normal">
           {post.title}
         </CardTitle>
       </CardHeader>
-      <CardContent className="text-secondary-foreground/80 break-all">
-        <span className="line-clamp-3">{post.body}</span>
+      <CardContent className="text-secondary-foreground/80">
+        <div
+          className="line-clamp-3 text-sm break-all"
+          dangerouslySetInnerHTML={{
+            __html: post.body ?? "",
+          }}
+        />
       </CardContent>
       <CardFooter className="text-secondary-foreground/75 text-sm">
         Read more
