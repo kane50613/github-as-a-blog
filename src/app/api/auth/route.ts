@@ -20,12 +20,6 @@ async function grabToken(req: Request, code: string) {
 
   const { protocol, host } = new URL(req.url);
 
-  // form.set("client_id", env.GITHUB_CLIENT_ID);
-  // form.set("client_secret", env.GITHUB_CLIENT_SECRET);
-  // form.set("redirect_uri", `${protocol}//${host}/api/auth`);
-  // form.set("code", code);
-  // form.set("repository_id", "770713436");
-
   const tokenRequest = await fetch(
     "https://github.com/login/oauth/access_token",
     {
@@ -48,12 +42,17 @@ async function grabToken(req: Request, code: string) {
     scope: string;
   };
 
-  if (token.scope !== scopes) return redirectToGithub(req);
+  const givenScopes = token.scope.split(",");
+
+  if (
+    givenScopes.length !== scopes.length ||
+    !givenScopes.every((scope) => scopes.includes(scope))
+  )
+    return redirectToGithub(req);
 
   session.token = token.access_token;
 
   await session.save();
-  console.log(session.token);
 
   if (!session.token) return redirectToGithub(req);
 
@@ -61,11 +60,13 @@ async function grabToken(req: Request, code: string) {
 }
 
 const loginUrl = new URL("https://github.com/login/oauth/authorize");
-const scopes = ["read:user", "repo"].join(" ");
+const scopes = ["read:user", "repo"];
+
+const scope = scopes.join(" ");
 
 loginUrl.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
 loginUrl.searchParams.set("response_type", "code");
-loginUrl.searchParams.set("scope", scopes);
+loginUrl.searchParams.set("scope", scope);
 
 async function redirectToGithub(req: Request) {
   const state = Math.random().toString(36).slice(2);
