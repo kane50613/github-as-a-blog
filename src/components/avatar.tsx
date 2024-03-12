@@ -8,6 +8,7 @@ export const Avatar: FC<
 > = (props) => {
   if (props.src)
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         {...props}
         alt={props.alt}
