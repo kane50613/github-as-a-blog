@@ -1,5 +1,6 @@
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
+import { cache } from "react";
 import { env } from "./env";
 
 export interface IronSessionData {
@@ -16,6 +17,6 @@ export const ironOptions = {
   },
 };
 
-export function getSession() {
-  return getIronSession<IronSessionData>(cookies(), ironOptions);
-}
+export const getSession = cache(() =>
+  getIronSession<IronSessionData>(cookies(), ironOptions),
+);

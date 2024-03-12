@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 
+import { Header } from "@/components/header";
 import { type ReactNode } from "react";
 
 const themeScript = `!function e(){let t=localStorage.getItem("theme");!t&&window.matchMedia&&(t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),"dark"===t&&document.querySelector("html").classList.add("dark"),localStorage.setItem("theme",t)}();`;
@@ -20,7 +21,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="container h-full">{children}</body>
+      <body className="container h-full">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 import { redirectFromCookie } from "@/app/api/auth/redirect";
 import { env } from "@/env";
 import { getSession } from "@/session";
+import { cookies } from "next/headers";
 
 export async function GET(req: Request) {
   const code = new URL(req.url).searchParams.get("code");
@@ -17,45 +18,44 @@ async function grabToken(req: Request, code: string) {
 
   if (params.get("state") !== session.state) return redirectToGithub(req);
 
-  const form = new URLSearchParams();
-
   const { protocol, host } = new URL(req.url);
 
-  form.set("client_id", env.GITHUB_CLIENT_ID);
-  form.set("client_secret", env.GITHUB_CLIENT_SECRET);
-  form.set("redirect_uri", `${protocol}//${host}/api/auth`);
-  form.set("code", code);
-  form.set("repository_id", "770713436");
+  // form.set("client_id", env.GITHUB_CLIENT_ID);
+  // form.set("client_secret", env.GITHUB_CLIENT_SECRET);
+  // form.set("redirect_uri", `${protocol}//${host}/api/auth`);
+  // form.set("code", code);
+  // form.set("repository_id", "770713436");
 
   const tokenRequest = await fetch(
     "https://github.com/login/oauth/access_token",
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      body: form.toString(),
+      body: JSON.stringify({
+        client_id: env.GITHUB_CLIENT_ID,
+        client_secret: env.GITHUB_CLIENT_SECRET,
+        code,
+        redirect_uri: `${protocol}//${host}/api/auth`,
+      }),
     },
   );
 
-  if (!tokenRequest.ok) {
-    console.log(tokenRequest.status);
-    console.log(await tokenRequest.text());
-
-    return redirectToGithub(req);
-  }
-
   const token = (await tokenRequest.json()) as {
     access_token: string;
+    scope: string;
   };
+
+  if (token.scope !== scopes) return redirectToGithub(req);
 
   session.token = token.access_token;
 
+  await session.save();
   console.log(session.token);
 
-  if (!session.token) throw new Error("Failed to get token");
-
-  await session.save();
+  if (!session.token) return redirectToGithub(req);
 
   redirectFromCookie();
 }
@@ -70,6 +70,10 @@ loginUrl.searchParams.set("scope", scopes);
 async function redirectToGithub(req: Request) {
   const state = Math.random().toString(36).slice(2);
 
+  const referer = req.headers.get("referer");
+
+  if (referer) cookies().set("rd", new URL(referer).pathname);
+
   const session = await getSession();
 
   session.state = state;
@@ -83,5 +87,5 @@ async function redirectToGithub(req: Request) {
   url.searchParams.set("redirect_uri", `${protocol}//${host}/api/auth`);
   url.searchParams.set("state", state);
 
-  return Response.redirect(loginUrl, 302);
+  return Response.redirect(url, 302);
 }

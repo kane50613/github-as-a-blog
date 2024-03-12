@@ -1,18 +1,17 @@
 import { getSession, type IronSessionData } from "@/session";
 import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
+import { cache } from "react";
 
-export async function listPosts(page = 0) {
+export const getUser = cache(async () => {
   const session = await getSession();
 
-  return client(session).issues.listForRepo({
-    owner: "kane50613",
-    repo: "github-as-a-blog",
-    creator: "kane50613",
-    page,
-    per_page: 10,
-  });
-}
+  if (!session.token) return;
+
+  return client(session)
+    .users.getAuthenticated()
+    .then((r) => r.data);
+});
 
 export function client(session: IronSession<IronSessionData>) {
   return new Octokit({

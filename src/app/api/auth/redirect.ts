@@ -13,7 +13,7 @@ export function redirectFromCookie() {
   if (
     redirectCookie &&
     /^\/([^?\/]+)/gm.test(redirectCookie) &&
-    redirectCookie !== "/api/auth"
+    !redirectCookie.includes("/api/auth")
   )
     return redirect(redirectCookie);
 
