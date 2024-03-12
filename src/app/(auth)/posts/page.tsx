@@ -31,7 +31,7 @@ export default function Page() {
       <h1 className="text-4xl font-semibold">My Posts</h1>
       <div className="grid gap-3 md:grid-cols-3">
         {posts.map((post) => (
-          <PostOverview key={post.id} post={post} />
+          <PostOverview key={post.number} post={post} />
         ))}
         <div ref={ref} />
         {!hasMore && <p>No more posts</p>}
