@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
 
+export const runtime = "edge";
+
 export default function Page() {
   const [hasMore, setHasMore] = useState(true);
 

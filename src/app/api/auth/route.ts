@@ -3,6 +3,8 @@ import { env } from "@/env";
 import { getSession } from "@/session";
 import { cookies } from "next/headers";
 
+export const runtime = "edge";
+
 export async function GET(req: Request) {
   const code = new URL(req.url).searchParams.get("code");
 

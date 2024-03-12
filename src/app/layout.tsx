@@ -11,6 +11,8 @@ export const metadata = {
     "Convert GitHub issues into blog posts for effortless content sharing and SEO enhancement",
 };
 
+export const runtime = "edge";
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="zh-Hant-TW" suppressHydrationWarning className="h-full">
