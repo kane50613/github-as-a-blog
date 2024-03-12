@@ -1,41 +1,58 @@
 "use client";
 
-import { listPosts, type Post } from "@/app/(auth)/posts/action";
+import { listPosts } from "@/app/(auth)/posts/action";
 import { PostOverview } from "@/components/post-overview";
-import { useCallback, useRef, useState } from "react";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
+import useSWRInfinite from "swr/infinite";
 
 export default function Page() {
-  const [posts, setPosts] = useState<Post[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  const page = useRef(0);
+
+  const {
+    data = [],
+    isLoading,
+    isValidating,
+    setSize,
+  } = useSWRInfinite(
+    (index) => {
+      if (!hasMore) return null;
+
+      console.log(index);
+
+      return [index];
+    },
+    async ([index]) => {
+      const posts = await listPosts(index);
+
+      if (!posts.length) setHasMore(false);
+
+      return posts;
+    },
+  );
 
   const { ref } = useInView({
-    onChange(value) {
-      if (value && hasMore) nextPage();
+    async onChange(value) {
+      if (value && hasMore) await setSize((s) => s + 1);
     },
   });
-
-  const nextPage = useCallback(() => {
-    listPosts(page.current++)
-      .then((newPosts) => {
-        if (!newPosts.length) return setHasMore(false);
-
-        setPosts((posts) => [...posts, ...newPosts]);
-      })
-      .catch((e) => console.error(e));
-  }, []);
 
   return (
     <main className="space-y-4">
       <h1 className="text-4xl font-semibold">My Posts</h1>
       <div className="grid gap-3 md:grid-cols-3">
-        {posts.map((post) => (
+        {data.flat().map((post) => (
           <PostOverview key={post.number} post={post} />
         ))}
-        <div ref={ref} />
-        {!hasMore && <p>No more posts</p>}
       </div>
+      <div ref={ref} />
+      {(isLoading || isValidating) && (
+        <div className="flex h-16 justify-center items-center">
+          <Loader2 className="animate-spin mr-2" /> Loading posts...
+        </div>
+      )}
+      {!hasMore && <p>No more posts</p>}
     </main>
   );
 }

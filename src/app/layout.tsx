@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="container h-full">
+      <body className="container">
         <Header />
         {children}
       </body>

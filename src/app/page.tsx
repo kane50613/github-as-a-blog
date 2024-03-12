@@ -6,8 +6,8 @@ export const runtime = "edge";
 
 export default async function HomePage() {
   return (
-    <div className="flex items-center gap-4 flex-col h-[calc(100%-4rem)] justify-center text-center">
-      <h1 className="text-3xl xl:text-6xl font-semibold">
+    <div className="flex items-center gap-4 flex-col h-[calc(100dvh-4rem)] justify-center text-center">
+      <h1 className="text-3xl lg:text-6xl font-semibold">
         Blogging should be
         <br /> easy as GitHub issue.
       </h1>

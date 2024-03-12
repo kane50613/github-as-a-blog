@@ -8,7 +8,7 @@ export const User = async () => {
 
   if (!user)
     return (
-      <Button>
+      <Button asChild size="sm" variant="secondary">
         <Link href="/api/auth">Login</Link>
       </Button>
     );
