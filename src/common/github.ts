@@ -1,6 +1,6 @@
-import { getSession, IronSessionData } from "@/session";
+import { getSession, type IronSessionData } from "@/session";
 import { Octokit } from "@octokit/rest";
-import { IronSession } from "iron-session";
+import { type IronSession } from "iron-session";
 
 export async function listPosts(page = 0) {
   const session = await getSession();
