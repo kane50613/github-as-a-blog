@@ -39,7 +39,7 @@ export default function Page() {
   });
 
   return (
-    <main className="space-y-4">
+    <main className="space-y-4 mt-4">
       <h1 className="text-4xl font-semibold">My Posts</h1>
       <div className="grid gap-3 md:grid-cols-3 grid-cols-1">
         {data.flat().map((post) => (
