@@ -1,6 +1,8 @@
 import { User } from "@/components/User";
 import { Avatar } from "@/components/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -8,8 +10,17 @@ export const Header = () => {
   return (
     <div className="h-16 flex justify-between w-full items-center sticky top-0 bg-background z-50">
       <Link href="/">GaaS</Link>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
+        <Button asChild variant="ghost" size="sm">
+          <a
+            href="https://github.com/kane50613/github-as-a-blog/"
+            target="_blank"
+          >
+            <SiGithub className="w-5" />
+          </a>
+        </Button>
         <ThemeToggle />
+        <div className="w-2" />
         <Suspense fallback={<Avatar alt="User avatar" />}>
           <User />
         </Suspense>
