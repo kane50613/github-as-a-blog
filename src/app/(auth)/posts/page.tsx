@@ -45,8 +45,8 @@ export default function Page() {
         {data.flat().map((post) => (
           <PostOverview key={post.number} post={post} />
         ))}
+        <div ref={ref} />
       </div>
-      <div ref={ref} />
       {(isLoading || isValidating) && (
         <div className="flex h-16 justify-center items-center">
           <Loader2 className="animate-spin mr-2" /> Loading posts...
