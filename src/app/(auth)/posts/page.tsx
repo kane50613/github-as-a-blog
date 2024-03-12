@@ -19,9 +19,7 @@ export default function Page() {
     (index) => {
       if (!hasMore) return null;
 
-      console.log(index);
-
-      return [index];
+      return [index + 1];
     },
     async ([index]) => {
       const posts = await listPosts(index);
