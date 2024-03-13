@@ -1,25 +1,24 @@
 "use server";
 
-import { client, getUser, owner, repo } from "@/common/github";
+import { client, getUser } from "@/common/github";
 import { getSession } from "@/session";
 import { marked } from "marked";
 import xss from "xss";
 
 export type Post = Awaited<ReturnType<typeof listPosts>>[number];
 
-export async function listPosts(page = 0) {
+export async function listPosts(owner: string, repo: string, page = 0) {
+  const session = await getSession();
+
   const user = await getUser();
 
   if (!user) return [];
-
-  const session = await getSession();
 
   const response = await client(session).issues.listForRepo({
     owner,
     repo,
     page,
     per_page: 10,
-    labels: "article",
     creator: user.login,
   });
 

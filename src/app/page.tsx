@@ -6,8 +6,8 @@ export const runtime = "edge";
 
 export default async function HomePage() {
   return (
-    <div className="flex items-center gap-4 flex-col h-[calc(100dvh-4rem)] justify-center text-center">
-      <h1 className="text-3xl lg:text-6xl font-semibold">
+    <div className="flex items-center gap-4 flex-col h-[calc(100dvh-4.5rem)] justify-center text-center">
+      <h1 className="text-3xl lg:text-6xl !leading-relaxed font-semibold">
         Blogging should be
         <br /> easy as GitHub issue.
       </h1>
@@ -16,7 +16,7 @@ export default async function HomePage() {
         content sharing and SEO enhancement.
       </p>
       <Button asChild className="mt-8">
-        <Link href="/posts">
+        <Link href="/pick">
           <Rocket className="mr-2 w-4" />
           Starts now
         </Link>

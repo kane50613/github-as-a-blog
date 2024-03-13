@@ -1,4 +1,4 @@
-import { type Post } from "@/app/(auth)/posts/action";
+import { type Post } from "@/app/(auth)/[owner]/[repo]/action";
 import { Avatar } from "@/components/avatar";
 import Link from "next/link";
 import { memo } from "react";

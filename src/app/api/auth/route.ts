@@ -1,6 +1,6 @@
 import { redirectFromCookie } from "@/app/api/auth/redirect";
 import { env } from "@/env";
-import { getSession } from "@/session";
+import { getUnsafeSession } from "@/session";
 import { cookies } from "next/headers";
 
 export const runtime = "edge";
@@ -14,7 +14,7 @@ export async function GET(req: Request) {
 }
 
 async function grabToken(req: Request, code: string) {
-  const session = await getSession();
+  const session = await getUnsafeSession();
 
   const params = new URL(req.url).searchParams;
 
@@ -62,7 +62,7 @@ async function grabToken(req: Request, code: string) {
 }
 
 const loginUrl = new URL("https://github.com/login/oauth/authorize");
-const scopes = ["read:user", "repo"];
+const scopes = ["read:user", "public_repo"];
 
 const scope = scopes.join(" ");
 
@@ -77,7 +77,7 @@ async function redirectToGithub(req: Request) {
 
   if (referer) cookies().set("rd", new URL(referer).pathname);
 
-  const session = await getSession();
+  const session = await getUnsafeSession();
 
   session.state = state;
 

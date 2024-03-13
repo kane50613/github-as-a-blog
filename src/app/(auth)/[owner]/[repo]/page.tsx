@@ -1,6 +1,6 @@
 "use client";
 
-import { listPosts } from "@/app/(auth)/posts/action";
+import { listPosts } from "@/app/(auth)/[owner]/[repo]/action";
 import { PostOverview } from "@/components/post-overview";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plus } from "lucide-react";
@@ -11,7 +11,11 @@ import useSWRInfinite from "swr/infinite";
 
 export const runtime = "edge";
 
-export default function Page() {
+export default function Page({
+  params: { owner, repo },
+}: {
+  params: { owner: string; repo: string };
+}) {
   const [hasMore, setHasMore] = useState(true);
 
   const {
@@ -26,7 +30,7 @@ export default function Page() {
       return [index + 1];
     },
     async ([index]) => {
-      const posts = await listPosts(index);
+      const posts = await listPosts(owner, repo, index);
 
       if (!posts.length) setHasMore(false);
 
@@ -45,7 +49,7 @@ export default function Page() {
       <div className="flex justify-between items-center">
         <h1>My Posts</h1>
         <Button asChild>
-          <Link href="/posts/create">
+          <Link href={`/${owner}/${repo}/create`}>
             <Plus className="w-4 mr-2" />
             Create
           </Link>
