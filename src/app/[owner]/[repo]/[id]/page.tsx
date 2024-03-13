@@ -2,7 +2,9 @@ import { getIssue, getIssueComments } from "@/common/github";
 import { Avatar } from "@/components/avatar";
 import { Separator } from "@/components/ui/separator";
 import { marked } from "marked";
+import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import removeMarkdown from "remove-markdown";
 import xss from "xss";
 
 export const runtime = "edge";
@@ -12,6 +14,36 @@ const formatter = new Intl.DateTimeFormat("en", {
   month: "long",
   day: "numeric",
 });
+
+export async function generateMetadata({
+  params: { owner, repo, id },
+}: {
+  params: { owner: string; repo: string; id: string };
+}) {
+  if (!Number(id)) notFound();
+
+  const post = await getIssue(owner, repo, parseInt(id));
+
+  if (post.closed_at) notFound();
+
+  const description = post.body ? removeMarkdown(post.body) : undefined;
+
+  return {
+    title: post.title,
+    description,
+    date: new Date(post.created_at).toISOString(),
+    authors: {
+      name: post.user?.login,
+      url: `https://github.com/${post.user?.login}`,
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description,
+    },
+    creator: post.user?.login,
+  } as Metadata;
+}
 
 export default async function Page({
   params: { owner, repo, id },

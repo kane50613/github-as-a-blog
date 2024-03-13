@@ -9,6 +9,13 @@ export const metadata = {
   title: "GaaB: Github as a Blog",
   description:
     "Convert GitHub issues into blog posts for effortless content sharing and SEO enhancement",
+  alternates: {
+    canonical: new URL("https://github-as-a-blog.vercel.app"),
+  },
+  metadataBase: new URL("https://github-as-a-blog.vercel.app"),
+  openGraph: {
+    siteName: "GaaB: Github as a Blog",
+  },
 };
 
 export const runtime = "edge";
