@@ -5,7 +5,7 @@ import { PostOverview } from "@/components/post-overview";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plus } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
 
@@ -25,8 +25,6 @@ export default function Page({
     setSize,
   } = useSWRInfinite(
     (index) => {
-      if (!hasMore) return null;
-
       return [index + 1];
     },
     async ([index]) => {
@@ -44,6 +42,12 @@ export default function Page({
     },
   });
 
+  const posts = useMemo(
+    () =>
+      data.flat().map((post) => <PostOverview key={post.number} post={post} />),
+    [data],
+  );
+
   return (
     <main className="space-y-4 mt-4">
       <div className="flex justify-between items-center">
@@ -56,9 +60,7 @@ export default function Page({
         </Button>
       </div>
       <div className="grid gap-3 md:grid-cols-3 grid-cols-1">
-        {data.flat().map((post) => (
-          <PostOverview key={post.number} post={post} />
-        ))}
+        {posts}
         <div ref={ref} />
       </div>
       {(isLoading || isValidating) && (

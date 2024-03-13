@@ -19,6 +19,7 @@ export const listRepos = cache(async () => {
   return client(session)
     .repos.listForAuthenticatedUser({
       per_page: 100,
+      type: "public",
     })
     .then((r) => r.data);
 });

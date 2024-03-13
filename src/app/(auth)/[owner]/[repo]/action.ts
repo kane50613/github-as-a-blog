@@ -20,6 +20,7 @@ export async function listPosts(owner: string, repo: string, page = 0) {
     page,
     per_page: 10,
     creator: user.login,
+    state: "open",
   });
 
   return Promise.all(
