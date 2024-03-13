@@ -2,7 +2,9 @@
 
 import { listPosts } from "@/app/(auth)/posts/action";
 import { PostOverview } from "@/components/post-overview";
-import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Plus } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
@@ -40,7 +42,15 @@ export default function Page() {
 
   return (
     <main className="space-y-4 mt-4">
-      <h1 className="text-4xl font-semibold">My Posts</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-4xl font-semibold">My Posts</h1>
+        <Button asChild>
+          <Link href="/posts/create">
+            <Plus className="w-4 mr-2" />
+            Create
+          </Link>
+        </Button>
+      </div>
       <div className="grid gap-3 md:grid-cols-3 grid-cols-1">
         {data.flat().map((post) => (
           <PostOverview key={post.number} post={post} />

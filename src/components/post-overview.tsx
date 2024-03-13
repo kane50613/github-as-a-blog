@@ -1,15 +1,10 @@
 import { type Post } from "@/app/(auth)/posts/action";
 import { Avatar } from "@/components/avatar";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { memo } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
-export const PostOverview = ({ post }: { post: Post }) => (
+export const PostOverview = memo(({ post }: { post: Post }) => (
   <Link href={`/posts/${post.number}`} className="h-full">
     <Card className="flex flex-col h-full hover:bg-secondary/50 transition-colors">
       <CardHeader className="flex-grow">
@@ -35,9 +30,8 @@ export const PostOverview = ({ post }: { post: Post }) => (
           }}
         />
       </CardContent>
-      <CardFooter className="text-secondary-foreground/75 text-sm">
-        Read more
-      </CardFooter>
     </Card>
   </Link>
-);
+));
+
+PostOverview.displayName = "PostOverview";

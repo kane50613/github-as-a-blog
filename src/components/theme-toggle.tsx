@@ -7,8 +7,6 @@ import { MoonStar, Sun } from "lucide-react";
 export const ThemeToggle = () => {
   const [theme, setTheme] = useTheme();
 
-  if (!theme) return;
-
   if (theme === "dark")
     return (
       <Button
@@ -23,6 +21,7 @@ export const ThemeToggle = () => {
 
   return (
     <Button
+      disabled={!theme}
       variant="ghost"
       size="sm"
       aria-label="Dark mode toggle"
