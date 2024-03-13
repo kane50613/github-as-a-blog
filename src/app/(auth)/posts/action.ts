@@ -1,6 +1,6 @@
 "use server";
 
-import { client, getUser } from "@/common/github";
+import { client, getUser, owner, repo } from "@/common/github";
 import { getSession } from "@/session";
 import { marked } from "marked";
 import xss from "xss";
@@ -15,8 +15,8 @@ export async function listPosts(page = 0) {
   const session = await getSession();
 
   const response = await client(session).issues.listForRepo({
-    owner: "kane50613",
-    repo: "github-as-a-blog",
+    owner,
+    repo,
     page,
     per_page: 10,
     labels: "article",

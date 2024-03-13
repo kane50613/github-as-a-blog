@@ -12,6 +12,7 @@
   "dependencies": {
     "@icons-pack/react-simple-icons": "^9.4.0",
     "@octokit/rest": "^20.0.2",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@t3-oss/env-nextjs": "^0.9.2",
     "class-variance-authority": "^0.7.0",
@@ -27,9 +28,11 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "xss": "^1.0.15",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.57",

@@ -73,4 +73,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  label {
+    @apply text-sm font-medium leading-none text-foreground/75 peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+  h1 {
+    @apply text-3xl md:text-4xl font-semibold;
+  }
 }

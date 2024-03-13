@@ -43,7 +43,7 @@ export default function Page() {
   return (
     <main className="space-y-4 mt-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-4xl font-semibold">My Posts</h1>
+        <h1>My Posts</h1>
         <Button asChild>
           <Link href="/posts/create">
             <Plus className="w-4 mr-2" />

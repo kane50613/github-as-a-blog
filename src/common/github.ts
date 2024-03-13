@@ -3,6 +3,9 @@ import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
 import { cache } from "react";
 
+export const owner = "kane50613";
+export const repo = "github-as-a-blog";
+
 export const getUser = cache(async () => {
   const session = await getSession();
 
