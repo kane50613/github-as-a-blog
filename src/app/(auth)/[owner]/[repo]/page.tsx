@@ -5,7 +5,7 @@ import { PostOverview } from "@/components/post-overview";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plus } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
 
@@ -16,24 +16,19 @@ export default function Page({
 }: {
   params: { owner: string; repo: string };
 }) {
-  const [hasMore, setHasMore] = useState(true);
-
   const {
     data = [],
     isLoading,
     isValidating,
     setSize,
   } = useSWRInfinite(
-    (index) => {
-      return [index + 1];
-    },
-    async ([index]) => {
-      const posts = await listPosts(owner, repo, index);
+    (index) => [index + 1] as const,
+    ([index]) => listPosts(owner, repo, index),
+  );
 
-      if (!posts.length) setHasMore(false);
-
-      return posts;
-    },
+  const hasMore = useMemo(
+    () => data.length > 0 && data?.at(-1)?.length === 10,
+    [data],
   );
 
   const { ref } = useInView({
@@ -68,7 +63,7 @@ export default function Page({
           <Loader2 className="animate-spin mr-2" /> Loading posts...
         </div>
       )}
-      {!hasMore && <p>No more posts</p>}
+      {!hasMore && !isLoading && <p>No more posts</p>}
     </main>
   );
 }

@@ -25,35 +25,29 @@ export const listRepos = cache(async () => {
 });
 
 export const getIssue = cache(
-  async (owner: string, repo: string, issue_number: number) => {
-    const session = await getSession();
-
-    return client(session)
+  async (owner: string, repo: string, issue_number: number) =>
+    client()
       .issues.get({
         owner,
         repo,
         issue_number,
       })
-      .then((r) => r.data);
-  },
+      .then((r) => r.data),
 );
 
 export const getIssueComments = cache(
-  async (owner: string, repo: string, issue_number: number) => {
-    const session = await getSession();
-
-    return client(session)
+  async (owner: string, repo: string, issue_number: number) =>
+    client()
       .issues.listComments({
         owner,
         repo,
         issue_number,
       })
-      .then((r) => r.data);
-  },
+      .then((r) => r.data),
 );
 
-export function client(session: IronSession<IronSessionData>) {
+export function client(session?: IronSession<IronSessionData>) {
   return new Octokit({
-    auth: session.token,
+    auth: session?.token,
   });
 }

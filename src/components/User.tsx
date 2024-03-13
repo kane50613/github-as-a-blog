@@ -1,10 +1,12 @@
 import { getUser } from "@/common/github";
 import { Avatar } from "@/components/avatar";
 import { Button } from "@/components/ui/button";
+import { getUnsafeSession } from "@/session";
 import Link from "next/link";
 
 export const User = async () => {
-  const user = await getUser();
+  const session = await getUnsafeSession();
+  const user = session.token ? await getUser() : undefined;
 
   if (!user)
     return (
