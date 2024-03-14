@@ -1,11 +1,8 @@
-export interface GithubComment {
-  id: number;
-  user: {
-    login: string;
-    avatar_url: string;
-  };
-  body: string;
-}
+import { Octokit } from "@octokit/rest";
+
+export type GithubComment = Awaited<
+  ReturnType<typeof getIssueComments>
+>[number];
 
 export async function getIssueComments(
   owner: string,
@@ -13,13 +10,15 @@ export async function getIssueComments(
   issue_number: number,
   page = 1,
 ) {
-  const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/issues/${issue_number}/comments?page=${page}&per_page=10`,
-  );
+  const client = new Octokit();
 
-  const json = (await response.json()) as GithubComment[];
-
-  console.log(json);
-
-  return json;
+  return client.issues
+    .listComments({
+      owner,
+      repo,
+      issue_number,
+      per_page: 10,
+      page,
+    })
+    .then((r) => r.data);
 }

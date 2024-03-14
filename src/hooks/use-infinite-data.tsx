@@ -4,7 +4,7 @@ import useSWRInfinite from "swr/infinite";
 
 interface InfiniteDataProps<T> {
   render: (props: T) => ReactNode;
-  loader: (index: number) => Promise<T[]>;
+  loader: (page: number) => Promise<T[]>;
 }
 
 export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
@@ -14,8 +14,8 @@ export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
     isValidating,
     setSize,
   } = useSWRInfinite<T[]>(
-    (index) => [index + 1] as const,
-    ([index]) => props.loader(index as number),
+    (page) => [page + 1] as const,
+    ([page]) => props.loader(page as number),
   );
 
   const hasMore = useMemo(
