@@ -23,7 +23,7 @@ export const Preview = () => {
         <AccordionTrigger>Markdown Rendered Post Preview</AccordionTrigger>
         <AccordionContent>
           {preview && (
-            <div className="prose dark:prose-invert lg:prose-xl break-words">
+            <div className="prose dark:prose-invert lg:prose-xl break-words mx-auto">
               <MDX>{`# ${title}\n${body}`}</MDX>
             </div>
           )}
