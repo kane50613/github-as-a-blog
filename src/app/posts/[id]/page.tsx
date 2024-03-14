@@ -41,6 +41,11 @@ export async function generateMetadata({
       modifiedTime: new Date(post.updated_at).toISOString(),
       authors: post.user?.login,
       description,
+      images: {
+        width: 1200,
+        height: 630,
+        url: `${env.NEXT_PUBLIC_BASE_URL}/og-image.jpg`,
+      },
     },
     creator: post.user?.login,
     publisher: post.user?.login,
