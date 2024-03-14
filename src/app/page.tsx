@@ -1,5 +1,6 @@
 import { listPosts } from "@/common/github";
 import { PostOverview } from "@/components/post-overview";
+import { PostsContainer } from "@/components/posts-container";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Rocket, Star } from "lucide-react";
@@ -36,9 +37,11 @@ export default async function HomePage() {
         </Button>
       </div>
       <Separator />
-      {posts.map((post, index) => (
-        <PostOverview post={post} key={index} />
-      ))}
+      <PostsContainer>
+        {posts.map((post, index) => (
+          <PostOverview post={post} key={index} />
+        ))}
+      </PostsContainer>
     </div>
   );
 }

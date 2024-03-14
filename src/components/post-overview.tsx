@@ -5,10 +5,10 @@ import Link from "next/link";
 import { memo } from "react";
 
 export const PostOverview = memo(({ post }: { post: Post }) => (
-  <article className="flex items-start flex-col gap-4 max-w-xl w-full">
+  <article className="flex items-start flex-col gap-2 max-w-xl w-full">
     {post.user && <Author user={post.user} date={post.updated_at} />}
     <Link href={`/posts/${post.number}`} className="h-full">
-      <p className="text-xl md:text-2xl h-full line-clamp-2 break-normal font-semibold text-start">
+      <p className="text-lg md:text-xl h-full line-clamp-2 break-normal font-semibold text-start">
         {post.title}
       </p>
     </Link>

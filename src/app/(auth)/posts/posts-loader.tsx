@@ -1,6 +1,7 @@
 import { listPosts } from "@/app/(auth)/posts/action";
 import type { Post } from "@/common/github";
 import { PostOverview } from "@/components/post-overview";
+import { PostsContainer } from "@/components/posts-container";
 import { useInfiniteData } from "@/hooks/use-infinite-data";
 import { Loader2 } from "lucide-react";
 
@@ -12,7 +13,7 @@ export const PostsLoader = () => {
 
   return (
     <>
-      <div className="mx-auto space-y-4 w-fit">{components}</div>
+      <PostsContainer>{components}</PostsContainer>
       <div ref={ref} />
       {isLoading && (
         <div className="flex h-16 justify-center items-center">
