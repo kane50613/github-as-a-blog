@@ -14,7 +14,7 @@ export default async function HomePage() {
 
   return (
     <div className="flex items-center gap-4 flex-col space-y-4 py-4 justify-center text-center">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl !leading-relaxed font-bold">
+      <h1 className="text-3xl md:text-5xl lg:text-6xl !leading-relaxed font-bold">
         Blogging should be
         <br /> easy as GitHub issue.
       </h1>
