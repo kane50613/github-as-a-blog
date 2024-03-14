@@ -1,11 +1,10 @@
-import { getIssue, getIssueComments } from "@/common/github";
-import { Author } from "@/components/Author";
+import { CommentsLoader } from "@/app/[owner]/[repo]/[id]/comments-loader";
+import { getIssue } from "@/common/github";
+import { MDX } from "@/components/mdx";
 import { Separator } from "@/components/ui/separator";
-import { marked } from "marked";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import removeMarkdown from "remove-markdown";
-import xss from "xss";
 
 export const runtime = "edge";
 
@@ -61,10 +60,6 @@ export default async function Page({
 
   if (post.closed_at) notFound();
 
-  const comments = await getIssueComments(owner, repo, post.number);
-
-  const html = xss(await marked(post.body ?? "", { async: true }));
-
   const issueUrl = `https://github.com/${owner}/${repo}/issues/${post.number}`;
 
   return (
@@ -90,37 +85,14 @@ export default async function Page({
           • {formatter.format(new Date(post.created_at))}
         </p>
         <Separator />
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <MDX>{post.body}</MDX>
       </article>
       <Separator />
       <section className="not-prose space-y-4">
         <p className="text-primary text-2xl font-medium">
-          Comments ({comments.length})
+          Comments ({post.comments})
         </p>
-        <ul className="space-y-4">
-          {await Promise.all(
-            comments.map(async (comment) => (
-              <li key={comment.id} className="flex flex-col gap-2">
-                <a
-                  className="flex gap-2 items-center w-fit"
-                  href={`${issueUrl}#issuecomment-${comment.id}`}
-                  target="_blank"
-                  rel="nofollow"
-                >
-                  {comment.user && <Author user={comment.user} />}
-                </a>
-                <span
-                  className="prose dark:prose-invert"
-                  dangerouslySetInnerHTML={{
-                    __html: xss(
-                      await marked(comment.body ?? "", { async: true }),
-                    ),
-                  }}
-                />
-              </li>
-            )),
-          )}
-        </ul>
+        <CommentsLoader owner={owner} repo={repo} id={post.number} />
       </section>
     </main>
   );

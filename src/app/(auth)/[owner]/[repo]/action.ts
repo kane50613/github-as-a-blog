@@ -2,8 +2,6 @@
 
 import { client, getUser } from "@/common/github";
 import { getSession } from "@/session";
-import { marked } from "marked";
-import xss from "xss";
 
 export type Post = Awaited<ReturnType<typeof listPosts>>[number];
 
@@ -26,7 +24,7 @@ export async function listPosts(owner: string, repo: string, page = 0) {
   return Promise.all(
     response.data.map(async (post) => ({
       ...post,
-      body: post.body ? xss(await marked(post.body)) : null,
+      body: post.body,
       body_html: null,
       body_text: null,
     })),

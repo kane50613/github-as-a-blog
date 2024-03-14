@@ -1,5 +1,6 @@
 import { type Post } from "@/app/(auth)/[owner]/[repo]/action";
 import { Author } from "@/components/Author";
+import { MDX } from "@/components/mdx";
 import { getPostIds } from "@/lib/utils";
 import Link from "next/link";
 import { memo } from "react";
@@ -18,12 +19,9 @@ export const PostOverview = memo(({ post }: { post: Post }) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="text-primary/80">
-          <div
-            className="line-clamp-3 text-sm break-all"
-            dangerouslySetInnerHTML={{
-              __html: post.body ?? "",
-            }}
-          />
+          <div className="line-clamp-3 text-sm break-all">
+            <MDX>{post.body}</MDX>
+          </div>
         </CardContent>
       </Card>
     </Link>

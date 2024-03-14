@@ -5,31 +5,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const MDX = dynamic(() => import("@/components/mdx").then((mod) => mod.MDX));
 
 export const Preview = () => {
-  const [previewContent, setPreviewContent] = useState("");
-
   const { body, title, preview } = useCreatePostStore();
-
-  useEffect(() => {
-    if (!preview) return;
-
-    const fullContent = `# ${title}\n\n${body}`;
-
-    async function render() {
-      const { marked } = await import("marked");
-      const xss = await import("xss").then((x) => x.default);
-
-      const html = await marked(fullContent, {
-        async: true,
-      });
-
-      setPreviewContent(xss(html));
-    }
-
-    render().catch(console.error);
-  }, [body, preview, title]);
 
   return (
     <Accordion
@@ -41,12 +22,11 @@ export const Preview = () => {
       <AccordionItem value="preview" className="border rounded-md px-4">
         <AccordionTrigger>Markdown Rendered Post Preview</AccordionTrigger>
         <AccordionContent>
-          <div
-            className="prose dark:prose-invert lg:prose-xl break-words"
-            dangerouslySetInnerHTML={{
-              __html: previewContent,
-            }}
-          />
+          {preview && (
+            <div className="prose dark:prose-invert lg:prose-xl break-words">
+              <MDX>{`# ${title}\n${body}`}</MDX>
+            </div>
+          )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
