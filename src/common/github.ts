@@ -40,6 +40,7 @@ export async function getIssue(issue_number: number) {
     ["posts", issue_number.toString()],
     {
       tags: [`posts-${issue_number}`],
+      revalidate: 60,
     },
   );
 
@@ -74,6 +75,7 @@ export async function listPosts(creator?: string, page = 1, per_page = 10) {
     },
     ["posts", creator ?? "all", page.toString()],
     {
+      revalidate: 60,
       tags,
     },
   );

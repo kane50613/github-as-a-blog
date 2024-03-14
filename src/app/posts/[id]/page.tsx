@@ -63,23 +63,25 @@ export default async function Page({
   return (
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-xl">
       <article>
-        <div className="flex justify-between">
-          <a
-            href={issueUrl}
-            target="_blank"
-            rel="nofollow"
-            className="text-foreground/80 not-prose"
-          >
-            #{post.number}
-          </a>
+        <h1 className="!mb-4">{post.title}</h1>
+        <div className="flex justify-between gap-4">
+          {post.user ? (
+            <Author user={post.user} date={post.updated_at} />
+          ) : (
+            <div>Unknown Author</div>
+          )}
           <Suspense>
             <PostHelper post={post} />
           </Suspense>
         </div>
-        <h1>{post.title}</h1>
-        {post.user && <Author user={post.user} date={post.updated_at} />}
         <Separator className="my-4" />
         <MDX>{post.body}</MDX>
+        <span className="text-sm">
+          View source on GitHub issue:{" "}
+          <a href={issueUrl} target="_blank" rel="nofollow">
+            {post.title} (#{post.number})
+          </a>
+        </span>
       </article>
       <Separator />
       <section className="not-prose space-y-4">
