@@ -9,8 +9,10 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 - SEO-friendly architecture with server-side rendering.
 - `@tailwindcss/typography` for beautiful typography.
 - Cached data for improved performance.
+- Sitemap generation for better SEO.
 
 ---
+
 ## How do I plan the project?
 
 When planning the project, several key considerations come into play:
@@ -35,19 +37,7 @@ Implementing infinite scroll was an engaging experience, and surprisingly straig
 
 To ensure reusability, a [`useInfiniteData`](./src/hooks/use-infinite-data.tsx) hook was crafted to manage the logic of infinite scrolling. The hook takes in a `render` function responsible for rendering the data as ReactNode and a `loader` function generating data arrays based on page numbers (starting from 1).
 
-```tsx
-declare function useInfiniteData<T>(props: {
-  render: (props: T) => ReactNode;
-  loader: (page: number) => Promise<T[]>;
-}): {
-  components: ReactNode[];
-  ref: RefObject;
-  isLoading: boolean;
-  hasMore: boolean;
-};
-```
-
-The actual implementation can be observed in [src/app/(auth)/[owner]/[repo]/page.tsx](./src/app/(auth)/[owner]/[repo]/page.tsx).
+The actual usage can be found in [src/app/(auth)/[owner]/[repo]/page.tsx](./src/app/(auth)/[owner]/[repo]/page.tsx).
 
 ### Authentication Mechanism
 
