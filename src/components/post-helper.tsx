@@ -6,7 +6,7 @@ import Link from "next/link";
 export const PostHelper = async ({ post }: { post: Post }) => {
   const session = await getUnsafeSession();
 
-  if (!session) return null;
+  if (!session.token) return null;
 
   const user = await getUser(session);
 

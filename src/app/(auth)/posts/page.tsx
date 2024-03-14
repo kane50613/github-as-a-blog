@@ -26,7 +26,7 @@ export default function Page() {
         <a
           target="_blank"
           href={`https://github.com/${env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/${env.NEXT_PUBLIC_GITHUB_REPO}/issues`}
-          className="underline text-foreground"
+          className="text-foreground font-medium"
         >
           {env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/{env.NEXT_PUBLIC_GITHUB_REPO}
         </a>
