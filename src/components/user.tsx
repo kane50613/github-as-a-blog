@@ -18,7 +18,8 @@ export const User = async () => {
   return (
     <Link href="/posts">
       <Avatar
-        src={`${user.avatar_url}&s=80`}
+        className="w-8 h-8"
+        src={`${user.avatar_url}&s=64`}
         alt={user.name ?? "User avatar"}
       />
     </Link>

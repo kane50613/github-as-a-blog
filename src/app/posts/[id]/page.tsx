@@ -69,7 +69,7 @@ export default async function Page({
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-lg">
       <article>
         <h1 className="!mb-4">{post.title}</h1>
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between flex-wrap gap-4">
           {post.user ? (
             <Author user={post.user} date={post.updated_at} />
           ) : (

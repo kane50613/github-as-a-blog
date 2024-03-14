@@ -24,7 +24,7 @@ export const Header = () => {
           </Button>
           <ThemeToggle />
           <div className="w-2" />
-          <Suspense fallback={<Avatar alt="User avatar" />}>
+          <Suspense fallback={<Avatar className="w-8" alt="User avatar" />}>
             <User />
           </Suspense>
         </div>
