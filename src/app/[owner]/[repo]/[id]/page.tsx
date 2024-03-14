@@ -1,5 +1,5 @@
 import { getIssue, getIssueComments } from "@/common/github";
-import { Avatar } from "@/components/avatar";
+import { Author } from "@/components/Author";
 import { Separator } from "@/components/ui/separator";
 import { marked } from "marked";
 import { type Metadata } from "next";
@@ -65,7 +65,12 @@ export default async function Page({
   return (
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-xl">
       <article>
-        <a href={issueUrl} target="_blank" rel="nofollow">
+        <a
+          href={issueUrl}
+          target="_blank"
+          rel="nofollow"
+          className="text-primary/80"
+        >
           #{post.number}
         </a>
         <h1>{post.title}</h1>
@@ -84,10 +89,10 @@ export default async function Page({
       </article>
       <Separator />
       <section className="not-prose space-y-4">
-        <h3 className="text-white text-2xl font-medium">
+        <p className="text-primary text-2xl font-medium">
           Comments ({comments.length})
-        </h3>
-        <ul>
+        </p>
+        <ul className="space-y-4">
           {await Promise.all(
             comments.map(async (comment) => (
               <li key={comment.id} className="flex flex-col gap-2">
@@ -97,12 +102,7 @@ export default async function Page({
                   target="_blank"
                   rel="nofollow"
                 >
-                  <Avatar
-                    className="w-5 h-5"
-                    src={comment.user?.avatar_url}
-                    alt={comment.user?.login ?? "User avatar"}
-                  />
-                  <span className="text-sm">{comment.user?.login}</span>
+                  {comment.user && <Author user={comment.user} />}
                 </a>
                 <span
                   className="prose dark:prose-invert"

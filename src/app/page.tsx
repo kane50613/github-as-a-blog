@@ -11,7 +11,7 @@ export default async function HomePage() {
         Blogging should be
         <br /> easy as GitHub issue.
       </h1>
-      <p className="text-primary/75">
+      <p className="text-primary/80">
         GaaB is a tool to convert Github issues into blog posts for effortless
         content sharing and SEO enhancement.
       </p>

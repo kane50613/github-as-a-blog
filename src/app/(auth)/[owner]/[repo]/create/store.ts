@@ -5,3 +5,5 @@ export const useCreatePostStore = create(() => ({
   body: "",
   preview: false,
 }));
+
+export type CreatePostStore = ReturnType<typeof useCreatePostStore.getState>;

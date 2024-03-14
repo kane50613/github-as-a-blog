@@ -1,5 +1,5 @@
 import { type Post } from "@/app/(auth)/[owner]/[repo]/action";
-import { Avatar } from "@/components/avatar";
+import { Author } from "@/components/Author";
 import { getPostIds } from "@/lib/utils";
 import Link from "next/link";
 import { memo } from "react";
@@ -12,21 +12,12 @@ export const PostOverview = memo(({ post }: { post: Post }) => {
     <Link href={`/${owner}/${repo}/${number}`} className="h-full">
       <Card className="flex flex-col h-full hover:bg-secondary/50 transition-colors">
         <CardHeader className="flex-grow">
-          <div className="flex gap-2 items-center">
-            <Avatar
-              className="w-4 h-4"
-              src={post.user?.avatar_url}
-              alt={post.user?.login ?? "User avatar"}
-            />
-            <span className="text-secondary-foreground/75 text-sm">
-              #{post.number} • @{post.user?.login}
-            </span>
-          </div>
+          {post.user && <Author user={post.user} />}
           <CardTitle className="text-lg md:text-lg h-full line-clamp-2 break-normal">
             {post.title}
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-secondary-foreground/80">
+        <CardContent className="text-primary/80">
           <div
             className="line-clamp-3 text-sm break-all"
             dangerouslySetInnerHTML={{

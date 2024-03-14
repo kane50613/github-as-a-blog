@@ -3,6 +3,8 @@ import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
 import { cache } from "react";
 
+export type User = Awaited<ReturnType<typeof getUser>>;
+
 export const getUser = cache(async () => {
   const session = await getSession();
 
