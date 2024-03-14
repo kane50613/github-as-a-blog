@@ -11,9 +11,9 @@ export const CommentsLoader = ({ id }: { id: number }) => {
   });
 
   return (
-    <ul className="space-y-6">
+    <div className="space-y-6">
       {components}
       <div ref={ref} />
-    </ul>
+    </div>
   );
 };
