@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     images: {
       width: 1200,
       height: 630,
-      url: `${env.NEXT_PUBLIC_BASE_URL}/og-image.jpg`,
+      url: `${env.NEXT_PUBLIC_BASE_URL}/cover.jpg`,
     },
   },
 };

@@ -44,7 +44,7 @@ export async function generateMetadata({
       images: {
         width: 1200,
         height: 630,
-        url: `${env.NEXT_PUBLIC_BASE_URL}/og-image.jpg`,
+        url: `${env.NEXT_PUBLIC_BASE_URL}/cover.jpg`,
       },
     },
     creator: post.user?.login,
