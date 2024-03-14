@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import { Header } from "@/components/header";
+import { env } from "@/env";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
 
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
   description:
     "Convert GitHub issues into blog posts for effortless content sharing and SEO enhancement",
   alternates: {
-    canonical: new URL("https://github-as-a-blog.vercel.app"),
+    canonical: new URL(env.NEXT_PUBLIC_BASE_URL),
   },
-  metadataBase: new URL("https://github-as-a-blog.vercel.app"),
+  metadataBase: new URL(env.NEXT_PUBLIC_BASE_URL),
   twitter: {
     card: "summary_large_image",
   },
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     images: {
       width: 1200,
       height: 630,
-      url: "https://github-as-a-blog.vercel.app/og-image.jpg",
+      url: `${env.NEXT_PUBLIC_BASE_URL}/og-image.jpg`,
     },
   },
 };
