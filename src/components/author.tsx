@@ -16,12 +16,16 @@ export const Author = ({
     className="flex gap-2 items-center not-prose text-sm text-foreground/80"
   >
     <Avatar
-      className="w-5 h-5"
       src={`${user.avatar_url}&s=40`}
       alt="User avatar"
+      className="w-8 h-8"
       title={user.login ?? undefined}
     />
-    <span>@{user.login}</span>
-    {date && <span>{formatter.format(new Date(date))}</span>}
+    <div className="flex flex-col">
+      <span className="text-white">{user.login}</span>
+      {date && (
+        <span className="text-xs">{formatter.format(new Date(date))}</span>
+      )}
+    </div>
   </a>
 );
