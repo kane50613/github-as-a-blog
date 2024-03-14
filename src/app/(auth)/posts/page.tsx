@@ -1,21 +1,20 @@
 "use client";
 
-import { listPosts, type Post } from "@/app/(auth)/[owner]/[repo]/action";
+import { listPosts } from "@/app/(auth)/posts/action";
+import { type Post } from "@/common/github";
 import { PostOverview } from "@/components/post-overview";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { env } from "@/env";
 import { useInfiniteData } from "@/hooks/use-infinite-data";
 import { Loader2, Plus } from "lucide-react";
 import Link from "next/link";
 
 export const runtime = "edge";
 
-export default function Page({
-  params: { owner, repo },
-}: {
-  params: { owner: string; repo: string };
-}) {
+export default function Page() {
   const { ref, components, isLoading, hasMore } = useInfiniteData<Post>({
-    loader: (index) => listPosts(owner, repo, index),
+    loader: (index) => listPosts(index),
     render: (post) => <PostOverview key={post.number} post={post} />,
   });
 
@@ -24,7 +23,7 @@ export default function Page({
       <div className="flex justify-between items-center">
         <h1>My Posts</h1>
         <Button asChild>
-          <Link href={`/${owner}/${repo}/create`}>
+          <Link href="/posts/create">
             <Plus className="w-4 mr-2" />
             Create
           </Link>
@@ -34,23 +33,22 @@ export default function Page({
         This page shows the posts you have created in{" "}
         <a
           target="_blank"
-          href={`https://github.com/${owner}/${repo}/issues`}
+          href={`https://github.com/${env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/${env.NEXT_PUBLIC_GITHUB_REPO}/issues`}
           className="underline text-primary"
         >
-          {owner}/{repo}
+          {env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/{env.NEXT_PUBLIC_GITHUB_REPO}
         </a>
         .
       </p>
-      <div className="grid gap-3 md:grid-cols-3 grid-cols-1">
-        {components}
-        <div ref={ref} />
-      </div>
+      <Separator />
+      <div className="mx-auto space-y-4 w-fit">{components}</div>
+      <div ref={ref} />
       {isLoading && (
         <div className="flex h-16 justify-center items-center">
           <Loader2 className="animate-spin mr-2" /> Loading posts...
         </div>
       )}
-      {!hasMore && !isLoading && <p>No more posts</p>}
+      {!hasMore && !isLoading && <p className="text-center">No more posts</p>}
     </main>
   );
 }

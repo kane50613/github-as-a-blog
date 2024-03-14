@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const User = async () => {
   const session = await getUnsafeSession();
-  const user = session.token ? await getUser() : undefined;
+  const user = session.token ? await getUser(session) : undefined;
 
   if (!user)
     return (
@@ -15,5 +15,7 @@ export const User = async () => {
       </Button>
     );
 
-  return <Avatar src={user.avatar_url} alt={user.name ?? "User avatar"} />;
+  return (
+    <Avatar src={`${user.avatar_url}&s=80`} alt={user.name ?? "User avatar"} />
+  );
 };

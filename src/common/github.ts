@@ -1,42 +1,68 @@
-import { getSession, type IronSessionData } from "@/session";
+import { env } from "@/env";
+import { type IronSessionData } from "@/session";
 import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
+import { unstable_cache } from "next/cache";
 import { cache } from "react";
 
-export const getUser = cache(async () => {
-  const session = await getSession();
-
-  return client(session)
+export const getUser = cache(async (session: IronSession<IronSessionData>) =>
+  client(session)
     .users.getAuthenticated()
-    .then((r) => r.data);
-});
-
-export type Repo = Awaited<ReturnType<typeof listRepos>>[number];
-
-export const listRepos = cache(async () => {
-  const session = await getSession();
-
-  return client(session)
-    .repos.listForAuthenticatedUser({
-      per_page: 100,
-      type: "public",
-    })
-    .then((r) => r.data);
-});
-
-export const getIssue = cache(
-  async (owner: string, repo: string, issue_number: number) =>
-    client()
-      .issues.get({
-        owner,
-        repo,
-        issue_number,
-      })
-      .then((r) => r.data),
+    .then((r) => r.data),
 );
+
+export async function getIssue(issue_number: number) {
+  const fn = unstable_cache(
+    async () =>
+      client()
+        .issues.get({
+          owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
+          repo: env.NEXT_PUBLIC_GITHUB_REPO,
+          issue_number,
+        })
+        .then((r) => r.data),
+    ["posts", issue_number.toString()],
+    {
+      tags: [`posts-${issue_number}`],
+    },
+  );
+
+  return await fn();
+}
 
 export function client(session?: IronSession<IronSessionData>) {
   return new Octokit({
     auth: session?.token,
   });
 }
+
+export async function listPosts(creator?: string, page = 1, per_page = 10) {
+  const tags = creator ? [`posts-${creator}`] : ["posts"];
+
+  const fn = unstable_cache(
+    async () => {
+      const response = await client().issues.listForRepo({
+        owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
+        repo: env.NEXT_PUBLIC_GITHUB_REPO,
+        page,
+        per_page,
+        creator,
+        state: "open",
+      });
+
+      return response.data.map((post) => ({
+        ...post,
+        body_html: null,
+        body_text: null,
+      }));
+    },
+    ["posts", creator ?? "all", page.toString()],
+    {
+      tags,
+    },
+  );
+
+  return await fn();
+}
+
+export type Post = Awaited<ReturnType<typeof listPosts>>[number];

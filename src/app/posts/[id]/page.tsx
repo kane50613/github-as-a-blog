@@ -1,7 +1,8 @@
-import { CommentsLoader } from "@/app/[owner]/[repo]/[id]/comments-loader";
+import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 import { getIssue } from "@/common/github";
 import { MDX } from "@/components/mdx";
 import { Separator } from "@/components/ui/separator";
+import { env } from "@/env";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import removeMarkdown from "remove-markdown";
@@ -15,13 +16,13 @@ const formatter = new Intl.DateTimeFormat("en", {
 });
 
 export async function generateMetadata({
-  params: { owner, repo, id },
+  params: { id },
 }: {
-  params: { owner: string; repo: string; id: string };
+  params: { id: string };
 }) {
   if (!Number(id)) notFound();
 
-  const post = await getIssue(owner, repo, parseInt(id)).catch(notFound);
+  const post = await getIssue(parseInt(id)).catch(notFound);
 
   if (post.closed_at) notFound();
 
@@ -50,17 +51,17 @@ export async function generateMetadata({
 }
 
 export default async function Page({
-  params: { owner, repo, id },
+  params: { id },
 }: {
-  params: { owner: string; repo: string; id: string };
+  params: { id: string };
 }) {
   if (!Number(id)) notFound();
 
-  const post = await getIssue(owner, repo, parseInt(id)).catch(notFound);
+  const post = await getIssue(parseInt(id)).catch(notFound);
 
   if (post.closed_at) notFound();
 
-  const issueUrl = `https://github.com/${owner}/${repo}/issues/${post.number}`;
+  const issueUrl = `https://github.com/${env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/${env.NEXT_PUBLIC_GITHUB_REPO}/issues/${post.number}`;
 
   return (
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-xl">
@@ -92,7 +93,7 @@ export default async function Page({
         <p className="text-primary text-2xl font-medium">
           Comments ({post.comments})
         </p>
-        <CommentsLoader owner={owner} repo={repo} id={post.number} />
+        <CommentsLoader id={post.number} />
       </section>
     </main>
   );

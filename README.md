@@ -4,11 +4,11 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 
 ## Key Features
 
-- Issues stores within your repository.
 - Support for both Light and Dark mode.
 - Latest technologies including Next.js App Router, Server Actions, Edge Runtime, and more.
 - SEO-friendly architecture with server-side rendering.
 - `@tailwindcss/typography` for beautiful typography.
+- Cached data for improved performance.
 
 ---
 ## How do I plan the project?

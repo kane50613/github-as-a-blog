@@ -62,7 +62,7 @@ async function grabToken(req: Request, code: string) {
 }
 
 const loginUrl = new URL("https://github.com/login/oauth/authorize");
-const scopes = ["read:user", "public_repo"];
+const scopes = ["read:user"];
 
 const scope = scopes.join(" ");
 

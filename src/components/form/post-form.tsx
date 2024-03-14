@@ -1,11 +1,11 @@
 "use client";
 
-import { upsertPost } from "@/app/(auth)/[owner]/[repo]/create/action";
-import { Preview } from "@/app/(auth)/[owner]/[repo]/create/preview";
+import { upsertPost } from "@/app/(auth)/posts/create/action";
+import { Preview } from "@/app/(auth)/posts/create/preview";
 import {
   useCreatePostStore,
   type CreatePostStore,
-} from "@/app/(auth)/[owner]/[repo]/create/store";
+} from "@/app/(auth)/posts/create/store";
 import { Submit } from "@/components/submit";
 import { FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -14,13 +14,9 @@ import { useEffect, useId, useMemo } from "react";
 
 export const PostForm = ({
   defaultState,
-  owner,
-  repo,
   id,
 }: {
   defaultState?: CreatePostStore;
-  owner: string;
-  repo: string;
   id?: number;
 }) => {
   const titleInputId = useId();
@@ -37,7 +33,7 @@ export const PostForm = ({
   );
 
   return (
-    <form action={upsertPost.bind(null, owner, repo, id)} className="space-y-4">
+    <form action={upsertPost.bind(null, id)} className="space-y-4">
       <FormItem>
         <label htmlFor={titleInputId}>Title</label>
         <p className="text-xs text-primary/80">

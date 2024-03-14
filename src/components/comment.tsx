@@ -1,24 +1,17 @@
-import { type GithubComment } from "@/app/[owner]/[repo]/[id]/comment";
-import { Author } from "@/components/Author";
+import { type GithubComment } from "@/app/posts/[id]/comment";
+import { Author } from "@/components/author";
 import { MDX } from "@/components/mdx";
 import { memo } from "react";
 
-export const Comment = memo(
-  ({ baseUrl, comment }: { baseUrl: string; comment: GithubComment }) => (
-    <li key={comment.id} className="flex flex-col gap-2">
-      <a
-        className="flex gap-2 items-center w-fit"
-        href={`${baseUrl}#issuecomment-${comment.id}`}
-        target="_blank"
-        rel="nofollow"
-      >
-        {comment.user && <Author user={comment.user} />}
-      </a>
-      <div className="prose dark:prose-invert">
-        <MDX>{comment.body}</MDX>
-      </div>
-    </li>
-  ),
-);
+export const Comment = memo(({ comment }: { comment: GithubComment }) => (
+  <li className="flex flex-col gap-2">
+    <div className="flex justify-between items-center">
+      {comment.user && <Author user={comment.user} />}
+    </div>
+    <div className="prose dark:prose-invert">
+      <MDX>{comment.body}</MDX>
+    </div>
+  </li>
+));
 
 Comment.displayName = "Comment";

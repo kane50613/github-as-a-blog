@@ -1,4 +1,4 @@
-import { useCreatePostStore } from "@/app/(auth)/[owner]/[repo]/create/store";
+import { useCreatePostStore } from "@/app/(auth)/posts/create/store";
 import {
   Accordion,
   AccordionContent,

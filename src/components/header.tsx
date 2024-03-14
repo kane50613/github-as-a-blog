@@ -1,7 +1,7 @@
-import { User } from "@/components/User";
 import { Avatar } from "@/components/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { User } from "@/components/user";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
 import { Suspense } from "react";

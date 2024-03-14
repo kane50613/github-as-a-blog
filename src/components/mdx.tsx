@@ -8,7 +8,11 @@ export const MDX = (props: ComponentProps<typeof Markdown>) => (
     remarkPlugins={[remarkGfm]}
     components={{
       a: (props) => (
-        <a {...props} className="text-primary underline" rel="nofollow" />
+        <a
+          {...props}
+          className="text-primary underline break-all"
+          rel="nofollow"
+        />
       ),
       ...props.components,
     }}
