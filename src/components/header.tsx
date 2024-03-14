@@ -10,7 +10,9 @@ export const Header = () => {
   return (
     <div className="sticky top-0 bg-background z-50 border-b">
       <div className="h-16 flex justify-between w-full items-center container">
-        <Link href="/">GaaB</Link>
+        <Link href="/" className="text-medium">
+          GaaB
+        </Link>
         <div className="flex items-center">
           <Button asChild variant="ghost" size="sm">
             <a
