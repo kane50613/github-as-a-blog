@@ -1,19 +1,16 @@
 import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 import { getIssue } from "@/common/github";
+import { Author } from "@/components/author";
 import { MDX } from "@/components/mdx";
+import { PostHelper } from "@/components/post-helper";
 import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import removeMarkdown from "remove-markdown";
 
 export const runtime = "edge";
-
-const formatter = new Intl.DateTimeFormat("en", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
 
 export async function generateMetadata({
   params: { id },
@@ -66,31 +63,27 @@ export default async function Page({
   return (
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-xl">
       <article>
-        <a
-          href={issueUrl}
-          target="_blank"
-          rel="nofollow"
-          className="text-primary/80"
-        >
-          #{post.number}
-        </a>
-        <h1>{post.title}</h1>
-        <p className="text-base mb-4">
+        <div className="flex justify-between">
           <a
-            href={`https://github.com/${post.user?.login}`}
+            href={issueUrl}
             target="_blank"
             rel="nofollow"
+            className="text-foreground/80 not-prose"
           >
-            @{post.user?.login}
-          </a>{" "}
-          • {formatter.format(new Date(post.created_at))}
-        </p>
-        <Separator />
+            #{post.number}
+          </a>
+          <Suspense>
+            <PostHelper post={post} />
+          </Suspense>
+        </div>
+        <h1>{post.title}</h1>
+        {post.user && <Author user={post.user} date={post.updated_at} />}
+        <Separator className="my-4" />
         <MDX>{post.body}</MDX>
       </article>
       <Separator />
       <section className="not-prose space-y-4">
-        <p className="text-primary text-2xl font-medium">
+        <p className="text-foreground text-2xl font-medium">
           Comments ({post.comments})
         </p>
         <CommentsLoader id={post.number} />

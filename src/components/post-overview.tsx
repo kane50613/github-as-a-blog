@@ -11,13 +11,13 @@ export const PostOverview = memo(({ post }: { post: Post }) => (
         {post.title}
       </p>
     </Link>
-    {post.user && <Author user={post.user} />}
+    {post.user && <Author user={post.user} date={post.updated_at} />}
     <div className="line-clamp-3 text-sm break-all prose dark:prose-invert">
       <MDX>{post.body}</MDX>
     </div>
     <Link
       href={`/posts/${post.number}`}
-      className="not-prose text-sm text-primary/75 underline"
+      className="not-prose text-sm text-foreground/75 underline"
     >
       Read more
     </Link>

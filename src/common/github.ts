@@ -20,7 +20,11 @@ export async function getIssue(issue_number: number) {
           repo: env.NEXT_PUBLIC_GITHUB_REPO,
           issue_number,
         })
-        .then((r) => r.data),
+        .then((r) => ({
+          ...r.data,
+          body_html: "",
+          body_text: "",
+        })),
     ["posts", issue_number.toString()],
     {
       tags: [`posts-${issue_number}`],
@@ -52,8 +56,8 @@ export async function listPosts(creator?: string, page = 1, per_page = 10) {
 
       return response.data.map((post) => ({
         ...post,
-        body_html: null,
-        body_text: null,
+        body_html: "",
+        body_text: "",
       }));
     },
     ["posts", creator ?? "all", page.toString()],

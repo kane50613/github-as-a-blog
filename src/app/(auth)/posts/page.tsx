@@ -29,12 +29,12 @@ export default function Page() {
           </Link>
         </Button>
       </div>
-      <p className="text-primary/80">
+      <p className="text-foreground/80">
         This page shows the posts you have created in{" "}
         <a
           target="_blank"
           href={`https://github.com/${env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/${env.NEXT_PUBLIC_GITHUB_REPO}/issues`}
-          className="underline text-primary"
+          className="underline text-foreground"
         >
           {env.NEXT_PUBLIC_GITHUB_REPO_OWNER}/{env.NEXT_PUBLIC_GITHUB_REPO}
         </a>

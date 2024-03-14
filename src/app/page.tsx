@@ -17,7 +17,7 @@ export default async function HomePage() {
         Blogging should be
         <br /> easy as GitHub issue.
       </h1>
-      <p className="text-primary/80">
+      <p className="text-foreground/80">
         Effortless blogging with GitHub issues and Next.js.
       </p>
       <Button>

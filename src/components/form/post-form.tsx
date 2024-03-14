@@ -36,7 +36,7 @@ export const PostForm = ({
     <form action={upsertPost.bind(null, id)} className="space-y-4">
       <FormItem>
         <label htmlFor={titleInputId}>Title</label>
-        <p className="text-xs text-primary/80">
+        <p className="text-xs text-foreground/80">
           This field will be an H1 in the post.
         </p>
         <Input
@@ -51,7 +51,7 @@ export const PostForm = ({
       </FormItem>
       <FormItem>
         <label htmlFor={bodyInputId}>Body</label>
-        <p className="text-xs text-primary/80">
+        <p className="text-xs text-foreground/80">
           Markdown is supported. Minimum length is 30 characters.
         </p>
         <Textarea
