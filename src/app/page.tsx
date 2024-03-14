@@ -2,7 +2,8 @@ import { listPosts } from "@/common/github";
 import { PostOverview } from "@/components/post-overview";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Rocket } from "lucide-react";
+import { Rocket, Star } from "lucide-react";
+import Link from "next/link";
 
 export const runtime = "edge";
 
@@ -20,10 +21,20 @@ export default async function HomePage() {
       <p className="text-foreground/80">
         Effortless blogging with GitHub issues and Next.js.
       </p>
-      <Button>
-        <Rocket className="w-4 mr-2" />
-        Starts now
-      </Button>
+      <div className="gap-2 flex flex-col md:flex-row w-full md:w-fit">
+        <Button asChild>
+          <Link href="/posts">
+            <Rocket className="w-4 mr-2" />
+            Start blogging now
+          </Link>
+        </Button>
+        <Button variant="secondary" asChild>
+          <a href="https://github.com/kane50613/github-as-a-blog/">
+            <Star className="w-4 mr-2" />
+            Star on GitHub
+          </a>
+        </Button>
+      </div>
       <Separator />
       {posts.map((post, index) => (
         <PostOverview post={post} key={index} />

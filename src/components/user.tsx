@@ -16,6 +16,11 @@ export const User = async () => {
     );
 
   return (
-    <Avatar src={`${user.avatar_url}&s=80`} alt={user.name ?? "User avatar"} />
+    <Link href="/posts">
+      <Avatar
+        src={`${user.avatar_url}&s=80`}
+        alt={user.name ?? "User avatar"}
+      />
+    </Link>
   );
 };

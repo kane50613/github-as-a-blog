@@ -3,13 +3,25 @@ import { type IronSessionData } from "@/session";
 import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
 import { unstable_cache } from "next/cache";
-import { cache } from "react";
+import { redirect } from "next/navigation";
 
-export const getUser = cache(async (session: IronSession<IronSessionData>) =>
-  client(session)
-    .users.getAuthenticated()
-    .then((r) => r.data),
-);
+export function getUser(session: IronSession<IronSessionData>) {
+  if (!session.token) return redirect("/");
+
+  const fn = unstable_cache(
+    async () =>
+      client(session)
+        .users.getAuthenticated()
+        .then((r) => r.data),
+    ["users", session.token],
+    {
+      tags: ["users", `users-${session.token}`],
+      revalidate: 60,
+    },
+  );
+
+  return fn();
+}
 
 export async function getIssue(issue_number: number) {
   const fn = unstable_cache(
@@ -31,7 +43,7 @@ export async function getIssue(issue_number: number) {
     },
   );
 
-  return await fn();
+  return fn();
 }
 
 export function client(session?: IronSession<IronSessionData>) {
@@ -66,7 +78,7 @@ export async function listPosts(creator?: string, page = 1, per_page = 10) {
     },
   );
 
-  return await fn();
+  return fn();
 }
 
 export type Post = Awaited<ReturnType<typeof listPosts>>[number];
