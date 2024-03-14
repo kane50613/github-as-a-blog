@@ -29,7 +29,10 @@ export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
     },
   });
 
-  const components = useMemo(() => data.flat().map(props.render), [data]);
+  const components = useMemo(
+    () => data.flat().map(props.render),
+    [data, props.render],
+  );
 
   return {
     components,
