@@ -55,6 +55,7 @@ export const PostForm = ({
           Markdown is supported. Minimum length is 30 characters.
         </p>
         <Textarea
+          rows={20}
           name="body"
           id={bodyInputId}
           defaultValue={initialState.body}
