@@ -22,7 +22,7 @@ export async function generateMetadata({
 }) {
   if (!Number(id)) notFound();
 
-  const post = await getIssue(owner, repo, parseInt(id));
+  const post = await getIssue(owner, repo, parseInt(id)).catch(notFound);
 
   if (post.closed_at) notFound();
 
@@ -37,11 +37,16 @@ export async function generateMetadata({
       url: `https://github.com/${post.user?.login}`,
     },
     openGraph: {
+      siteName: "GitHub as a Blog",
       type: "article",
       title: post.title,
+      publishedTime: new Date(post.created_at).toISOString(),
+      modifiedTime: new Date(post.updated_at).toISOString(),
+      authors: post.user?.login,
       description,
     },
     creator: post.user?.login,
+    publisher: post.user?.login,
   } as Metadata;
 }
 
@@ -52,7 +57,7 @@ export default async function Page({
 }) {
   if (!Number(id)) notFound();
 
-  const post = await getIssue(owner, repo, parseInt(id));
+  const post = await getIssue(owner, repo, parseInt(id)).catch(notFound);
 
   if (post.closed_at) notFound();
 
