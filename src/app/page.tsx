@@ -14,14 +14,14 @@ export default async function HomePage() {
 
   return (
     <div className="flex items-center gap-4 flex-col space-y-4 py-4 justify-center text-center">
-      <h1 className="text-3xl lg:text-5xl !leading-relaxed font-semibold">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl !leading-relaxed font-bold">
         Blogging should be
         <br /> easy as GitHub issue.
       </h1>
       <p className="text-foreground/80">
         Effortless blogging with GitHub issues and Next.js.
       </p>
-      <div className="gap-2 flex flex-col md:flex-row w-full md:w-fit">
+      <div className="gap-2 flex flex-col sm:flex-row w-full sm:w-fit">
         <Button asChild>
           <Link href="/posts">
             <Rocket className="w-4 mr-2" />
