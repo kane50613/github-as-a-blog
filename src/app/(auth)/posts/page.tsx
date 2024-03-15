@@ -11,7 +11,7 @@ export const runtime = "edge";
 
 export default function Page() {
   return (
-    <main className="space-y-4 mt-4">
+    <main className="space-y-4 py-4">
       <div className="flex justify-between items-center">
         <h1>My Posts</h1>
         <Button asChild>
