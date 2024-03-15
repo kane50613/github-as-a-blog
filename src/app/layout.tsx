@@ -1,11 +1,9 @@
-import "@/styles/globals.css";
-
 import { Header } from "@/components/header";
 import { env } from "@/env";
+import { themeScript } from "@/lib/script";
+import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
-
-const themeScript = `!function e(){let t=localStorage.getItem("theme");!t&&window.matchMedia&&(t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),"dark"===t&&document.querySelector("html").classList.add("dark"),localStorage.setItem("theme",t)}();`;
 
 export const metadata: Metadata = {
   title: "GaaB: Github as a Blog",
@@ -32,7 +30,8 @@ export const runtime = "edge";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="zh-Hant-TW" suppressHydrationWarning className="h-full">
+    // need to suppressHydrationWarning because of the script tag in the head sets the theme class
+    <html lang="en" suppressHydrationWarning className="h-full">
       <head>
         <script
           dangerouslySetInnerHTML={{
