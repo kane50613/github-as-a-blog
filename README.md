@@ -49,9 +49,9 @@ The actual usage can be found in [src/app/(auth)/posts/posts-loader.tsx](./src/a
 
 ### Authentication Mechanism
 
-GitHub OAuth App was used for user authentication. Users can log in using their GitHub accounts and authorize the app to access their profiles and public repositories with minimal scopes (`read:user` and `public_repo`).
+GitHub OAuth App was used for user authentication. Users can log in using their GitHub accounts with minimal scope required (`read:user`), ensuring privacy and security.
 
-The authentication process is straightforward: upon clicking the "Starts now" button, users are redirected to the GitHub OAuth page. Following authorization, GitHub redirects back to the app with a code, which is then exchanged for an access token.
+The authentication process is straightforward: upon clicking the "Start blogging now" button, users are redirected to the GitHub OAuth page. Following authorization, GitHub redirects back to the app with a code, which is then exchanged for an access token.
 
 The token is securely stored in httpOnly cookies using [iron-session](https://www.npmjs.com/package/iron-session), which encrypts and signs the token with a secret key, ensuring its safety and preventing XSS attacks.
 
