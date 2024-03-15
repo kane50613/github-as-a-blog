@@ -9,6 +9,7 @@ export const PostsLoader = () => {
   const { ref, components, isLoading, hasMore } = useInfiniteData<Post>({
     loader: (index) => listPosts(index),
     render: (post) => <PostOverview key={post.number} post={post} />,
+    key: "my-posts",
   });
 
   return (

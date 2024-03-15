@@ -1,22 +1,21 @@
-import { useId, useMemo, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
 
 interface InfiniteDataProps<T> {
   render: (props: T) => ReactNode;
   loader: (page: number) => Promise<T[]>;
+  key: string;
 }
 
 export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
-  const id = useId();
-
   const {
     data = [],
     isLoading,
     isValidating,
     setSize,
   } = useSWRInfinite<T[]>(
-    (page) => [page + 1, id] as const,
+    (page) => [page + 1, props.key] as const,
     ([page]) => props.loader(page as number),
   );
 
