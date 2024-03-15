@@ -45,7 +45,7 @@ Implementing infinite scroll was an engaging experience, and surprisingly straig
 
 To ensure reusability, a [`useInfiniteData`](./src/hooks/use-infinite-data.tsx) hook was crafted to manage the logic of infinite scrolling. The hook takes in a `render` function responsible for rendering the data as ReactNode and a `loader` function generating data arrays based on page numbers (starting from 1).
 
-The actual usage can be found in [src/app/(auth)/[owner]/[repo]/page.tsx](./src/app/(auth)/[owner]/[repo]/page.tsx).
+The actual usage can be found in [src/app/(auth)/posts/posts-loader.tsx](./src/app/(auth)/posts/posts-loader.tsx).
 
 ### Authentication Mechanism
 
