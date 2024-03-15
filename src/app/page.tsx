@@ -1,10 +1,14 @@
 import { listPosts } from "@/common/github";
+import {
+  MainActionButton,
+  MainActionButtonLoader,
+} from "@/components/main-action-button";
 import { PostOverview } from "@/components/post-overview";
 import { PostsContainer } from "@/components/posts-container";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Rocket, Star } from "lucide-react";
-import Link from "next/link";
+import { Star } from "lucide-react";
+import { Suspense } from "react";
 
 export const runtime = "edge";
 
@@ -23,12 +27,9 @@ export default async function HomePage() {
         Effortless blogging with GitHub issues and Next.js.
       </p>
       <div className="gap-2 flex flex-col sm:flex-row w-full sm:w-fit">
-        <Button asChild>
-          <Link href="/posts">
-            <Rocket className="w-4 mr-2" />
-            Start blogging now
-          </Link>
-        </Button>
+        <Suspense fallback={<MainActionButton redirectToAuth={false} />}>
+          <MainActionButtonLoader />
+        </Suspense>
         <Button variant="secondary" asChild>
           <a href="https://github.com/kane50613/github-as-a-blog/">
             <Star className="w-4 mr-2" />
