@@ -21,7 +21,7 @@ export const MDX = (props: ComponentProps<typeof Markdown>) => (
       a: (props) => (
         <a
           {...props}
-          className="foreground underline break-all"
+          className="foreground underline break-words"
           rel="nofollow"
         />
       ),

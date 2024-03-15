@@ -24,7 +24,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GITHUB_REPO_OWNER:
       process.env.NEXT_PUBLIC_GITHUB_REPO_OWNER ?? "kane50613",
     NEXT_PUBLIC_GITHUB_REPO:
-      process.env.NEXT_PUBLIC_GITHUB_REPO ?? "github-issues-blog-demo",
+      process.env.NEXT_PUBLIC_GITHUB_REPO ?? "github-as-a-blog",
     JWT_SECRET: process.env.JWT_SECRET,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
