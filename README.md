@@ -29,6 +29,12 @@ Considering these factors, the options under consideration were Next.js and Astr
 
 As per the homework requirements, all posts are to be stored in GitHub issues, eliminating the need for a separate database. This requires the use of the GitHub API to fetch the issues dynamically.
 
+## PageSpeed Insights (Web Vitals, Lighthouse)
+
+According to Google's PageSpeed Insights, the project scores 100 on both mobile and desktop devices, with a perfect 100/100 score on Lighthouse.
+
+[The report can be found here](https://pagespeed.web.dev/analysis/https-github-as-a-blog-vercel-app/ohjuu7y1tj)
+
 ## Technical Insights
 
 Below are some of the technical aspects and implementation details:

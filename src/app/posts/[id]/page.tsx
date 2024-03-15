@@ -1,4 +1,3 @@
-import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 import { getIssue } from "@/common/github";
 import { Author } from "@/components/author";
 import { MDX } from "@/components/mdx";
@@ -6,9 +5,18 @@ import { PostHelper } from "@/components/post-helper";
 import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
 import { type Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import removeMarkdown from "remove-markdown";
+
+// this component is lazy loaded because it uses the octokit client, it adds a lot of weight to the initial bundle.
+const CommentsLoader = dynamic(
+  import("./comments-loader").then((mod) => mod.CommentsLoader),
+  {
+    ssr: false,
+  },
+);
 
 export const runtime = "edge";
 
