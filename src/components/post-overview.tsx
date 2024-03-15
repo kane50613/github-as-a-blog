@@ -6,6 +6,7 @@ import Link from "next/link";
 import { memo } from "react";
 import removeMarkdown from "remove-markdown";
 
+// Rendering mdx content in overview is not necessary and could break the LightHouse score, so we remove it.
 export const PostOverview = memo(({ post }: { post: Post }) => (
   <article className="flex items-start flex-col gap-2 max-w-xl w-full">
     {post.user && <Author user={post.user} date={post.updated_at} />}
