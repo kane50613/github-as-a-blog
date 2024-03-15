@@ -11,7 +11,7 @@ export const User = async () => {
   if (!user)
     return (
       <Button asChild size="sm" variant="secondary">
-        <Link href="/api/auth">Login</Link>
+        <a href="/api/auth">Login</a>
       </Button>
     );
 
