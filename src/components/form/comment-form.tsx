@@ -26,7 +26,7 @@ export const CommentForm = async ({ post }: { post: Post }) => {
 
   return (
     <form action={createComment.bind(null, post.number)}>
-      <Textarea placeholder="Write a comment" />
+      <Textarea name="body" placeholder="Write a comment" />
       <Submit>Comment</Submit>
     </form>
   );
