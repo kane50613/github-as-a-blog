@@ -28,6 +28,14 @@ export async function GET() {
       id: `${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}`,
       link: `${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}`,
       content: post.body ? removeMarkdown(post.body) : "",
+      author: [
+        {
+          name: post.user?.login ?? "Unknown",
+          link: post.user
+            ? `https://github.com/${post.user.login}`
+            : "https://github.com/",
+        },
+      ],
     });
   }
 
