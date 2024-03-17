@@ -35,6 +35,9 @@ dependencies:
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
+  feed:
+    specifier: ^4.2.2
+    version: 4.2.2
   iron-session:
     specifier: ^8.0.1
     version: 8.0.1
@@ -2556,6 +2559,13 @@ packages:
     dependencies:
       reusify: 1.0.4
 
+  /feed@4.2.2:
+    resolution: {integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==, tarball: https://registry.npmjs.org/feed/-/feed-4.2.2.tgz}
+    engines: {node: '>=0.4.0'}
+    dependencies:
+      xml-js: 1.6.11
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==, tarball: https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-6.0.1.tgz}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -4437,6 +4447,10 @@ packages:
       is-regex: 1.1.4
     dev: true
 
+  /sax@1.3.0:
+    resolution: {integrity: sha512-0s+oAmw9zLl1V1cS9BtZN7JAd0cW5e0QH4W3LWEK6a4LaLEA2OTpGYWDY+6XasBLtz6wkm3u1xRw95mRuJ59WA==, tarball: https://registry.npmjs.org/sax/-/sax-1.3.0.tgz}
+    dev: false
+
   /scheduler@0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==, tarball: https://registry.npmjs.org/scheduler/-/scheduler-0.23.0.tgz}
     dependencies:
@@ -5066,6 +5080,13 @@ packages:
 
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==, tarball: https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz}
+
+  /xml-js@1.6.11:
+    resolution: {integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==, tarball: https://registry.npmjs.org/xml-js/-/xml-js-1.6.11.tgz}
+    hasBin: true
+    dependencies:
+      sax: 1.3.0
+    dev: false
 
   /xss@1.0.15:
     resolution: {integrity: sha512-FVdlVVC67WOIPvfOwhoMETV72f6GbW7aOabBC3WxN/oUdoEMDyLz4OgRv5/gck2ZeNqEQu+Tb0kloovXOfpYVg==, tarball: https://registry.npmjs.org/xss/-/xss-1.0.15.tgz}

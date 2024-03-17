@@ -16,8 +16,9 @@ export const env = createEnv({
   runtimeEnv: {
     NEXT_PUBLIC_BASE_URL:
       process.env.NEXT_PUBLIC_BASE_URL ??
-      `https://${process.env.VERCEL_URL}` ??
-      "http://localhost:3000",
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000"),
     NODE_ENV: process.env.NODE_ENV,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,

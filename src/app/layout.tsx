@@ -38,6 +38,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             __html: themeScript,
           }}
         />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS Feed for GaaB: Github as a Blog"
+          href="/api/rss.xml"
+        />
       </head>
       <body>
         <Header />

@@ -53,9 +53,33 @@ export function client(session?: IronSession<IronSessionData>) {
   });
 }
 
-export async function listPosts(creator?: string, page = 1, per_page = 10) {
-  const tags = creator ? [`posts-${creator}`] : ["posts"];
+export async function listAllPosts(creator?: string) {
+  const fn = unstable_cache(
+    async () => {
+      const data: Post[] = [];
 
+      let page = 1;
+
+      while (true) {
+        const response = await listPosts(creator, page++, 100);
+
+        if (response.length) data.push(...response);
+        if (response.length < 100) break;
+      }
+
+      return data;
+    },
+    ["posts", "list-all", creator ?? "all"],
+    {
+      revalidate: 60,
+      tags: [creator ? `posts-${creator}` : "posts"],
+    },
+  );
+
+  return fn();
+}
+
+export async function listPosts(creator?: string, page = 1, per_page = 10) {
   const fn = unstable_cache(
     async () => {
       const response = await client().issues.listForRepo({
@@ -76,7 +100,7 @@ export async function listPosts(creator?: string, page = 1, per_page = 10) {
     ["posts", creator ?? "all", page.toString()],
     {
       revalidate: 60,
-      tags,
+      tags: [creator ? `posts-${creator}` : "posts"],
     },
   );
 
