@@ -18,12 +18,13 @@ export async function GET() {
       <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
       <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
       <description>${post.body ? removeMarkdown(post.body) : ""}</description>
+      <guid>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</guid>
     </item>`,
     )
     .join("\n");
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>GitHub as a Blog</title>
       <description>GitHub as a Blog</description>
