@@ -39,6 +39,7 @@ export async function GET() {
       <pubDate>${latestDate.toUTCString()}</pubDate>
       <ttl>60</ttl>
       ${postsXml}
+      <atom:link href="${env.NEXT_PUBLIC_BASE_URL}/api/rss.xml" rel="self" type="application/rss+xml" />
     </channel>
   </rss>`;
 
