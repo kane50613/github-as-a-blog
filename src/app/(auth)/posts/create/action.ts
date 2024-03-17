@@ -1,6 +1,7 @@
 "use server";
 
-import { client } from "@/common/github";
+import { client, getUser } from "@/common/github";
+import { whitelistCheck } from "@/common/whitelist";
 import { env } from "@/env";
 import { getSession } from "@/session";
 import { revalidateTag } from "next/cache";
@@ -15,6 +16,12 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 export async function upsertPost(id: number | undefined, form: FormData) {
+  const session = await getSession();
+
+  const user = await getUser(session);
+
+  whitelistCheck(user.login);
+
   const data = schema.parse(Object.fromEntries(form.entries()));
 
   const issue = id ? await updatePost(id, data) : await createPost(data);

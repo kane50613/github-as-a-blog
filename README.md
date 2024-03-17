@@ -2,58 +2,15 @@
 
 This project, developed as part of a Dcard internship assignment, aims to transform GitHub issues into blog posts for seamless content sharing and search engine optimization (SEO) improvement.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkane50613%2Fgithub-as-a-blog)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkane50613%2Fgithub-as-a-blog&env=GITHUB_CLIENT_ID,GITHUB_CLIENT_SECRET,JWT_SECRET,NEXT_PUBLIC_GITHUB_REPO_OWNER,NEXT_PUBLIC_GITHUB_REPO&demo-title=Github%20as%20a%20Blog&demo-description=Effortless%20blogging%20with%20GitHub%20issues%20and%20Next.js&demo-url=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2F&demo-image=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2Fcover.jpg)
 
-## Key Features
+## GitHub issues is good, what problem does GaaB solve?
 
-- Support for both Light and Dark mode.
-- Latest technologies including Next.js App Router, Server Actions, Edge Runtime, and more.
-- SEO-friendly architecture with server-side rendering.
-- `@tailwindcss/typography` for beautiful typography.
-- Cached data for improved performance.
-- Sitemap generation for better SEO.
+### SEO
 
----
+### User Experience
 
-## How do I plan the project?
-
-When planning the project, several key considerations come into play:
-
-- **React Based**: Utilizing React for its robust ecosystem and component-based architecture.
-- **SEO-Friendly**: Ensuring that the project is optimized for search engine visibility.
-- **Readability, Consistency, and Reusability**: Prioritizing maintainability and code quality.
-
-Considering these factors, the options under consideration were Next.js and Astro. Next.js was ultimately chosen due to its advanced features such as Server Actions, Edge Runtime, and more.
-
-[Astro doesn't support Vercel Edge Runtime _natively_](https://vercel.com/docs/frameworks/astro#edge-functions). Without Edge Runtime, there is a risk of cold starts, which can negatively impact user experience.
-
-As per the homework requirements, all posts are to be stored in GitHub issues, eliminating the need for a separate database. This requires the use of the GitHub API to fetch the issues dynamically.
-
-## PageSpeed Insights (Web Vitals, Lighthouse)
-
-According to Google's PageSpeed Insights, the project scores 100 on both mobile and desktop devices, with a perfect 100/100 score on Lighthouse.
-
-[The report can be found here](https://pagespeed.web.dev/analysis/https-github-as-a-blog-vercel-app/ohjuu7y1tj)
-
-## Technical Insights
-
-Below are some of the technical aspects and implementation details:
-
-### Infinite Scroll Implementation
-
-Implementing infinite scroll was an engaging experience, and surprisingly straightforward. The [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer) package proved instrumental, providing a React hook `useInView` that wraps `IntersectionObserver`.
-
-To ensure reusability, a [`useInfiniteData`](./src/hooks/use-infinite-data.tsx) hook was crafted to manage the logic of infinite scrolling. The hook takes in a `render` function responsible for rendering the data as ReactNode and a `loader` function generating data arrays based on page numbers (starting from 1).
-
-The actual usage can be found in [src/app/(auth)/posts/posts-loader.tsx](./src/app/(auth)/posts/posts-loader.tsx).
-
-### Authentication Mechanism
-
-GitHub OAuth App was used for user authentication. Users can log in using their GitHub accounts with minimal scope required (`read:user`), ensuring privacy and security.
-
-The authentication process is straightforward: upon clicking the "Start blogging now" button, users are redirected to the GitHub OAuth page. Following authorization, GitHub redirects back to the app with a code, which is then exchanged for an access token.
-
-The token is securely stored in httpOnly cookies using [iron-session](https://www.npmjs.com/package/iron-session), which encrypts and signs the token with a secret key, ensuring its safety and preventing XSS attacks.
+### Whitelisting
 
 ## Local Development
 

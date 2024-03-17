@@ -7,6 +7,11 @@ export const env = createEnv({
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
     JWT_SECRET: z.string(),
+    WHITELISTED_AUTHORS: z
+      .string()
+      .trim()
+      .transform((value) => value.split(",").filter(Boolean))
+      .optional(),
   },
   client: {
     NEXT_PUBLIC_BASE_URL: z.string(),
@@ -19,6 +24,7 @@ export const env = createEnv({
       (process.env.VERCEL_URL
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000"),
+    WHITELISTED_AUTHORS: process.env.WHITELISTED_AUTHORS,
     NODE_ENV: process.env.NODE_ENV,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
