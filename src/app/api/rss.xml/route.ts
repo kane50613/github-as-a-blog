@@ -1,6 +1,5 @@
 import { listAllPosts } from "@/common/github";
 import { env } from "@/env";
-import { Feed } from "feed";
 import removeMarkdown from "remove-markdown";
 
 export const runtime = "edge";
@@ -10,36 +9,38 @@ export async function GET() {
 
   const latestDate = new Date(posts[0]?.updated_at ?? Date.now());
 
-  const feed = new Feed({
-    title: "GitHub as a Blog",
-    description: "GitHub as a Blog",
-    id: env.NEXT_PUBLIC_BASE_URL,
-    link: env.NEXT_PUBLIC_BASE_URL,
-    language: "en",
-    image: `${env.NEXT_PUBLIC_BASE_URL}/cover.jpg`,
-    updated: latestDate,
-    copyright: "unknown",
-  });
+  const postsXml = posts
+    .map(
+      (post) => `<item>
+      <title>${post.title}</title>
+      <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
+      <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
+      <description>${post.body ? removeMarkdown(post.body) : ""}</description>
+      <author>${post.user?.login ?? "Unknown"}</author>
+    </item>`,
+    )
+    .join("\n");
 
-  for (const post of posts) {
-    feed.addItem({
-      date: new Date(post.updated_at),
-      title: post.title,
-      id: `${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}`,
-      link: `${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}`,
-      content: post.body ? removeMarkdown(post.body) : "",
-      author: [
-        {
-          name: post.user?.login ?? "Unknown",
-          link: post.user
-            ? `https://github.com/${post.user.login}`
-            : "https://github.com/",
-        },
-      ],
-    });
-  }
+  const feed = `<?xml version="1.0" encoding="UTF-8" ?>
+  <rss version="2.0">
+    <channel>
+      <title>GitHub as a Blog</title>
+      <description>GitHub as a Blog</description>
+      <link>${env.NEXT_PUBLIC_BASE_URL}</link>
+      <language>en</language>
+      <image>
+        <url>${env.NEXT_PUBLIC_BASE_URL}/cover.jpg</url>
+        <title>GitHub as a Blog</title>
+        <link>${env.NEXT_PUBLIC_BASE_URL}</link>
+      </image>
+      <lastBuildDate>${latestDate.toUTCString()}</lastBuildDate>
+      <pubDate>${latestDate.toUTCString()}</pubDate>
+      <ttl>60</ttl>
+      ${postsXml}
+    </channel>
+  </rss>`;
 
-  return new Response(feed.rss2(), {
+  return new Response(feed, {
     headers: {
       "content-type": "application/rss+xml",
     },
