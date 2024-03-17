@@ -1,7 +1,9 @@
 import { deletePost } from "@/app/(auth)/posts/[id]/delete/action";
 import { getIssue } from "@/common/github";
 import { Submit } from "@/components/submit";
+import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
+import Link from "next/link";
 
 export default async function Page({
   params: { id },
@@ -17,10 +19,15 @@ export default async function Page({
     >
       <h1 className="text-3xl">Are you sure you want to delete this post?</h1>
       <p>{issue.title}</p>
-      <Submit variant="destructive">
-        <Trash className="mr-2 w-4" />
-        Yes
-      </Submit>
+      <div className="flex gap-2">
+        <Button variant="secondary" asChild>
+          <Link href={`/posts/${issue.number}`}>Cancel</Link>
+        </Button>
+        <Submit variant="destructive">
+          <Trash className="mr-2 w-4" />
+          Yes
+        </Submit>
+      </div>
     </form>
   );
 }
