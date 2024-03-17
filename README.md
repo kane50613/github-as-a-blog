@@ -40,11 +40,15 @@ Since the GitHub repository is public, anyone can create issues and comments. Ga
 
 By settings the `WHITELISTED_AUTHORS` environment variable in `.env`, separated by commas, only the authors in the whitelist can create issues and comments.
 
+We also have XSS protection for the content, thanks to the [react-markdown](https://www.npmjs.com/package/react-markdown) library, which automatically escapes the HTML in the content and not using `dangerouslySetInnerHTML` directly. 
+
 ### Ownership
 
 By hosting the content on your own domain, you have full control over the page rendering.
 
 We do not host any content, and the content is fetched from GitHub's API directly. This means that you can easily migrate to another platform without losing any content.
+
+In the future, we may create a migration tool to help you migrate to another platform easily.
 
 ## Local Development
 
