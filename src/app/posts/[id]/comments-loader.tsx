@@ -1,6 +1,6 @@
 "use client";
 
-import { getIssueComments, GithubComment } from "@/common/github";
+import { getIssueComments, type GithubComment } from "@/common/github";
 import { Comment } from "@/components/comment";
 import { useInfiniteData } from "@/hooks/use-infinite-data";
 
