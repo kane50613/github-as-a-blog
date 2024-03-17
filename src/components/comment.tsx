@@ -1,5 +1,5 @@
-import { type GithubComment } from "@/app/posts/[id]/comment";
 import { Author } from "@/components/author";
+import { type GithubComment } from "@/components/comment";
 import { MDX } from "@/components/mdx";
 import { memo } from "react";
 

@@ -1,5 +1,6 @@
 import { getIssue } from "@/common/github";
 import { Author } from "@/components/author";
+import { CommentForm } from "@/components/form/comment-form";
 import { MDX } from "@/components/mdx";
 import { PostHelper } from "@/components/post-helper";
 import { Separator } from "@/components/ui/separator";
@@ -101,6 +102,7 @@ export default async function Page({
         <p className="text-foreground text-2xl font-medium">
           Comments ({post.comments})
         </p>
+        <CommentForm post={post} />
         <CommentsLoader id={post.number} />
       </section>
     </main>
