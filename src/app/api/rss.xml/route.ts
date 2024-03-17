@@ -14,10 +14,10 @@ export async function GET() {
   const postsXml = posts
     .map(
       (post) => `<item>
-        <title>${post.title}</title>
+        <title>${escapeXml(post.title)}</title>
         <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
         <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
-        <description>${post.body ? removeMarkdown(post.body) : ""}</description>
+        <description>${post.body ? escapeXml(removeMarkdown(post.body)) : ""}</description>
         <guid>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</guid>
       </item>`,
     )
@@ -48,4 +48,14 @@ export async function GET() {
       "content-type": "application/rss+xml",
     },
   });
+}
+
+// directly putting raw post body is super dangerous, we have to escape xml symbols
+function escapeXml(unsafe: string) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
