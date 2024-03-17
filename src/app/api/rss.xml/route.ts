@@ -16,7 +16,6 @@ export async function GET() {
       <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
       <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
       <description>${post.body ? removeMarkdown(post.body) : ""}</description>
-      <author>${post.user?.login ?? "Unknown"}</author>
     </item>`,
     )
     .join("\n");
