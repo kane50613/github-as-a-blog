@@ -2,6 +2,7 @@ import { Header } from "@/components/header";
 import { env } from "@/env";
 import { themeScript } from "@/lib/script";
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
 
@@ -47,7 +48,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <Header />
-        <div className="container">{children}</div>
+        <div className="container">
+          {children}
+          <Analytics />
+        </div>
       </body>
     </html>
   );
