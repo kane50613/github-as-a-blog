@@ -18,26 +18,26 @@ To run the project locally, follow the steps below:
 
 1. Clone the repository:
 
-    ```bash
-    git clone git@github.com:kane50613/github-as-a-blog.git
-    ```
-   
+   ```bash
+   git clone git@github.com:kane50613/github-as-a-blog.git
+   ```
+
 2. Install the dependencies:
 
-    ```bash
-    pnpm install
-    ```
-   
+   ```bash
+   pnpm install
+   ```
+
 3. Prepare the environment variables:
 
-    ```bash
-    cp .env.example .env
-    ```
-   
+   ```bash
+   cp .env.example .env
+   ```
+
    Fill in the environment variables in `.env` with your GitHub OAuth App credentials, and a secret key for encrypting the session token.
 
 4. Run the development server:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
