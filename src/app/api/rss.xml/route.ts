@@ -14,12 +14,12 @@ export async function GET() {
   const postsXml = posts
     .map(
       (post) => `<item>
-      <title>${post.title}</title>
-      <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
-      <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
-      <description>${post.body ? removeMarkdown(post.body) : ""}</description>
-      <guid>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</guid>
-    </item>`,
+        <title>${post.title}</title>
+        <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
+        <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
+        <description>${post.body ? removeMarkdown(post.body) : ""}</description>
+        <guid>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</guid>
+      </item>`,
     )
     .join("\n");
 
@@ -38,8 +38,8 @@ export async function GET() {
       <lastBuildDate>${latestDate.toUTCString()}</lastBuildDate>
       <pubDate>${latestDate.toUTCString()}</pubDate>
       <ttl>60</ttl>
-      ${postsXml}
       <atom:link href="${env.NEXT_PUBLIC_BASE_URL}/api/rss.xml" rel="self" type="application/rss+xml" />
+      ${postsXml}
     </channel>
   </rss>`;
 
