@@ -8,6 +8,15 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 
 GitHub issues is good, but it's still not a perfect place for blogging. GaaB aims to solve the following problems:
 
+- [SEO](#seo)
+- [User Experience](#user-experience)
+- [Customization](#customization)
+- [Subscription](#subscription)
+- [Analytics](#analytics)
+- [Security (Whitelisting)](#security-whitelisting)
+- [Ownership](#ownership)
+- [Performance](#performance)
+
 ### SEO
 
 The content in GitHub issues is not indexed by search engines always, which means that the content is not discoverable and hard to gain organic traffic.
@@ -49,6 +58,12 @@ By hosting the content on your own domain, you have full control over the page r
 We do not host any content, and the content is fetched from GitHub's API directly. This means that you can easily migrate to another platform without losing any content.
 
 In the future, we may create a migration tool to help you migrate to another platform easily.
+
+### Performance
+
+GaaB is built with Next.js, which provides server-side rendering and static site generation out of the box.
+
+With the help of CDN and well-optimized caching, the website can be loaded quickly and efficiently.
 
 ## Local Development
 
