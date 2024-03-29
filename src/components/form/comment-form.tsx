@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export const CommentForm = ({ post }: { post: Post }) => {
   return (
-    <form action={createComment.bind(null, post.number)}>
+    <form action={createComment.bind(null, post.number)} className="space-y-4">
       <Textarea name="body" placeholder={`Comment on ${post.title}`} />
       <Submit>Comment</Submit>
     </form>
