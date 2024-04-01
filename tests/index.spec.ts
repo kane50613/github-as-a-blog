@@ -17,6 +17,7 @@ test("create post", async ({ page }) => {
   await page.waitForLoadState("networkidle");
 
   await page.click("text=Create");
+  await page.waitForLoadState("networkidle");
 
   await expect(page).toHaveURL(/\/posts\/create/);
 
@@ -26,12 +27,9 @@ test("create post", async ({ page }) => {
   await page.fill('textarea[name="body"]', body);
 
   await page.click("text=Submit");
-
   await page.waitForLoadState("networkidle");
 
-  await expect(page).toHaveURL(/\/posts\/[0-9]+/, {
-    timeout: 10_000,
-  });
+  await expect(page).toHaveURL(/\/posts\/[0-9]+/);
   await expect(page).toHaveTitle(title);
 });
 
