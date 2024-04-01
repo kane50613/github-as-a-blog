@@ -8,15 +8,33 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+
     - name: Install dependencies
       run: npm install -g pnpm && pnpm install
-    - name: Install Playwright Browsers
+
+    - name: Store Playwright's Version
+      run: |
+        PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json | jq -r '.[0].devDependencies["@playwright/test"].version')
+        echo "Playwright's Version: $PLAYWRIGHT_VERSION"
+        echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
+
+    - name: Cache Playwright Browsers for Playwright's Version
+      id: cache-playwright-browsers
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}
+
+    - name: Setup Playwright
+      if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
       run: pnpm exec playwright install --with-deps
+
     - name: Run Playwright tests
       run: JWT_SECRET=$(openssl rand -hex 32) pnpm test
       env:
