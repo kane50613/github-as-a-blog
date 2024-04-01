@@ -94,3 +94,12 @@ To run the project locally, follow the steps below:
    ```bash
    pnpm dev
    ```
+
+### Testing
+
+To run the playwright tests, follow the steps below:
+
+```bash
+npx playwright install --with-deps
+pnpm test
+```
