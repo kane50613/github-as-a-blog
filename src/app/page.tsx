@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Star } from "lucide-react";
 import { Suspense } from "react";
+import { HeaderTitle } from "@/components/header-title";
 
 export const runtime = "edge";
 
@@ -19,10 +20,12 @@ export default async function HomePage() {
 
   return (
     <div className="flex items-center gap-4 flex-col space-y-4 py-4 justify-center">
-      <h1 className="text-3xl md:text-5xl lg:text-6xl !leading-relaxed font-bold text-center">
-        Blogging should be
-        <br /> easy as GitHub issue.
-      </h1>
+      <HeaderTitle label="Blogging should be easy as GitHub issue.">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl !leading-relaxed font-bold text-center">
+          Blogging should be
+          <br /> easy as GitHub issue.
+        </h1>
+      </HeaderTitle>
       <p className="text-foreground/80 text-center">
         Effortless blogging with GitHub issues and Next.js.
       </p>

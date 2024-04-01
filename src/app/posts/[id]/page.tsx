@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import removeMarkdown from "remove-markdown";
+import { HeaderTitle } from "@/components/header-title";
 
 // this component is lazy loaded because it uses the octokit client, it adds a lot of weight to the initial bundle.
 const CommentsLoader = dynamic(
@@ -77,7 +78,9 @@ export default async function Page({
   return (
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-lg">
       <article>
-        <h1 className="!mb-4">{post.title}</h1>
+        <HeaderTitle label={post.title}>
+          <h1 className="!mb-4">{post.title}</h1>
+        </HeaderTitle>
         <div className="flex justify-between flex-wrap gap-4 items-end">
           {post.user ? (
             <Author user={post.user} date={post.updated_at} />
