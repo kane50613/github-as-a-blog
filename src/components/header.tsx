@@ -7,6 +7,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { HeaderSecondaryTitle } from "@/components/header-secondary-title";
 
+// React type definition for svg is broken
+// https://github.com/icons-pack/react-simple-icons/issues/215
 export const Header = () => {
   return (
     <div className="sticky top-0 bg-background/50 backdrop-blur-md z-50 border-b">
@@ -23,6 +25,8 @@ export const Header = () => {
               href="https://github.com/kane50613/github-as-a-blog/"
               target="_blank"
             >
+              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+              {/* @ts-expect-error */}
               <SiGithub className="w-5" />
             </a>
           </Button>
