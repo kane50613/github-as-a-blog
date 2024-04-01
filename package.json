@@ -40,6 +40,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@octokit/openapi-types": "^20.0.0",
     "@octokit/types": "^12.6.0",
     "@playwright/test": "^1.42.1",
