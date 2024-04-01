@@ -18,7 +18,13 @@ jobs:
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
     - name: Run Playwright tests
-      run: pnpm exec playwright test
+      run: pnpm test
+      env:
+        CI: true
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        JWT_SECRET: ${{ github.run_id }}-${{ github.run_attempt }}
+        GITHUB_CLIENT_ID: test
+        GITHUB_CLIENT_SECRET: test
     - uses: actions/upload-artifact@v4
       if: always()
       with:
