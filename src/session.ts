@@ -1,4 +1,4 @@
-import { getIronSession } from "iron-session";
+import { getIronSession, type SessionOptions } from "iron-session";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
@@ -13,10 +13,13 @@ export const ironOptions = {
   cookieName: "github-as-a-blog",
   password: env.JWT_SECRET,
   cookieOptions: {
-    secure: true,
+    // webkit based browsers behave differently with secure field,
+    // only set it to true in production (when protocol is https)
+    secure: process.env.NODE_ENV === "production",
     httpOnly: true,
+    sameSite: "lax",
   },
-};
+} satisfies SessionOptions;
 
 export const getUnsafeSession = cache(() =>
   getIronSession<IronSessionData>(cookies(), ironOptions),

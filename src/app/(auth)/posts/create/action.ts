@@ -33,7 +33,7 @@ export async function upsertPost(id: number | undefined, form: FormData) {
   redirect(`/posts/${issue.number}`);
 }
 
-export async function updatePost(id: number, data: Schema) {
+async function updatePost(id: number, data: Schema) {
   const session = await getSession();
 
   return client(session)
@@ -46,7 +46,7 @@ export async function updatePost(id: number, data: Schema) {
     .then((r) => r.data);
 }
 
-export async function createPost(payload: Schema) {
+async function createPost(payload: Schema) {
   const session = await getSession();
 
   return client(session)
