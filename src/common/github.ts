@@ -6,7 +6,7 @@ import { unstable_cache } from "next/cache";
 import { redirect } from "next/navigation";
 import { type Endpoints } from "@octokit/types";
 
-export function getUser(session: IronSession<IronSessionData>) {
+export async function getUser(session: IronSession<IronSessionData>) {
   if (!session.token) return redirect("/");
 
   if (process.env.CI)
