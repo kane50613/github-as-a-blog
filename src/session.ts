@@ -10,7 +10,7 @@ export interface IronSessionData {
 }
 
 export const ironOptions = {
-  cookieName: "github-as-a-blog",
+  cookieName: "github-as-a-blog-v2",
   password: env.JWT_SECRET,
   cookieOptions: {
     // webkit based browsers behave differently with secure field,
