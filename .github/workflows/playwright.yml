@@ -25,6 +25,9 @@ jobs:
         JWT_SECRET: ${{ github.run_id }}-${{ github.run_attempt }}
         GITHUB_CLIENT_ID: test
         GITHUB_CLIENT_SECRET: test
+        NEXT_PUBLIC_GITHUB_REPO_OWNER: ${{ github.repository_owner }}
+        NEXT_PUBLIC_GITHUB_REPO: ${{ github.event.repository.name }}
+        NEXT_PUBLIC_BASE_URL: http://localhost:8080
     - uses: actions/upload-artifact@v4
       if: always()
       with:
