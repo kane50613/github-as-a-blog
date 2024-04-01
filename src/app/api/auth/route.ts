@@ -42,7 +42,7 @@ async function grabToken(req: Request, code: string) {
 
   const token = await exchangeToken(req, code);
 
-  const givenScopes = token.scope.split(",");
+  const givenScopes = token.scope.match(/[a-z:_]+/g) ?? [];
 
   if (
     givenScopes.length !== scopes.length ||
