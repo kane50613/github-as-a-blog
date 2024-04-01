@@ -4,9 +4,19 @@ import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
 import { unstable_cache } from "next/cache";
 import { redirect } from "next/navigation";
+import { type Endpoints } from "@octokit/types";
 
 export function getUser(session: IronSession<IronSessionData>) {
   if (!session.token) return redirect("/");
+
+  if (process.env.CI)
+    return {
+      login: "test",
+      id: 1,
+      avatar_url: "",
+      name: "Test User",
+      email: "test@example.com",
+    } as Endpoints["GET /user"]["response"]["data"];
 
   const fn = unstable_cache(
     async () =>

@@ -91,6 +91,9 @@ devDependencies:
   '@octokit/openapi-types':
     specifier: ^20.0.0
     version: 20.0.0
+  '@octokit/types':
+    specifier: ^12.6.0
+    version: 12.6.0
   '@playwright/test':
     specifier: ^1.42.1
     version: 1.42.1
@@ -535,7 +538,6 @@ packages:
     resolution: {integrity: sha512-1rhSOfRa6H9w4YwK0yrf5faDaDTb+yLyBUKOCV4xtCDB5VmIPqd/v9yr9o6SAzOAlRxMiRiCic6JVM1/kunVkw==, tarball: https://registry.npmjs.org/@octokit/types/-/types-12.6.0.tgz}
     dependencies:
       '@octokit/openapi-types': 20.0.0
-    dev: false
 
   /@pkgjs/parseargs@0.11.0:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==, tarball: https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz}

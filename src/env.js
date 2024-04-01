@@ -23,7 +23,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_BASE_URL ??
       (process.env.VERCEL_URL
         ? `https://${process.env.VERCEL_URL}`
-        : `http://localhost:${process.env.PORT ?? 3000}`),
+        : "http://localhost:3000"),
     WHITELISTED_AUTHORS: process.env.WHITELISTED_AUTHORS,
     NODE_ENV: process.env.NODE_ENV,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
