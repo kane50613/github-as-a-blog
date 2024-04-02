@@ -68,9 +68,25 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "CI=true pnpm dev",
-    url: "http://127.0.0.1:3000",
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: "npx tsx src/mock/github-server.ts",
+      url: "http://127.0.0.1:3001",
+      reuseExistingServer: !process.env.CI,
+      stdout: "pipe",
+    },
+    {
+      command: "pnpm dev",
+      url: "http://127.0.0.1:3000",
+      reuseExistingServer: !process.env.CI,
+      env: {
+        NEXT_PUBLIC_GITHUB_REPO_OWNER: "test",
+        NEXT_PUBLIC_GITHUB_REPO: "test",
+        GITHUB_CLIENT_ID: "test",
+        GITHUB_CLIENT_SECRET: "test",
+        NEXT_PUBLIC_BASE_URL: "http://localhost:3000",
+        CI: "true",
+      },
+    },
+  ],
 });

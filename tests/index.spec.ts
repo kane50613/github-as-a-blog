@@ -12,7 +12,7 @@ test("auth", async ({ page }) => {
   await expect(page).toHaveURL(/\/posts/);
 });
 
-test("create post", async ({ page }) => {
+test("create/edit post", async ({ page }) => {
   await page.goto("/posts");
   await page.waitForLoadState("networkidle");
 
@@ -27,12 +27,27 @@ test("create post", async ({ page }) => {
   await page.fill('textarea[name="body"]', body);
 
   await page.click("text=Submit");
-  await page.waitForLoadState("domcontentloaded");
+  await page.waitForLoadState("networkidle");
 
   await expect(page).toHaveURL(/\/posts\/[0-9]+/);
   await expect(page).toHaveTitle(title);
 
+  await page.click("text=Edit");
   await page.waitForLoadState("networkidle");
+
+  await expect(page).toHaveURL(/\/posts\/[0-9]+\/edit/);
+
+  const newTitle = `Updated ${title}`;
+  const newBody = `${body}\n\nUpdated!`;
+
+  await page.fill('input[name="title"]', newTitle);
+  await page.fill('textarea[name="body"]', newBody);
+
+  await page.click("text=Submit");
+  await page.waitForLoadState("networkidle");
+
+  await expect(page).toHaveURL(/\/posts\/[0-9]+/);
+  await expect(page).toHaveTitle(newTitle);
 });
 
 function randomPost() {

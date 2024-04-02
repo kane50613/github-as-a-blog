@@ -38,11 +38,6 @@ jobs:
       run: JWT_SECRET=$(openssl rand -hex 32) pnpm test
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_CLIENT_ID: test
-        GITHUB_CLIENT_SECRET: test
-        NEXT_PUBLIC_GITHUB_REPO_OWNER: ${{ github.repository_owner }}
-        NEXT_PUBLIC_GITHUB_REPO: ${{ github.event.repository.name }}
-        NEXT_PUBLIC_BASE_URL: http://localhost:3000
     - uses: actions/upload-artifact@v4
       if: always()
       with:

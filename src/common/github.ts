@@ -4,19 +4,9 @@ import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
 import { unstable_cache } from "next/cache";
 import { redirect } from "next/navigation";
-import { type Endpoints } from "@octokit/types";
 
 export async function getUser(session: IronSession<IronSessionData>) {
   if (!session.token) return redirect("/");
-
-  if (process.env.CI)
-    return {
-      login: "test",
-      id: 1,
-      avatar_url: "",
-      name: "Test User",
-      email: "test@example.com",
-    } as Endpoints["GET /user"]["response"]["data"];
 
   const fn = unstable_cache(
     async () =>
@@ -60,6 +50,7 @@ export async function getIssue(issue_number: number) {
 export function client(session?: IronSession<IronSessionData>) {
   return new Octokit({
     auth: session?.token,
+    baseUrl: process.env.CI ? "http://localhost:3001" : undefined,
   });
 }
 
@@ -124,7 +115,9 @@ export type GithubComment = Awaited<
 >[number];
 
 export async function getIssueComments(issue_number: number, page = 1) {
-  const client = new Octokit();
+  const client = new Octokit({
+    baseUrl: process.env.CI ? "http://localhost:3001" : undefined,
+  });
 
   return client.issues
     .listComments({
