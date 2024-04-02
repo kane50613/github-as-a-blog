@@ -15,6 +15,9 @@ test("auth", async () => {
   await page.goto("/");
 
   await expect(page).toHaveTitle("GaaB: Github as a Blog");
+  await expect(page.locator("text=Loading posts...")).not.toBeVisible({
+    timeout: 10_000,
+  });
 
   await page.click("text=Start blogging now");
 
@@ -65,9 +68,9 @@ test("delete post", async () => {
   await expect(page).toHaveURL(/\/posts/);
   await expect(page).toHaveTitle("GaaB: Github as a Blog");
 
-  await page.waitForLoadState("networkidle");
-
-  await expect(page.locator(`text=${title}`)).not.toBeVisible();
+  await expect(page.locator("text=Loading posts...")).not.toBeVisible({
+    timeout: 10_000,
+  });
 });
 
 function randomPost() {

@@ -16,12 +16,14 @@ export async function deletePost(id: number) {
 
   const issue = await getIssue(id).catch(notFound);
 
-  await client(session).issues.update({
+  const result = await client(session).issues.update({
     issue_number: id,
     owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
     repo: env.NEXT_PUBLIC_GITHUB_REPO,
     state: "closed",
   });
+
+  if (result.data.state !== "closed") throw new Error("Failed to delete post");
 
   revalidateTag(`posts-${issue.user?.login}`);
   revalidateTag(`posts-${issue.number}`);
