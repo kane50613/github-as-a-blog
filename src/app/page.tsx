@@ -8,7 +8,6 @@ import { Star } from "lucide-react";
 import { Suspense } from "react";
 import { HeaderTitle } from "@/components/header-title";
 import { PostsLoader } from "@/app/(auth)/posts/posts-loader";
-import { listAllPosts } from "@/actions/list-all-posts";
 
 export const runtime = "edge";
 
@@ -36,7 +35,7 @@ export default function HomePage() {
         </Button>
       </div>
       <Separator />
-      <PostsLoader key="all-posts" loader={listAllPosts} />
+      <PostsLoader type="all" />
     </div>
   );
 }
