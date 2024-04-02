@@ -40,7 +40,33 @@ app.get("/", async () => "Hello, world!");
 
 app.get("/user", async () => mockUser);
 
-app.get("/repos/:owner/:repo/issues", () => issues);
+app.get(
+  "/repos/:owner/:repo/issues",
+  (
+    req: FastifyRequest<{
+      Querystring: {
+        state?: "open" | "closed";
+        limit?: string;
+        page?: string;
+      };
+    }>,
+  ) => {
+    let result = issues;
+
+    if (req.query?.state)
+      result = result.filter((i) => i.state === req.query.state);
+
+    if (req.query?.limit) {
+      const page = Number(req.query.page ?? 1);
+
+      const start = (page - 1) * Number(req.query.limit);
+
+      result = result.slice(start, start + Number(req.query.limit));
+    }
+
+    return result;
+  },
+);
 
 app.get(
   "/repos/:owner/:repo/issues/:issue_number",
@@ -101,7 +127,11 @@ app.post(
 
 app.patch(
   "/repos/:owner/:repo/issues/:issue_number",
-  async (req: IssueRequest) => {
+  async (
+    req: IssueRequest<{
+      Body: Partial<Issue>;
+    }>,
+  ) => {
     const issue = issues.find((i) => i.number === getIssueNumber(req));
 
     if (!issue)
@@ -110,6 +140,8 @@ app.patch(
       };
 
     Object.assign(issue, req.body);
+
+    issues[issues.findIndex((i) => i.number === issue.number)] = issue;
 
     return issue;
   },

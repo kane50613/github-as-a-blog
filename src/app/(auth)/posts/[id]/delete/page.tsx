@@ -14,7 +14,7 @@ export default async function Page({
 
   return (
     <form
-      action={deletePost.bind(null, issue.id)}
+      action={deletePost.bind(null, issue.number)}
       className="flex flex-col items-center gap-4 h-[calc(100dvh-4.5rem)] justify-center"
     >
       <h1 className="text-3xl">Are you sure you want to delete this post?</h1>
