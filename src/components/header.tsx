@@ -11,7 +11,7 @@ import { HeaderSecondaryTitle } from "@/components/header-secondary-title";
 // https://github.com/icons-pack/react-simple-icons/issues/215
 export const Header = () => {
   return (
-    <div className="sticky top-0 bg-background/50 backdrop-blur-md z-50 border-b">
+    <div className="sticky top-0 bg-background z-50 border-b">
       <div className="h-16 md:grid flex justify-between md:grid-cols-3 overflow-y-hidden w-full items-center container">
         <Link href="/" className="text-medium">
           GaaB
