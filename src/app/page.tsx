@@ -1,23 +1,18 @@
-import { listPosts } from "@/common/github";
 import {
   MainActionButton,
   MainActionButtonLoader,
 } from "@/components/main-action-button";
-import { PostOverview } from "@/components/post-overview";
-import { PostsContainer } from "@/components/posts-container";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Star } from "lucide-react";
 import { Suspense } from "react";
 import { HeaderTitle } from "@/components/header-title";
+import { PostsLoader } from "@/app/(auth)/posts/posts-loader";
+import { listAllPosts } from "@/actions/list-all-posts";
 
 export const runtime = "edge";
 
-export const revalidate = 30;
-
-export default async function HomePage() {
-  const posts = await listPosts();
-
+export default function HomePage() {
   return (
     <div className="flex items-center gap-4 flex-col space-y-4 py-4 justify-center">
       <HeaderTitle label="Blogging should be easy as GitHub issue.">
@@ -41,11 +36,7 @@ export default async function HomePage() {
         </Button>
       </div>
       <Separator />
-      <PostsContainer>
-        {posts.map((post, index) => (
-          <PostOverview post={post} key={index} />
-        ))}
-      </PostsContainer>
+      <PostsLoader key="all-posts" loader={listAllPosts} />
     </div>
   );
 }

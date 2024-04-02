@@ -1,4 +1,4 @@
-import { deletePost } from "@/app/(auth)/posts/[id]/delete/action";
+import { deletePost } from "@/actions/delete-post";
 import { getIssue } from "@/common/github";
 import { Submit } from "@/components/submit";
 import { Button } from "@/components/ui/button";

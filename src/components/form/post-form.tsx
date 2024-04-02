@@ -1,6 +1,6 @@
 "use client";
 
-import { upsertPost } from "@/app/(auth)/posts/create/action";
+import { upsertPost } from "@/actions/upsert-post";
 import { Preview } from "@/app/(auth)/posts/create/preview";
 import {
   useCreatePostStore,

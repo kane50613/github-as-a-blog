@@ -2,7 +2,7 @@ import { useMemo, type ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
 
-interface InfiniteDataProps<T> {
+export interface InfiniteDataProps<T> {
   render: (props: T) => ReactNode;
   loader: (page: number) => Promise<T[]>;
   key: string;

@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { listMyPosts } from "@/actions/list-my-posts";
 
 export const runtime = "edge";
 
@@ -33,7 +34,7 @@ export default function Page() {
         .
       </p>
       <Separator />
-      <PostsLoader />
+      <PostsLoader key="my-posts" loader={listMyPosts} />
     </main>
   );
 }
