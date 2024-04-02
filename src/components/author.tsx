@@ -11,7 +11,7 @@ export const Author = ({
 }) => (
   <a
     href={
-      user.login.startsWith("github-action")
+      user.login === "github-actions[bot]"
         ? "https://docs.github.com/en/actions"
         : `https://github.com/${user.login}`
     }
