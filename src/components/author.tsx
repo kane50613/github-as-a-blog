@@ -10,7 +10,11 @@ export const Author = ({
   date?: string;
 }) => (
   <a
-    href={`https://github.com/${user.login}`}
+    href={
+      user.login.startsWith("github-action")
+        ? "https://docs.github.com/en/actions"
+        : `https://github.com/${user.login}`
+    }
     target="_blank"
     rel="nofollow"
     className="flex gap-2 items-center not-prose text-sm text-foreground/80"
