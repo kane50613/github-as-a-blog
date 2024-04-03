@@ -2,6 +2,9 @@ import Fastify, { type FastifyRequest } from "fastify";
 import type { Endpoints } from "@octokit/types";
 import { type RouteGenericInterface } from "fastify/types/route";
 
+// this is a mock server to simulate the GitHub API,
+// it's not a complete implementation, only the parts used in the app
+
 type Issue =
   Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"][0];
 

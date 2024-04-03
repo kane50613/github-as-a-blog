@@ -3,10 +3,7 @@
 import { create } from "zustand";
 import { cn } from "@/lib/utils";
 
-export const useHeaderTitle = create<{
-  title: string;
-  visible: boolean;
-}>(() => ({
+export const useHeaderTitle = create(() => ({
   title: "",
   visible: false,
 }));
