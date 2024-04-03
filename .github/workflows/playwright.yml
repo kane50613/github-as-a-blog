@@ -21,6 +21,8 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
+      - run: pnpm install --frozen-lockfile
+
       - name: Store Playwright's Version
         run: |
           PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json | jq -r '.[0].devDependencies["@playwright/test"].version')
