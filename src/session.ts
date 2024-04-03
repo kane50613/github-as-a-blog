@@ -14,8 +14,8 @@ export const ironOptions = {
   password: env.JWT_SECRET,
   cookieOptions: {
     // webkit based browsers behave differently with secure field,
-    // only set it to true in production (when protocol is https)
-    secure: process.env.NODE_ENV === "production",
+    // only set it to true when the base url is https
+    secure: env.NEXT_PUBLIC_BASE_URL.startsWith("https"),
     httpOnly: true,
     sameSite: "lax",
   },

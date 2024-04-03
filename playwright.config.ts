@@ -70,13 +70,13 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: "npx tsx src/mock/github-server.ts",
+      command: "tsx src/mock/github-server.ts",
       url: "http://127.0.0.1:3001",
       reuseExistingServer: !process.env.CI,
       stdout: "pipe",
     },
     {
-      command: "pnpm dev",
+      command: "pnpm build && pnpm start",
       url: "http://127.0.0.1:3000",
       reuseExistingServer: !process.env.CI,
       env: {
