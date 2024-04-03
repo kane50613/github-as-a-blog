@@ -11,6 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -42,6 +47,7 @@ jobs:
         run: JWT_SECRET=$(openssl rand -hex 32) pnpm test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
