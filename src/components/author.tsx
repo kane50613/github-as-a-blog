@@ -26,7 +26,7 @@ export const Author = ({
       title={user.login ?? undefined}
     />
     <div className="flex flex-col">
-      <span className="text-white">{user.login}</span>
+      <span className="text-foreground">{user.login}</span>
       {date && (
         <span className="text-xs">{formatter.format(new Date(date))}</span>
       )}
