@@ -103,3 +103,7 @@ To run the playwright tests, follow the steps below:
 npx playwright install --with-deps
 pnpm test
 ```
+
+### License
+
+This project is licensed under the GPL-3.0 License.
