@@ -41,7 +41,7 @@ Tracking the performance of your blog is important. GaaB uses [Vercel Analytics]
 
 You can simply enable Vercel Analytics by heading to the [Vercel dashboard](https://vercel.com/dashboard) and enabling the Analytics feature under the settings of your project.
 
-If you want to use other analytics service like Cloudflare Web Analytics, you can easily integrate it by yourself. 
+If you want to use other analytics service like Cloudflare Web Analytics, you can easily integrate it by yourself.
 
 ### Security (Whitelisting)
 
@@ -49,7 +49,7 @@ Since the GitHub repository is public, anyone can create issues and comments. Ga
 
 By settings the `WHITELISTED_AUTHORS` environment variable in `.env`, separated by commas, only the authors in the whitelist can create issues and comments.
 
-We also have XSS protection for the content, thanks to the [react-markdown](https://www.npmjs.com/package/react-markdown) library, which automatically escapes the HTML in the content and not using `dangerouslySetInnerHTML` directly. 
+We also have XSS protection for the content, thanks to the [react-markdown](https://www.npmjs.com/package/react-markdown) library, which automatically escapes the HTML in the content and not using `dangerouslySetInnerHTML` directly.
 
 ### Ownership
 

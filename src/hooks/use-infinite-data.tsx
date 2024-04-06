@@ -2,9 +2,9 @@ import { useMemo, type ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
 import useSWRInfinite from "swr/infinite";
 
-export interface InfiniteDataProps<T> {
-  render: (props: T) => ReactNode;
-  loader: (page: number) => Promise<T[]>;
+export interface InfiniteDataProps<Data> {
+  render: (props: Data) => ReactNode;
+  loader: (page: number) => Promise<Data[]>;
   key: string;
 }
 
@@ -16,7 +16,7 @@ export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
     setSize,
   } = useSWRInfinite<T[]>(
     (page) => [page + 1, props.key] as const,
-    ([page]) => props.loader(page as number),
+    ([page, _]) => props.loader(page as number),
   );
 
   const hasMore = useMemo(

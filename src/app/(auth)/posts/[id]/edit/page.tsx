@@ -10,7 +10,7 @@ export default async function Page({
   const issue = await getIssue(parseInt(id));
 
   return (
-    <div className="space-y-4 py-4">
+    <div className="space-y-4 py-4 container">
       <h1>Edit Post</h1>
       <PostForm
         id={issue.number}

@@ -1,29 +1,23 @@
 "use server";
 
-import { client, getUser } from "@/common/github";
-import { whitelistCheck } from "@/common/whitelist";
+import { client } from "@/common/github";
 import { env } from "@/env";
 import { getSession } from "@/session";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { zfd } from "zod-form-data";
+import { authAction } from "@/common/action";
 
-const schema = z.object({
-  title: z.string(),
-  body: z.string().min(30),
+const schema = zfd.formData({
+  id: zfd.numeric().optional(),
+  title: zfd.text(z.string().min(1)),
+  body: zfd.text(z.string().min(30)),
 });
 
 type Schema = z.infer<typeof schema>;
 
-export async function upsertPost(id: number | undefined, form: FormData) {
-  const session = await getSession();
-
-  const user = await getUser(session);
-
-  whitelistCheck(user.login);
-
-  const data = schema.parse(Object.fromEntries(form.entries()));
-
+export const upsertPost = authAction(schema, async ({ id, ...data }) => {
   const issue = id ? await updatePost(id, data) : await createPost(data);
 
   revalidateTag(`posts-${issue.user?.login}`);
@@ -31,7 +25,7 @@ export async function upsertPost(id: number | undefined, form: FormData) {
   revalidateTag("posts");
 
   redirect(`/posts/${issue.number}`);
-}
+});
 
 async function updatePost(id: number, data: Schema) {
   const session = await getSession();

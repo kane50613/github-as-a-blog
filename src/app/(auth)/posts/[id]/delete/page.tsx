@@ -4,18 +4,19 @@ import { Submit } from "@/components/submit";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function Page({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const issue = await getIssue(parseInt(id));
+  const issue = await getIssue(parseInt(id)).catch(notFound);
 
   return (
     <form
       action={deletePost.bind(null, issue.number)}
-      className="flex flex-col items-center gap-4 h-[calc(100dvh-4.5rem)] justify-center"
+      className="flex flex-col items-center gap-4 h-[calc(100dvh-4.5rem)] justify-center container"
     >
       <h1 className="text-3xl">Are you sure you want to delete this post?</h1>
       <p>{issue.title}</p>

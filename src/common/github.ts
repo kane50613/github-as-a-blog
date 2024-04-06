@@ -109,23 +109,3 @@ export async function listPosts(creator?: string, page = 1, per_page = 10) {
 }
 
 export type Post = Awaited<ReturnType<typeof listPosts>>[number];
-
-export type GithubComment = Awaited<
-  ReturnType<typeof getIssueComments>
->[number];
-
-export async function getIssueComments(issue_number: number, page = 1) {
-  const client = new Octokit({
-    baseUrl: process.env.CI ? "http://localhost:3001" : undefined,
-  });
-
-  return client.issues
-    .listComments({
-      owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
-      repo: env.NEXT_PUBLIC_GITHUB_REPO,
-      issue_number,
-      per_page: 10,
-      page,
-    })
-    .then((r) => r.data);
-}

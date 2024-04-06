@@ -53,8 +53,9 @@
   * {
     @apply border-border;
   }
+  html,
   body {
-    @apply bg-background text-foreground;
+    @apply h-full min-h-screen overflow-y-auto bg-background text-foreground;
   }
   label {
     @apply text-sm font-medium leading-none text-foreground/75 peer-disabled:cursor-not-allowed peer-disabled:opacity-70;

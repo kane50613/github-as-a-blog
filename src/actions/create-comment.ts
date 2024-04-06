@@ -4,20 +4,24 @@ import { client } from "@/common/github";
 import { env } from "@/env";
 import { getSession } from "@/session";
 import { z } from "zod";
+import { authAction } from "@/common/action";
+import { zfd } from "zod-form-data";
 
-const schema = z.object({
-  body: z.string(),
+const schema = zfd.formData({
+  issue_number: zfd.numeric(),
+  body: zfd.text(z.string().min(1)),
 });
 
-export async function createComment(issue_number: number, form: FormData) {
-  const data = schema.parse(Object.fromEntries(form.entries()));
+export const createComment = authAction(
+  schema,
+  async ({ issue_number, body }) => {
+    const session = await getSession();
 
-  const session = await getSession();
-
-  return client(session).issues.createComment({
-    owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
-    repo: env.NEXT_PUBLIC_GITHUB_REPO,
-    issue_number,
-    body: data.body,
-  });
-}
+    return client(session).issues.createComment({
+      owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
+      repo: env.NEXT_PUBLIC_GITHUB_REPO,
+      issue_number,
+      body,
+    });
+  },
+);

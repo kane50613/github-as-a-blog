@@ -1,10 +1,11 @@
-import { Header } from "@/components/header";
 import { env } from "@/env";
 import { themeScript } from "@/lib/script";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
+import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "GaaB: Github as a Blog",
@@ -48,10 +49,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <Header />
-        <div className="container">
-          {children}
-          <Analytics />
-        </div>
+        <div>{children}</div>
+        <Toaster />
+        <Analytics />
       </body>
     </html>
   );

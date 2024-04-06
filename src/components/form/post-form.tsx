@@ -11,6 +11,7 @@ import { FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useId, useMemo } from "react";
+import { useActionWithHandler } from "@/lib/action-hook";
 
 export const PostForm = ({
   defaultState,
@@ -32,8 +33,11 @@ export const PostForm = ({
     [defaultState],
   );
 
+  const { execute } = useActionWithHandler(upsertPost);
+
   return (
-    <form action={upsertPost.bind(null, id)} className="space-y-4">
+    <form action={execute} className="space-y-4">
+      <input type="hidden" name="id" value={id} />
       <FormItem>
         <label htmlFor={titleInputId}>Title</label>
         <p className="text-xs text-foreground/80">

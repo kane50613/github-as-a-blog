@@ -1,19 +1,13 @@
 "use server";
 
-import { client, getIssue, getUser } from "@/common/github";
-import { whitelistCheck } from "@/common/whitelist";
+import { client, getIssue } from "@/common/github";
 import { env } from "@/env";
-import { getSession } from "@/session";
 import { revalidateTag } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { authAction } from "@/common/action";
+import { z } from "zod";
 
-export async function deletePost(id: number) {
-  const session = await getSession();
-
-  const user = await getUser(session);
-
-  whitelistCheck(user.login);
-
+export const deletePost = authAction(z.number(), async (id, { session }) => {
   const issue = await getIssue(id).catch(notFound);
 
   const result = await client(session).issues.update({
@@ -30,4 +24,4 @@ export async function deletePost(id: number) {
   revalidateTag("posts");
 
   redirect("/posts");
-}
+});

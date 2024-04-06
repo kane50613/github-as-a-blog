@@ -17,8 +17,20 @@ export const Author = ({
     }
     target="_blank"
     rel="nofollow"
-    className="flex gap-2 items-center not-prose text-sm text-foreground/80"
+    className="not-prose"
   >
+    <AuthorContent user={user} date={date} />
+  </a>
+);
+
+export const AuthorContent = ({
+  user,
+  date,
+}: {
+  user: Pick<NonNullable<Post["user"]>, "avatar_url" | "login">;
+  date?: string;
+}) => (
+  <div className="flex gap-2 items-center not-prose text-sm text-foreground/80">
     <Avatar
       src={`${user.avatar_url}&s=40`}
       alt="User avatar"
@@ -31,5 +43,5 @@ export const Author = ({
         <span className="text-xs">{formatter.format(new Date(date))}</span>
       )}
     </div>
-  </a>
+  </div>
 );

@@ -1,13 +1,22 @@
 "use client";
 
-import { getIssueComments, type GithubComment } from "@/common/github";
 import { Comment } from "@/components/comment";
 import { useInfiniteData } from "@/hooks/use-infinite-data";
+import {
+  type ListIssueComments,
+  listIssueComments,
+} from "@/actions/list-issue-comments";
+import { wrapInfiniteSafeAction } from "@/lib/action-hook";
 
 export const CommentsLoader = ({ id }: { id: number }) => {
-  const { ref, components } = useInfiniteData<GithubComment>({
+  const { ref, components } = useInfiniteData<ListIssueComments[number]>({
     render: (comment) => <Comment key={comment.id} comment={comment} />,
-    loader: (index) => getIssueComments(id, index),
+    loader: wrapInfiniteSafeAction((index) =>
+      listIssueComments({
+        issue_number: id,
+        page: index,
+      }),
+    ),
     key: `comments-${id}`,
   });
 

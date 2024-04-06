@@ -17,9 +17,9 @@ export async function GET() {
         <title>${escapeXml(post.title)}</title>
         <link>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</link>
         <pubDate>${new Date(post.updated_at).toUTCString()}</pubDate>
-        <description>${post.body
-              ? escapeXml(removeMarkdown(post.body))
-              : ""}</description>
+        <description>${
+          post.body ? escapeXml(removeMarkdown(post.body)) : ""
+        }</description>
         <guid>${env.NEXT_PUBLIC_BASE_URL}/posts/${post.number}</guid>
       </item>`,
     )

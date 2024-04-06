@@ -6,19 +6,11 @@ import { PostHelper } from "@/components/post-helper";
 import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
 import { type Metadata } from "next";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import removeMarkdown from "remove-markdown";
 import { HeaderTitle } from "@/components/header-title";
-
-// this component is lazy loaded because it uses the octokit client, it adds a lot of weight to the initial bundle.
-const CommentsLoader = dynamic(
-  import("./comments-loader").then((mod) => mod.CommentsLoader),
-  {
-    ssr: false,
-  },
-);
+import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 
 export const runtime = "edge";
 
@@ -54,7 +46,7 @@ export async function generateMetadata({
       images: {
         width: 1200,
         height: 630,
-        url: `${env.NEXT_PUBLIC_BASE_URL}/cover.jpg`,
+        url: "/cover.jpg",
       },
     },
     creator: post.user?.login,

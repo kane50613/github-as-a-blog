@@ -7,9 +7,12 @@ import { useInfiniteData } from "@/hooks/use-infinite-data";
 import { Loader2 } from "lucide-react";
 import { listMyPosts } from "@/actions/list-my-posts";
 import { listAllPosts } from "@/actions/list-all-posts";
+import { wrapInfiniteSafeAction } from "@/lib/action-hook";
 
 export const PostsLoader = ({ type }: { type: "all" | "mine" }) => {
-  const loader = type === "all" ? listAllPosts : listMyPosts;
+  const loader = wrapInfiniteSafeAction(
+    type === "all" ? listAllPosts : listMyPosts,
+  );
 
   const { ref, components, isLoading, hasMore } = useInfiniteData<Post>({
     loader,
@@ -26,7 +29,11 @@ export const PostsLoader = ({ type }: { type: "all" | "mine" }) => {
           <Loader2 className="animate-spin mr-2" /> Loading posts...
         </div>
       )}
-      {!hasMore && !isLoading && <p className="text-center">No more posts</p>}
+      {!hasMore && !isLoading && (
+        <div className="text-center h-16 flex justify-center items-center text-muted-foreground">
+          <p>No more posts</p>
+        </div>
+      )}
     </>
   );
 };
