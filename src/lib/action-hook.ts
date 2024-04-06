@@ -7,7 +7,7 @@ export function useActionWithHandler<T extends Parameters<typeof useAction>[0]>(
   return useAction(func, {
     onError(error) {
       console.error(error);
-      toast.error(String(error));
+      toast.error(JSON.stringify(error));
     },
   });
 }
@@ -23,7 +23,7 @@ export function wrapInfiniteSafeAction<Data>(
     const data = await func(page);
 
     if (data.serverError) {
-      toast.error(data.serverError);
+      toast.error(JSON.stringify(data.serverError));
       throw new Error(data.serverError);
     }
 

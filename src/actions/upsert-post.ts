@@ -10,7 +10,7 @@ import { zfd } from "zod-form-data";
 import { authAction } from "@/common/action";
 
 const schema = zfd.formData({
-  id: zfd.numeric().optional(),
+  id: zfd.numeric(z.number().optional()),
   title: zfd.text(z.string().min(1)),
   body: zfd.text(z.string().min(30)),
 });
