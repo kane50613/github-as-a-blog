@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export const useHeaderTitle = create(() => ({
   title: "",
@@ -12,13 +13,25 @@ export const HeaderSecondaryTitle = () => {
   const { title, visible } = useHeaderTitle();
 
   return (
-    <h3
-      className={cn(
-        "md:block hidden text-sm transition-transform",
-        !visible && "translate-y-12",
-      )}
-    >
-      {title}
-    </h3>
+    <div className="md:text-center">
+      <Link
+        href="/"
+        className={cn(
+          "text-medium md:invisible transition-transform block absolute",
+          visible && "-translate-y-12",
+        )}
+      >
+        GaaB
+      </Link>
+      <p
+        onClick={() => scrollTo(0, 0)}
+        className={cn(
+          "text-sm transition-transform line-clamp-1",
+          !visible && "translate-y-12",
+        )}
+      >
+        {title || "GaaB"}
+      </p>
+    </div>
   );
 };

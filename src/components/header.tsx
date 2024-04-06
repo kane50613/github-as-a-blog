@@ -12,12 +12,10 @@ import { HeaderSecondaryTitle } from "@/components/header-secondary-title";
 export const Header = () => (
   <div className="sticky top-0 bg-background z-50 border-b">
     <div className="h-16 md:grid flex justify-between md:grid-cols-3 overflow-y-hidden w-full items-center container">
-      <Link href="/" className="text-medium">
+      <Link href="/" className="md:block hidden text-medium">
         GaaB
       </Link>
-      <div className="text-center md:block hidden">
-        <HeaderSecondaryTitle />
-      </div>
+      <HeaderSecondaryTitle />
       <div className="flex items-center justify-self-end">
         <Button asChild variant="ghost" size="sm">
           <a

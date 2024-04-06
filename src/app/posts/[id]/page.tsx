@@ -67,7 +67,7 @@ export default async function Page({
 
   return (
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-lg container">
-      <article>
+      <article className="break-words">
         <HeaderTitle label={post.title}>
           <h1 className="!mb-4">{post.title}</h1>
         </HeaderTitle>
