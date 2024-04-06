@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
-import { Header } from "@/components/header";
+import { Header } from "@/components/header/header";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
@@ -48,6 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
+        <div id="top" />
         <Header />
         <div>{children}</div>
         <Toaster />

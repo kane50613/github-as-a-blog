@@ -2,7 +2,7 @@
 
 import { type FC, type PropsWithChildren, useLayoutEffect } from "react";
 import { InView } from "react-intersection-observer";
-import { useHeaderTitle } from "@/components/header-secondary-title";
+import { useHeaderTitle } from "@/components/header/header-secondary-title";
 
 export const HeaderTitle: FC<
   PropsWithChildren & {

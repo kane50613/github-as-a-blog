@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Star } from "lucide-react";
 import { Suspense } from "react";
-import { HeaderTitle } from "@/components/header-title";
+import { HeaderTitle } from "@/components/header/header-title";
 import { PostsLoader } from "@/app/(auth)/posts/posts-loader";
 
 export default function HomePage() {

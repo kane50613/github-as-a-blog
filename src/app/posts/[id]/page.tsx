@@ -9,7 +9,7 @@ import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import removeMarkdown from "remove-markdown";
-import { HeaderTitle } from "@/components/header-title";
+import { HeaderTitle } from "@/components/header/header-title";
 import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 
 export async function generateMetadata({

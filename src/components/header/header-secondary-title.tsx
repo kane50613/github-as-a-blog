@@ -25,8 +25,8 @@ export const HeaderSecondaryTitle = () => {
       </Link>
       <button
         onClick={() =>
-          scrollTo({
-            top: 0,
+          // since body has overflow auto, we need to scroll the top element defined in layout.tsx
+          document.querySelector("#top")?.scrollIntoView({
             behavior: "smooth",
           })
         }

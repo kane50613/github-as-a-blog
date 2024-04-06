@@ -5,7 +5,7 @@ import { User } from "@/components/user";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
 import { Suspense } from "react";
-import { HeaderSecondaryTitle } from "@/components/header-secondary-title";
+import { HeaderSecondaryTitle } from "@/components/header/header-secondary-title";
 
 // React type definition for svg is broken
 // https://github.com/icons-pack/react-simple-icons/issues/215

@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { HeaderTitle } from "@/components/header-title";
+import { HeaderTitle } from "@/components/header/header-title";
 
 export default function Page() {
   return (

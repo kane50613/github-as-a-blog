@@ -100,6 +100,8 @@ Check out the implementation in [`src/hooks/use-infinite-data.tsx`](src/hooks/us
 
 GaaB uses the `next-safe-action` library to handle server actions with validation, error handling, and loading states.
 
+When errors occur during server actions, the error message is displayed to the user with a toast notification, the [Error boundary](src/app/error.tsx) component catches the error and displays the error message.
+
 Check out all the server actions in [`src/actions`](src/actions).
 
 ### Local Development
