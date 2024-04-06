@@ -4,7 +4,6 @@ import { createComment } from "@/actions/create-comment";
 import { type Post } from "@/common/github";
 import { Submit } from "@/components/submit";
 import { Textarea } from "@/components/ui/textarea";
-import { useAction } from "next-safe-action/hooks";
 import { useActionWithHandler } from "@/lib/action-hook";
 
 export const CommentForm = ({ post }: { post: Post }) => {
