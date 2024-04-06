@@ -13,7 +13,7 @@ export const HeaderSecondaryTitle = () => {
   const { title, visible } = useHeaderTitle();
 
   return (
-    <div className="flex md:justify-center">
+    <div className="md:mx-auto">
       <Link
         href="/"
         className={cn(
@@ -23,20 +23,22 @@ export const HeaderSecondaryTitle = () => {
       >
         GaaB
       </Link>
-      <button
+      <a
+        href="#"
         onClick={() =>
           // since body has overflow auto, we need to scroll the top element defined in layout.tsx
           document.querySelector("#top")?.scrollIntoView({
             behavior: "smooth",
           })
         }
+        aria-label="Back to top"
         className={cn(
-          "text-sm transition-transform line-clamp-1",
+          "text-sm transition-transform line-clamp-1 cursor-pointer",
           !visible && "translate-y-12",
         )}
       >
         {title || "GaaB"}
-      </button>
+      </a>
     </div>
   );
 };
