@@ -23,15 +23,20 @@ export const HeaderSecondaryTitle = () => {
       >
         GaaB
       </Link>
-      <p
-        onClick={() => scrollTo(0, 0)}
+      <button
+        onClick={() =>
+          scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        }
         className={cn(
           "text-sm transition-transform line-clamp-1",
           !visible && "translate-y-12",
         )}
       >
         {title || "GaaB"}
-      </p>
+      </button>
     </div>
   );
 };
