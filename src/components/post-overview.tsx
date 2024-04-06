@@ -14,7 +14,9 @@ export const PostOverview = memo(({ post }: { post: Post }) => (
     aria-label={post.title}
   >
     <article className="flex items-start flex-col gap-2 max-w-2xl w-full md:rounded-md hover:bg-secondary/15 transition-colors py-4 container">
-      {post.user && <AuthorContent user={post.user} date={post.updated_at} />}
+      {post.user && (
+        <AuthorContent user={post.user} date={post.updated_at} compact />
+      )}
       <p className="text-lg md:text-xl h-full line-clamp-2 break-normal font-semibold">
         {post.title}
       </p>

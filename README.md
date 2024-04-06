@@ -4,6 +4,10 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkane50613%2Fgithub-as-a-blog&env=GITHUB_CLIENT_ID,GITHUB_CLIENT_SECRET,JWT_SECRET,NEXT_PUBLIC_GITHUB_REPO_OWNER,NEXT_PUBLIC_GITHUB_REPO&demo-title=Github%20as%20a%20Blog&demo-description=Effortless%20blogging%20with%20GitHub%20issues%20and%20Next.js&demo-url=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2F&demo-image=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2Fcover.jpg)
 
+- [What problem does GaaB solve?](#what-problem-does-gaab-solve)
+- [Local Development](#local-development)
+- [License](#license)
+
 ## What problem does GaaB solve?
 
 GitHub issues is good, but it's still not a perfect place for blogging. GaaB aims to solve the following problems:
@@ -104,6 +108,6 @@ npx playwright install --with-deps
 pnpm test
 ```
 
-### License
+## License
 
 This project is licensed under the GPL-3.0 License.
