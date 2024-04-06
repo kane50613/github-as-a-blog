@@ -69,7 +69,7 @@ export default async function Page({
     <main className="mx-auto py-4 space-y-4 prose dark:prose-invert lg:prose-lg container">
       <article className="break-words">
         <HeaderTitle label={post.title}>
-          <h1 className="!mb-4">{post.title}</h1>
+          <h1>{post.title}</h1>
         </HeaderTitle>
         <div className="flex justify-between flex-wrap gap-4 items-end">
           {post.user ? (
