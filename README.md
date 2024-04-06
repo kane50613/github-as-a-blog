@@ -5,7 +5,7 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkane50613%2Fgithub-as-a-blog&env=GITHUB_CLIENT_ID,GITHUB_CLIENT_SECRET,JWT_SECRET,NEXT_PUBLIC_GITHUB_REPO_OWNER,NEXT_PUBLIC_GITHUB_REPO&demo-title=Github%20as%20a%20Blog&demo-description=Effortless%20blogging%20with%20GitHub%20issues%20and%20Next.js&demo-url=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2F&demo-image=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2Fcover.jpg)
 
 - [What problem does GaaB solve?](#what-problem-does-gaab-solve)
-- [Local Development](#local-development)
+- [Technical Details](#technical-details)
 - [License](#license)
 
 ## What problem does GaaB solve?
@@ -68,8 +68,41 @@ In the future, we may create a migration tool to help you migrate to another pla
 GaaB is built with Next.js, which provides server-side rendering and static site generation out of the box.
 
 With the help of CDN and well-optimized caching, the website can be loaded quickly and efficiently.
+   
+## Technical Details
 
-## Local Development
+- [Tech Stack](#tech-stack)
+- [Infinite Scrolling Pagination](#infinite-scrolling-pagination)
+- [Safe Server Actions](#safe-server-actions)
+- [Local Development](#local-development)
+- [Testing](#testing)
+
+### Tech Stack
+
+- [Next.js](https://nextjs.org/): React framework for server-side rendering and static site generation.
+- [shadcn/ui](https://ui.shadcn.com/): A minimalistic UI library for building modern websites.
+- [swr](https://swr.vercel.app/): React Hooks library for data fetching.
+- [next-safe-action](https://www.npmjs.com/package/next-safe-action): Type safe server actions with validation, error handling, and loading states. 
+- [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): A React component for the Intersection Observer API.
+- [react-markdown](https://www.npmjs.com/package/react-markdown): A markdown component for React.
+- [playwright](https://playwright.dev/): Integration testing with Playwright.
+- [create-t3-app](https://create.t3.gg/): The best way to start a full-stack, typesafe Next.js app.
+
+### Infinite Scrolling Pagination
+
+GaaB uses infinite scrolling pagination to load more issues when the user scrolls to the bottom of the page.
+
+The infinite scrolling pagination is implemented with the Intersection Observer API and the `useSWRInfinite` hook from the SWR library.
+
+Check out the implementation in [`src/hooks/use-infinite-data.tsx`](src/hooks/use-infinite-data.tsx).
+
+### Safe Server Actions
+
+GaaB uses the `next-safe-action` library to handle server actions with validation, error handling, and loading states.
+
+Check out all the server actions in [`src/actions`](src/actions).
+
+### Local Development
 
 To run the project locally, follow the steps below:
 
@@ -110,4 +143,4 @@ pnpm test
 
 ## License
 
-This project is licensed under the GPL-3.0 License.
+This project is licensed under the [GPL-3.0 License](LICENSE).

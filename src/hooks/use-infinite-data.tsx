@@ -15,22 +15,26 @@ export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
     isValidating,
     setSize,
   } = useSWRInfinite<T[]>(
+    // create a key for each page
     (page) => [page + 1, props.key] as const,
     ([page, _]) => props.loader(page as number),
   );
 
   const hasMore = useMemo(
+    // check if the last page has 10 items, if not, there are no more items
     () => data.length > 0 && data?.at(-1)?.length === 10,
     [data],
   );
 
   const { ref } = useInView({
     async onChange(value) {
+      // update the page size when the last item is in view
       if (value && hasMore) await setSize((s) => s + 1);
     },
   });
 
   const components = useMemo(
+    // flatten the data from each page and render the component
     () => data.flat().map(props.render),
     [data, props.render],
   );
