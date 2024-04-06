@@ -9,7 +9,9 @@ import {
 import { wrapInfiniteSafeAction } from "@/lib/action-hook";
 
 export const CommentsLoader = ({ id }: { id: number }) => {
-  const { ref, components } = useInfiniteData<ListIssueComments[number]>({
+  const { ref, components, isLoading } = useInfiniteData<
+    ListIssueComments[number]
+  >({
     render: (comment) => <Comment key={comment.id} comment={comment} />,
     loader: wrapInfiniteSafeAction((index) =>
       listIssueComments({
@@ -21,9 +23,14 @@ export const CommentsLoader = ({ id }: { id: number }) => {
   });
 
   return (
-    <div className="space-y-6">
-      {components}
-      <div ref={ref} />
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
+        {components}
+        <div ref={ref} />
+      </div>
+      {isLoading && (
+        <p className="text-muted-foreground text-sm">Loading comments...</p>
+      )}
     </div>
   );
 };
