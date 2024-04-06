@@ -13,7 +13,7 @@ export const HeaderSecondaryTitle = () => {
   const { title, visible } = useHeaderTitle();
 
   return (
-    <div className="md:text-center">
+    <div className="flex md:justify-center">
       <Link
         href="/"
         className={cn(
