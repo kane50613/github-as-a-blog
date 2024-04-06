@@ -8,8 +8,6 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { HeaderTitle } from "@/components/header-title";
 
-export const runtime = "edge";
-
 export default function Page() {
   return (
     <main className="space-y-4">

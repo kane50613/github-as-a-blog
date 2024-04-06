@@ -12,8 +12,6 @@ import removeMarkdown from "remove-markdown";
 import { HeaderTitle } from "@/components/header-title";
 import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 
-export const runtime = "edge";
-
 export async function generateMetadata({
   params: { id },
 }: {

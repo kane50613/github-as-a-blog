@@ -43,8 +43,6 @@ yarn-error.log*
 .idea
 .vscode
 
-# Sentry Config File
-.sentryclirc
 /test-results/
 /playwright-report/
 /blob-report/

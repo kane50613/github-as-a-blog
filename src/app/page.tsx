@@ -9,8 +9,6 @@ import { Suspense } from "react";
 import { HeaderTitle } from "@/components/header-title";
 import { PostsLoader } from "@/app/(auth)/posts/posts-loader";
 
-export const runtime = "edge";
-
 export default function HomePage() {
   return (
     <div className="flex items-center flex-col justify-center">
