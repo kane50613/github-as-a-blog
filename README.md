@@ -81,6 +81,7 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 
 - [Next.js](https://nextjs.org/): React framework for server-side rendering and static site generation.
 - [shadcn/ui](https://ui.shadcn.com/): A minimalistic UI library for building modern websites.
+- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
 - [swr](https://swr.vercel.app/): React Hooks library for data fetching.
 - [next-safe-action](https://www.npmjs.com/package/next-safe-action): Type safe server actions with validation, error handling, and loading states. 
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): A React component for the Intersection Observer API.
