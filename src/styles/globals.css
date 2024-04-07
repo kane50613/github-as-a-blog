@@ -53,8 +53,9 @@
   * {
     @apply border-border;
   }
-  html, body {
-    @apply antialiased h-[100dvh] overflow-y-auto bg-background text-foreground;
+  html,
+  body {
+    @apply h-[100dvh] overflow-y-auto bg-background text-foreground antialiased;
   }
   label {
     @apply text-sm font-medium leading-none text-foreground/75 peer-disabled:cursor-not-allowed peer-disabled:opacity-70;

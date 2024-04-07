@@ -1,37 +1,28 @@
 "use client";
 
 import { upsertPost } from "@/actions/upsert-post";
-import { Preview } from "@/app/(auth)/posts/create/preview";
-import {
-  useCreatePostStore,
-  type CreatePostStore,
-} from "@/app/(auth)/posts/create/store";
 import { Submit } from "@/components/submit";
 import { FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useEffect, useId, useMemo } from "react";
+import { useId } from "react";
 import { useActionWithHandler } from "@/lib/action-hook";
+import { Editor } from "@/components/ui/editor/editor";
+import { Input } from "@/components/ui/input";
 
 export const PostForm = ({
-  defaultState,
+  defaultState: { title, body } = {
+    title: "",
+    body: "",
+  },
   id,
 }: {
-  defaultState?: CreatePostStore;
+  defaultState?: {
+    title: string;
+    body: string;
+  };
   id?: number;
 }) => {
   const titleInputId = useId();
   const bodyInputId = useId();
-
-  const initialState = useMemo(
-    () => defaultState ?? useCreatePostStore.getState(),
-    [defaultState],
-  );
-
-  useEffect(
-    () => defaultState && useCreatePostStore.setState(defaultState),
-    [defaultState],
-  );
 
   const { execute } = useActionWithHandler(upsertPost);
 
@@ -45,12 +36,11 @@ export const PostForm = ({
         </p>
         <Input
           name="title"
+          placeholder="Make a title for your interesting post!"
+          className="text-xl font-semibold bg-transparent h-12"
           id={titleInputId}
-          defaultValue={initialState.title}
+          defaultValue={title}
           required
-          onChange={(event) =>
-            useCreatePostStore.setState({ title: event.target.value })
-          }
         />
       </FormItem>
       <FormItem>
@@ -58,19 +48,8 @@ export const PostForm = ({
         <p className="text-xs text-foreground/80">
           Markdown is supported. Minimum length is 30 characters.
         </p>
-        <Textarea
-          rows={20}
-          name="body"
-          id={bodyInputId}
-          defaultValue={initialState.body}
-          onChange={(event) =>
-            useCreatePostStore.setState({ body: event.target.value })
-          }
-          required
-          minLength={30}
-        />
+        <Editor initialContent={body} />
       </FormItem>
-      <Preview />
       <Submit />
     </form>
   );

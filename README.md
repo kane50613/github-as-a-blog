@@ -68,7 +68,7 @@ In the future, we may create a migration tool to help you migrate to another pla
 GaaB is built with Next.js, which provides server-side rendering and static site generation out of the box.
 
 With the help of CDN and well-optimized caching, the website can be loaded quickly and efficiently.
-   
+
 ## Technical Details
 
 - [Tech Stack](#tech-stack)
@@ -84,7 +84,7 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 - [shadcn/ui](https://ui.shadcn.com/): A minimalistic UI library for building modern websites.
 - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
 - [swr](https://swr.vercel.app/): React Hooks library for data fetching.
-- [next-safe-action](https://www.npmjs.com/package/next-safe-action): Type safe server actions with validation, error handling, and loading states. 
+- [next-safe-action](https://www.npmjs.com/package/next-safe-action): Type safe server actions with validation, error handling, and loading states.
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): A React component for the Intersection Observer API.
 - [react-markdown](https://www.npmjs.com/package/react-markdown): A markdown component for React.
 - [playwright](https://playwright.dev/): Integration testing with Playwright.
@@ -113,7 +113,6 @@ Check out all the server actions in [`src/actions`](src/actions).
 To run the project locally, follow the steps below:
 
 1. Install [Node.js LTS](https://nodejs.org/), [pnpm](https://pnpm.io/installation), and [Git](https://git-scm.com/), `brew install node pnpm git` is the recommended way to install it on macOS.
-   
 2. Clone the repository:
 
    ```bash
