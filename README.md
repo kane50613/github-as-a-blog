@@ -31,6 +31,8 @@ By self-hosting the content with GaaB on your own domain, it can be more profess
 
 GitHub issues is designed for issue tracking, with a lot of features that are not necessary for blogging. GaaB provides a clean and minimalistic interface for reading and writing blog posts.
 
+With the powerful WYSIWYG editor [novel](https://novel.sh/), users can write blog posts with ease and preview the content in real-time.
+
 ### Customization
 
 The website is made with Next.js and [shadcn/ui](https://ui.shadcn.com/) components, which means that you can easily customize the website by forking the repository and modifying the components.
@@ -83,6 +85,7 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 - [create-t3-app](https://create.t3.gg/): The best way to start a full-stack, typesafe Next.js app.
 - [shadcn/ui](https://ui.shadcn.com/): A minimalistic UI library for building modern websites.
 - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
+- [novel](https://novel.sh/): Notion-style WYSIWYG editor.
 - [swr](https://swr.vercel.app/): React Hooks library for data fetching.
 - [next-safe-action](https://www.npmjs.com/package/next-safe-action): Type safe server actions with validation, error handling, and loading states.
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): A React component for the Intersection Observer API.
