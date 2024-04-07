@@ -112,10 +112,7 @@ Check out all the server actions in [`src/actions`](src/actions).
 
 To run the project locally, follow the steps below:
 
-1. Install [Node.js LTS](https://nodejs.org/), [pnpm](https://pnpm.io/installation), and [Git](https://git-scm.com/).
-
-   > [!NOTE]
-   > `brew install node pnpm git` is the recommended way to install it on macOS.
+1. Install [Node.js LTS](https://nodejs.org/), [pnpm](https://pnpm.io/installation), and [Git](https://git-scm.com/), `brew install node pnpm git` is the recommended way to install it on macOS.
    
 2. Clone the repository:
 
