@@ -62,7 +62,6 @@ export const Editor = ({
             maxWidth: "unset",
           }}
         >
-          <Separator orientation="vertical" />
           <NodeSelector
             open={dialog === "node"}
             onOpenChange={(value) => setDialog(value ? "node" : null)}

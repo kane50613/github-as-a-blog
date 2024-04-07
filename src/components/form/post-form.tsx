@@ -3,7 +3,7 @@
 import { upsertPost } from "@/actions/upsert-post";
 import { Submit } from "@/components/submit";
 import { FormItem } from "@/components/ui/form";
-import { useId } from "react";
+import { useEffect, useId, useRef } from "react";
 import { useActionWithHandler } from "@/lib/action-hook";
 import { Editor } from "@/components/ui/editor/editor";
 import { Input } from "@/components/ui/input";
@@ -22,7 +22,13 @@ export const PostForm = ({
   id?: number;
 }) => {
   const titleInputId = useId();
-  const bodyInputId = useId();
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    // Set the initial value of the textarea
+    if (textareaRef.current) textareaRef.current.value = body;
+  }, [body]);
 
   const { execute } = useActionWithHandler(upsertPost);
 
@@ -44,11 +50,22 @@ export const PostForm = ({
         />
       </FormItem>
       <FormItem>
-        <label htmlFor={bodyInputId}>Body</label>
+        <label>Body</label>
         <p className="text-xs text-foreground/80">
           Markdown is supported. Minimum length is 30 characters.
         </p>
-        <Editor initialContent={body} />
+        <Editor
+          initialContent={body}
+          onValueChange={(body) =>
+            textareaRef.current && (textareaRef.current.value = body)
+          }
+        />
+        <textarea
+          name="body"
+          ref={textareaRef}
+          hidden
+          className="hidden pointer-events-none"
+        />
       </FormItem>
       <Submit />
     </form>
