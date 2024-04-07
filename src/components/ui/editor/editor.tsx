@@ -2,12 +2,12 @@ import { EditorBubble, EditorContent, EditorRoot } from "novel";
 import { useMemo, useState } from "react";
 import { defaultExtensions } from "@/components/ui/editor/novel-extensions";
 import { Separator } from "@/components/ui/separator";
-import { LinkSelector } from "@/components/ui/editor/link-selector";
+import { LinkSelector } from "@/components/ui/editor/bubble-actions/link-selector";
 import { generateJSON } from "@tiptap/html";
 import { marked } from "marked";
 import xss from "xss";
-import { NodeSelector } from "@/components/ui/editor/node-selector";
-import { TextButtons } from "@/components/ui/editor/text-buttonts";
+import { NodeSelector } from "@/components/ui/editor/bubble-actions/node-selector";
+import { TextButtons } from "@/components/ui/editor/bubble-actions/text-buttonts";
 
 type Dialog = "node" | "link" | "color";
 

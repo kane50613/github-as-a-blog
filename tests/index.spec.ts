@@ -32,7 +32,7 @@ test("create post", async () => {
   await expect(page).toHaveURL(/\/posts\/create/);
 
   await page.fill('input[name="title"]', title);
-  await page.fill('textarea[name="body"]', body);
+  await page.fill(".tiptap", body);
 
   await page.click("text=Submit");
 
@@ -51,7 +51,7 @@ test("edit post", async () => {
   body = `${body}\n\nUpdated!`;
 
   await page.fill('input[name="title"]', title);
-  await page.fill('textarea[name="body"]', body);
+  await page.fill(".tiptap", body);
 
   await page.click("text=Submit");
 

@@ -1,17 +1,13 @@
 import {
-  TiptapImage,
   TiptapLink,
-  UpdatedImage,
   TaskList,
   TaskItem,
-  HorizontalRule,
   StarterKit,
   Placeholder,
 } from "novel/extensions";
 
 import { cx } from "class-variance-authority";
 
-const placeholder = Placeholder;
 const tiptapLink = TiptapLink.configure({
   HTMLAttributes: {
     class: cx(
@@ -25,17 +21,12 @@ const taskList = TaskList.configure({
     class: cx("not-prose pl-2"),
   },
 });
+
 const taskItem = TaskItem.configure({
   HTMLAttributes: {
     class: cx("flex items-start my-4"),
   },
   nested: true,
-});
-
-const horizontalRule = HorizontalRule.configure({
-  HTMLAttributes: {
-    class: cx("mt-4 mb-6 border-t border-muted-foreground"),
-  },
 });
 
 const starterKit = StarterKit.configure({
@@ -70,7 +61,11 @@ const starterKit = StarterKit.configure({
       spellcheck: "false",
     },
   },
-  horizontalRule: false,
+  horizontalRule: {
+    HTMLAttributes: {
+      class: cx("mt-4 mb-6 border-t border-muted-foreground"),
+    },
+  },
   dropcursor: {
     color: "#DBEAFE",
     width: 4,
@@ -80,11 +75,8 @@ const starterKit = StarterKit.configure({
 
 export const defaultExtensions = [
   starterKit,
-  placeholder,
+  Placeholder,
   tiptapLink,
-  TiptapImage,
-  UpdatedImage,
   taskList,
   taskItem,
-  horizontalRule,
 ];
