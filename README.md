@@ -80,6 +80,7 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 ### Tech Stack
 
 - [Next.js](https://nextjs.org/): React framework for server-side rendering and static site generation.
+- [create-t3-app](https://create.t3.gg/): The best way to start a full-stack, typesafe Next.js app.
 - [shadcn/ui](https://ui.shadcn.com/): A minimalistic UI library for building modern websites.
 - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
 - [swr](https://swr.vercel.app/): React Hooks library for data fetching.
@@ -87,7 +88,6 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): A React component for the Intersection Observer API.
 - [react-markdown](https://www.npmjs.com/package/react-markdown): A markdown component for React.
 - [playwright](https://playwright.dev/): Integration testing with Playwright.
-- [create-t3-app](https://create.t3.gg/): The best way to start a full-stack, typesafe Next.js app.
 
 ### Infinite Scrolling Pagination
 
@@ -107,35 +107,46 @@ Check out all the server actions in [`src/actions`](src/actions).
 
 ### Local Development
 
+> [!NOTE]
+> Vercel is the recommended way to deploy the project, please refer to the top of the README for the Vercel deployment button.
+
 To run the project locally, follow the steps below:
 
-1. Clone the repository:
+1. Install [Node.js LTS](https://nodejs.org/), [pnpm](https://pnpm.io/installation), and [Git](https://git-scm.com/).
+
+   > [!NOTE]
+   > `brew install node pnpm git` is the recommended way to install it on macOS.
+   
+2. Clone the repository:
 
    ```bash
    git clone git@github.com:kane50613/github-as-a-blog.git
    ```
 
-2. Install the dependencies:
+3. Install the dependencies:
 
    ```bash
    pnpm install
    ```
 
-3. Prepare the environment variables:
+4. Prepare the environment variables:
 
    ```bash
    cp .env.example .env
    ```
 
-   Fill in the environment variables in `.env` with your GitHub OAuth App credentials, and a secret key for encrypting the session token.
+   Fill in the environment variables in `.env` with your GitHub OAuth App credentials, and a 32-character random string for the `JWT_SECRET`.
 
-4. Run the development server:
+5. Run the development server:
 
    ```bash
    pnpm dev
    ```
 
 ### Testing
+
+> [!WARNING]
+> You should stop the development server before running the tests, as it will build the project and run the tests in production mode.
 
 To run the playwright tests, follow the steps below:
 
