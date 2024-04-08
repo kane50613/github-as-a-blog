@@ -4,6 +4,9 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkane50613%2Fgithub-as-a-blog&env=GITHUB_CLIENT_ID,GITHUB_CLIENT_SECRET,JWT_SECRET,NEXT_PUBLIC_GITHUB_REPO_OWNER,NEXT_PUBLIC_GITHUB_REPO&demo-title=Github%20as%20a%20Blog&demo-description=Effortless%20blogging%20with%20GitHub%20issues%20and%20Next.js&demo-url=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2F&demo-image=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2Fcover.jpg)
 
+> [!NOTE]
+> Refer to the [Setup GitHub OAuth App](#setup-github-oauth-app) section for the environment variables required to run the project.
+
 - [What problem does GaaB solve?](#what-problem-does-gaab-solve)
 - [Technical Details](#technical-details)
 - [License](#license)
@@ -107,6 +110,17 @@ GaaB uses the `next-safe-action` library to handle server actions with validatio
 When errors occur during server actions, the error message is displayed to the user with a toast notification, the [Error boundary](src/app/error.tsx) component catches the error and displays the error message.
 
 Check out all the server actions in [`src/actions`](src/actions).
+
+### Setup GitHub OAuth App
+
+To use GaaB, you need to create a GitHub OAuth App to authenticate users and fetch the issues from the repository.
+
+1. Go to [GitHub Developer Settings](https://github.com/settings/developers), and click on "New OAuth App".
+2. Fill in the required fields:
+   - Application name: `GaaB`
+   - Homepage URL: `<Base URL of your website>`
+   - Authorization callback URL: `<Base URL of your website>/api/auth`
+3. Click on "Register application", and you will get the `Client ID` and `Client Secret`.
 
 ### Local Development
 
