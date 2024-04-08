@@ -79,6 +79,7 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 - [Tech Stack](#tech-stack)
 - [Infinite Scrolling Pagination](#infinite-scrolling-pagination)
 - [Safe Server Actions](#safe-server-actions)
+- [Setup GitHub OAuth App](#setup-github-oauth-app)
 - [Local Development](#local-development)
 - [Testing](#testing)
 
