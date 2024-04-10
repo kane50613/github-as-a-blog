@@ -7,7 +7,13 @@ export function useActionWithHandler<T extends Parameters<typeof useAction>[0]>(
   return useAction(func, {
     onError(error) {
       console.error(error);
-      toast.error(JSON.stringify(error));
+
+      if (error.serverError) toast.error(error.serverError);
+
+      if (error.validationErrors)
+        toast.error(JSON.stringify(error.validationErrors));
+
+      if (error.fetchError) toast.error("Failed to fetch data");
     },
   });
 }
