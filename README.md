@@ -74,6 +74,8 @@ GaaB is built with Next.js, which provides server-side rendering and static site
 
 With the help of CDN and well-optimized caching, the website can be loaded quickly and efficiently.
 
+[The Lighthouse report](https://pagespeed.web.dev/analysis/https-gaab-yeecord-com-posts-40/8v1v6pfbdl?form_factor=desktop) shows that GaaB has a perfect score of 100 on all metrics, including LCP, FID, CLS, and more.
+
 ## Technical Details
 
 - [Tech Stack](#tech-stack)
