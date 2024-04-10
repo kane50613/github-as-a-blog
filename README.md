@@ -162,6 +162,9 @@ To run the project locally, follow the steps below:
 > [!WARNING]
 > You should stop the development server before running the tests, as it will build the project and run the tests in production mode.
 
+> [!NOTE]
+> [Mocked versions of the GitHub API](src/mock/github-server.ts) are used in the tests to prevent rate limiting and to make the tests more reliable.
+
 To run the playwright tests, follow the steps below:
 
 ```bash
