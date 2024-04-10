@@ -4,6 +4,9 @@ This project, developed as part of a Dcard internship assignment, aims to transf
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkane50613%2Fgithub-as-a-blog&env=GITHUB_CLIENT_ID,GITHUB_CLIENT_SECRET,JWT_SECRET,NEXT_PUBLIC_GITHUB_REPO_OWNER,NEXT_PUBLIC_GITHUB_REPO&demo-title=Github%20as%20a%20Blog&demo-description=Effortless%20blogging%20with%20GitHub%20issues%20and%20Next.js&demo-url=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2F&demo-image=https%3A%2F%2Fgithub-as-a-blog.vercel.app%2Fcover.jpg)
 
+> [!WARNING]
+> By default, when forking the repository, the issues feature is disabled. You need to enable it by going to the repository settings and enabling the issues feature.
+
 > [!NOTE]
 > Refer to the [Setup GitHub OAuth App](#setup-github-oauth-app) section for the environment variables required to run the project.
 
