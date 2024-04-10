@@ -95,11 +95,14 @@ export async function listPosts(creator?: string, page = 1, per_page = 10) {
         state: "open",
       });
 
-      return response.data.map((post) => ({
-        ...post,
-        body_html: "",
-        body_text: "",
-      }));
+      // filter out pull requests
+      return response.data
+        .filter((post) => !post.pull_request)
+        .map((post) => ({
+          ...post,
+          body_html: "",
+          body_text: "",
+        }));
     },
     ["posts", creator ?? "all", page.toString()],
     {
