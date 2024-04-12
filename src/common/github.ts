@@ -62,13 +62,15 @@ export async function listAllPosts(creator?: string) {
     async () => {
       const data: Post[] = [];
 
-      let page = 1;
+      let page = 1,
+        hasMore = true;
 
-      while (true) {
+      while (hasMore) {
         const response = await listPosts(creator, page++, 100);
 
         if (response.length) data.push(...response);
-        if (response.length < 100) break;
+        // If we get less than 100 posts, we've reached the end
+        if (response.length < 100) hasMore = false;
       }
 
       return data;

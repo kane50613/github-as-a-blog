@@ -17,7 +17,7 @@ export function useInfiniteData<T>(props: InfiniteDataProps<T>) {
   } = useSWRInfinite<T[]>(
     // create a key for each page
     (page) => [page + 1, props.key] as const,
-    ([page, _]) => props.loader(page as number),
+    ([page]) => props.loader(page as number),
   );
 
   const hasMore = useMemo(
