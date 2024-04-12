@@ -35,6 +35,8 @@ export const MDX = ({ children }: { children: string }) => (
 
         return createElement(type, props, children);
       },
+      // safety measure to prevent XSS attacks
+      disableParsingRawHTML: true,
     }}
   >
     {children}
