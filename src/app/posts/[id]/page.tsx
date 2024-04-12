@@ -83,12 +83,12 @@ export default async function Page({
         </div>
         <Separator className="my-4" />
         {post.body && <MDX>{post.body}</MDX>}
-        <span className="text-sm">
+        <p className="text-sm">
           View source on GitHub issue:{" "}
           <a href={issueUrl} target="_blank" rel="nofollow">
             {post.title} (#{post.number})
           </a>
-        </span>
+        </p>
       </article>
       <Separator />
       <section className="not-prose space-y-4">
