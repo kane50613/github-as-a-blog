@@ -24,11 +24,12 @@ export async function getUser(session: IronSession<IronSessionData>) {
 }
 
 export async function getIssue(issue_number: number) {
-  const fn = unstable_cache(
-    async () => {
-      const session = await getUnsafeSession();
+  // have to move session out of the unstable_cache function
+  const session = await getUnsafeSession();
 
-      return client(session)
+  const fn = unstable_cache(
+    async () =>
+      client(session)
         .issues.get({
           owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
           repo: env.NEXT_PUBLIC_GITHUB_REPO,
@@ -38,8 +39,7 @@ export async function getIssue(issue_number: number) {
           ...r.data,
           body_html: "",
           body_text: "",
-        }));
-    },
+        })),
     ["posts", issue_number.toString()],
     {
       tags: [`posts-${issue_number}`],
@@ -50,9 +50,9 @@ export async function getIssue(issue_number: number) {
   return fn();
 }
 
-export function client(session?: IronSession<IronSessionData>) {
+export function client(session?: IronSession<IronSessionData> | string) {
   return new Octokit({
-    auth: session?.token,
+    auth: typeof session === "string" ? session : session?.token,
     baseUrl: process.env.CI ? "http://localhost:3001" : undefined,
   });
 }
@@ -84,9 +84,11 @@ export async function listAllPosts(creator?: string) {
 }
 
 export async function listPosts(creator?: string, page = 1, per_page = 10) {
+  const session = await getUnsafeSession();
+
   const fn = unstable_cache(
     async () => {
-      const response = await client().issues.listForRepo({
+      const response = await client(session.token).issues.listForRepo({
         owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
         repo: env.NEXT_PUBLIC_GITHUB_REPO,
         page,
