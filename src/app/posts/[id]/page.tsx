@@ -82,7 +82,7 @@ export default async function Page({
           </Suspense>
         </div>
         <Separator className="my-4" />
-        <MDX>{post.body}</MDX>
+        {post.body && <MDX>{post.body}</MDX>}
         <span className="text-sm">
           View source on GitHub issue:{" "}
           <a href={issueUrl} target="_blank" rel="nofollow">

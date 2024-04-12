@@ -12,7 +12,7 @@ export const Comment = memo(
         )}
       </div>
       <div className="prose dark:prose-invert">
-        <MDX>{comment.body}</MDX>
+        {comment.body && <MDX>{comment.body}</MDX>}
       </div>
     </div>
   ),

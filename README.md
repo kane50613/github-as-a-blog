@@ -61,7 +61,7 @@ Since the GitHub repository is public, anyone can create issues and comments. Ga
 
 By settings the `WHITELISTED_AUTHORS` environment variable in `.env`, separated by commas, only the authors in the whitelist can create issues and comments.
 
-We also have XSS protection for the content, thanks to the [react-markdown](https://www.npmjs.com/package/react-markdown) library, which automatically escapes the HTML in the content and not using `dangerouslySetInnerHTML` directly.
+We also have XSS protection for the content, thanks to the [markdown-to-jsx](https://www.npmjs.com/package/markdown-to-jsx)  library, which automatically escapes the HTML in the content and not using `dangerouslySetInnerHTML` directly.
 
 ### Ownership
 
@@ -98,7 +98,7 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 - [swr](https://swr.vercel.app/): React Hooks library for data fetching.
 - [next-safe-action](https://www.npmjs.com/package/next-safe-action): Type safe server actions with validation, error handling, and loading states.
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): A React component for the Intersection Observer API.
-- [react-markdown](https://www.npmjs.com/package/react-markdown): A markdown component for React.
+- [markdown-to-jsx](https://www.npmjs.com/package/markdown-to-jsx): The most lightweight, customizable React markdown component.
 - [playwright](https://playwright.dev/): Integration testing with Playwright.
 
 ### Infinite Scrolling Pagination
