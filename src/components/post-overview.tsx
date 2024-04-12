@@ -12,6 +12,8 @@ export const PostOverview = memo(({ post }: { post: Post }) => (
     href={`/posts/${post.number}`}
     className="!no-underline"
     aria-label={post.title}
+    // disable prefetching to avoid loading unnecessary post content
+    prefetch={false}
   >
     <article className="flex items-start flex-col gap-2 max-w-2xl w-full md:rounded-md hover:bg-secondary/15 transition-colors py-4 container">
       {post.user && (
