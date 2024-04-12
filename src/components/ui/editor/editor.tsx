@@ -24,13 +24,12 @@ export const Editor = ({
     () =>
       generateJSON(
         xss(
-          // marked didn't get the type definition right, it still returns Promise<string> instead of string at type level.
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
+          // @ts-expect-error: marked didn't get the type definition right, it still returns Promise<string> instead of string at type level.
           marked(initialContent, {
             async: false,
           }),
         ),
+        // @ts-expect-error: @tiptap/core version conflict from the novel package.
         defaultExtensions,
       ),
     [initialContent],
