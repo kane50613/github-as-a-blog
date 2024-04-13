@@ -1,5 +1,6 @@
 # GaaB: GitHub as a Blog
 
+![Playwright Tests](https://github.com/kane50613/github-as-a-blog/actions/workflows/playwright.yml/badge.svg)
 [![CodeFactor](https://www.codefactor.io/repository/github/kane50613/github-as-a-blog/badge)](https://www.codefactor.io/repository/github/kane50613/github-as-a-blog)
 
 This project, developed as part of a Dcard internship assignment, aims to transform GitHub issues into blog posts for seamless content sharing and search engine optimization (SEO) improvement.
