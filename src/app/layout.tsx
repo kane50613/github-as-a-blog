@@ -28,8 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const runtime = "edge";
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // need to suppressHydrationWarning because of the script tag in the head sets the theme class

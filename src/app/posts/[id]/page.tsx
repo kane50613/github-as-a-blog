@@ -11,9 +11,6 @@ import removeMarkdown from "remove-markdown";
 import { HeaderTitle } from "@/components/header/header-title";
 import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 
-export const revalidate = 60;
-export const dynamic = "force-static";
-
 export async function generateMetadata({
   params: { id },
 }: {

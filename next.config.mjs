@@ -6,6 +6,9 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  // disable the `X-Powered-By` header to improve security
+  poweredByHeader: false,
+};
 
 export default config;
