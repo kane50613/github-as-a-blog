@@ -3,6 +3,8 @@ import { whitelistCheckWithFallback } from "@/common/whitelist";
 import { getSession } from "@/session";
 import { type ReactNode } from "react";
 
+export const runtime = "edge";
+
 export default async function Layout({ children }: { children: ReactNode }) {
   const session = await getSession();
 
