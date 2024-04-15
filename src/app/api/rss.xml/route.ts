@@ -3,7 +3,6 @@ import { env } from "@/env";
 import removeMarkdown from "remove-markdown";
 
 export const runtime = "edge";
-
 export const revalidate = 60;
 
 export async function GET() {
