@@ -3,11 +3,11 @@
 import { client } from "@/common/github";
 import { env } from "@/env";
 import { getSession } from "@/session";
-import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 import { authAction } from "@/common/action";
+import { revalidatePost } from "@/actions/helpers/revalidate-post";
 
 const schema = zfd.formData({
   id: zfd.numeric(z.number().optional()),
@@ -20,9 +20,7 @@ type Schema = z.infer<typeof schema>;
 export const upsertPost = authAction(schema, async ({ id, ...data }) => {
   const issue = id ? await updatePost(id, data) : await createPost(data);
 
-  revalidateTag(`posts-${issue.user?.login}`);
-  revalidateTag(`posts-${issue.number}`);
-  revalidateTag("posts");
+  revalidatePost(issue);
 
   redirect(`/posts/${issue.number}`);
 });

@@ -8,7 +8,11 @@
     "dev": "next dev --turbo",
     "lint": "next lint",
     "start": "next start",
-    "test": "playwright test"
+    "test": "playwright test",
+    "postinstall": "npx simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run lint"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^9.4.1",
@@ -65,6 +69,7 @@
     "prettier-plugin-embed": "^0.4.15",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.13",
+    "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^3.4.3",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5"

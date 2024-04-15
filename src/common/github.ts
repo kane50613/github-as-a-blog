@@ -50,6 +50,8 @@ export async function getIssue(issue_number: number) {
   return fn();
 }
 
+export type Issue = Awaited<ReturnType<typeof getIssue>>;
+
 export function client(session?: IronSession<IronSessionData> | string) {
   return new Octokit({
     auth: typeof session === "string" ? session : session?.token,
