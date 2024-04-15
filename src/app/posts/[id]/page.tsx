@@ -7,12 +7,12 @@ import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import removeMarkdown from "remove-markdown";
 import { HeaderTitle } from "@/components/header/header-title";
 import { CommentsLoader } from "@/app/posts/[id]/comments-loader";
 
 export const revalidate = 60;
+export const dynamic = "error";
 
 export async function generateMetadata({
   params: { id },
@@ -79,9 +79,7 @@ export default async function Page({
           ) : (
             <div>Unknown Author</div>
           )}
-          <Suspense>
-            <PostHelper post={post} />
-          </Suspense>
+          <PostHelper post={post} />
         </div>
         <Separator className="my-4" />
         {post.body && <MDX>{post.body}</MDX>}

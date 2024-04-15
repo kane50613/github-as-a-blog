@@ -1,7 +1,9 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { getUnsafeSession } from "@/session";
 import { Rocket } from "lucide-react";
 import Link from "next/link";
+import { useUser } from "@/hooks/use-user";
 
 export const MainActionButton = ({
   redirectToAuth,
@@ -30,8 +32,8 @@ export const MainActionButton = ({
 
 // this loader is used to prevent some wierd browser behavior,
 // which shows an empty page when the user is not authenticated
-export const MainActionButtonLoader = async () => {
-  const session = await getUnsafeSession();
+export const MainActionButtonLoader = () => {
+  const user = useUser();
 
-  return <MainActionButton redirectToAuth={!session.token} />;
+  return <MainActionButton redirectToAuth={!user.data && !user.isLoading} />;
 };

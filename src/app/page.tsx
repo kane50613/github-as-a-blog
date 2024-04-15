@@ -1,11 +1,7 @@
-import {
-  MainActionButton,
-  MainActionButtonLoader,
-} from "@/components/main-action-button";
+import { MainActionButtonLoader } from "@/components/main-action-button";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Star } from "lucide-react";
-import { Suspense } from "react";
 import { HeaderTitle } from "@/components/header/header-title";
 import { PostsLoader } from "@/app/(auth)/posts/posts-loader";
 
@@ -23,9 +19,7 @@ export default function HomePage() {
           Effortless blogging with GitHub issues and Next.js.
         </p>
         <div className="gap-2 flex flex-col sm:flex-row w-full sm:w-fit">
-          <Suspense fallback={<MainActionButton redirectToAuth={false} />}>
-            <MainActionButtonLoader />
-          </Suspense>
+          <MainActionButtonLoader />
           <Button variant="secondary" asChild>
             <a href="https://github.com/kane50613/github-as-a-blog/">
               <Star className="w-4 mr-2" />
