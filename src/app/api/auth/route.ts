@@ -61,13 +61,12 @@ async function grabToken(req: Request, code: string) {
 
 async function exchangeToken(req: Request, code: string) {
   if (process.env.CI) {
-    if (!process.env.GITHUB_TOKEN)
-      throw new Error("GITHUB_TOKEN is not set in CI");
+    if (!env.GITHUB_TOKEN) throw new Error("GITHUB_TOKEN is not set in CI");
 
     if (code !== "TEST") throw new Error("Code is not set to TEST in CI");
 
     return {
-      access_token: process.env.GITHUB_TOKEN,
+      access_token: env.GITHUB_TOKEN,
       scope,
     };
   }

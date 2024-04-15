@@ -1,12 +1,14 @@
-import { getUser } from "@/common/github";
+"use client";
+
 import { Avatar } from "@/components/avatar";
 import { Button } from "@/components/ui/button";
-import { getUnsafeSession } from "@/session";
 import Link from "next/link";
+import { useUser } from "@/hooks/use-user";
 
-export const User = async () => {
-  const session = await getUnsafeSession();
-  const user = session.token ? await getUser(session) : undefined;
+export const User = () => {
+  const { data: user, isLoading } = useUser();
+
+  if (isLoading) return <Avatar className="w-8 h-8" alt="User" />;
 
   if (!user)
     return (

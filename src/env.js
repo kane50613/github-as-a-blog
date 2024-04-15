@@ -7,6 +7,7 @@ export const env = createEnv({
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
     JWT_SECRET: z.string(),
+    GITHUB_TOKEN: z.string().optional(),
     WHITELISTED_AUTHORS: z
       .string()
       .trim()
@@ -19,6 +20,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GITHUB_REPO: z.string(),
   },
   runtimeEnv: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     NEXT_PUBLIC_BASE_URL:
       process.env.NEXT_PUBLIC_BASE_URL ??
       (process.env.VERCEL_URL

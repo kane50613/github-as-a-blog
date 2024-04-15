@@ -1,18 +1,18 @@
-import { getUser, type Post } from "@/common/github";
+"use client";
+
+import { type Post } from "@/common/github";
 import { CommentForm } from "@/components/form/comment-form";
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import { getUnsafeSession } from "@/session";
 import { MessageCircleOff } from "lucide-react";
+import { useUser } from "@/hooks/use-user";
 
-export const CommentFormLoader = async ({ post }: { post: Post }) => {
-  const session = await getUnsafeSession();
+export const CommentFormLoader = ({ post }: { post: Post }) => {
+  const { data: user } = useUser();
 
   if (!post.id) return <CommentUnavailable message="Invalid post" />;
 
-  if (!session.token)
+  if (!user)
     return <CommentUnavailable message="You must be logged in to comment" />;
-
-  const user = await getUser(session).catch(() => null);
 
   if (!user)
     return (

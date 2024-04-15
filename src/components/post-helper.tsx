@@ -1,16 +1,14 @@
-import { getUser, type Post } from "@/common/github";
-import { getUnsafeSession } from "@/session";
+"use client";
+
+import { type Post } from "@/common/github";
 import { Pen, Trash } from "lucide-react";
 import Link from "next/link";
+import { useUser } from "@/hooks/use-user";
 
-export const PostHelper = async ({ post }: { post: Post }) => {
-  const session = await getUnsafeSession();
+export const PostHelper = ({ post }: { post: Post }) => {
+  const { data: user } = useUser();
 
-  if (!session.token) return null;
-
-  const user = await getUser(session);
-
-  if (user.id !== post.user?.id) return null;
+  if (user?.id !== post.user?.id) return null;
 
   return (
     <div className="text-base not-prose flex gap-4">

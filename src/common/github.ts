@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { getUnsafeSession, type IronSessionData } from "@/session";
+import { type IronSessionData } from "@/session";
 import { Octokit } from "@octokit/rest";
 import { type IronSession } from "iron-session";
 import { unstable_cache } from "next/cache";
@@ -24,12 +24,9 @@ export async function getUser(session: IronSession<IronSessionData>) {
 }
 
 export async function getIssue(issue_number: number) {
-  // have to move session out of the unstable_cache function
-  const session = await getUnsafeSession();
-
   const fn = unstable_cache(
     async () =>
-      client(session)
+      client(env.GITHUB_TOKEN)
         .issues.get({
           owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
           repo: env.NEXT_PUBLIC_GITHUB_REPO,
@@ -88,11 +85,9 @@ export async function listAllPosts(creator?: string) {
 }
 
 export async function listPosts(creator?: string, page = 1, per_page = 10) {
-  const session = await getUnsafeSession();
-
   const fn = unstable_cache(
     async () => {
-      const response = await client(session.token).issues.listForRepo({
+      const response = await client(env.GITHUB_TOKEN).issues.listForRepo({
         owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
         repo: env.NEXT_PUBLIC_GITHUB_REPO,
         page,

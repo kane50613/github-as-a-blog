@@ -1,10 +1,8 @@
-import { Avatar } from "@/components/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { User } from "@/components/user";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
-import { Suspense } from "react";
 import { HeaderSecondaryTitle } from "@/components/header/header-secondary-title";
 
 export const Header = () => (
@@ -25,9 +23,7 @@ export const Header = () => (
         </Button>
         <ThemeToggle />
         <div className="w-2" />
-        <Suspense fallback={<Avatar className="w-8" alt="User avatar" />}>
-          <User />
-        </Suspense>
+        <User />
       </div>
     </div>
   </div>
