@@ -131,6 +131,13 @@ To use GaaB, you need to create a GitHub OAuth App to authenticate users and fet
    - Authorization callback URL: `<Base URL of your website>/api/auth`
 3. Click on "Register application", and you will get the `Client ID` and `Client Secret`.
 
+### Bypassing the Rate Limit (Optional)
+
+To bypass the rate limit of the GitHub API, you can [create a personal access token](https://github.com/settings/tokens/new) with the `public_repo` scope and set it as the `GITHUB_TOKEN` environment variable in `.env`.
+
+> [!WARNING]
+> Please keep your personal access token secure and do not expose it to the public.
+
 ### Local Development
 
 > [!NOTE]
