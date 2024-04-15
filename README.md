@@ -88,6 +88,8 @@ With the help of CDN and well-optimized caching, the website can be loaded quick
 - [Infinite Scrolling Pagination](#infinite-scrolling-pagination)
 - [Safe Server Actions](#safe-server-actions)
 - [Setup GitHub OAuth App](#setup-github-oauth-app)
+- [Next.js Caching Strategy](#nextjs-caching-strategy)
+- [Bypassing the Rate Limit (Optional)](#bypassing-the-rate-limit-optional)
 - [Local Development](#local-development)
 - [Testing](#testing)
 
@@ -130,6 +132,10 @@ To use GaaB, you need to create a GitHub OAuth App to authenticate users and fet
    - Homepage URL: `<Base URL of your website>`
    - Authorization callback URL: `<Base URL of your website>/api/auth`
 3. Click on "Register application", and you will get the `Client ID` and `Client Secret`.
+
+### Next.js Caching Strategy
+
+To adhere to Next.js caching rules, dynamic functions, such as getUser, must be converted into server actions to resolve the issue, using the [useUser](src/hooks/use-user.ts) hook to fetch the user data on the client-side.
 
 ### Bypassing the Rate Limit (Optional)
 
