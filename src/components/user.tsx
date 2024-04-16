@@ -20,7 +20,7 @@ export const User = () => {
         variant="ghost"
         className="w-8 h-8 p-0 rounded-full"
       >
-        <a href="/api/auth">
+        <a href="/api/auth" aria-label="Login">
           <LogIn className="w-5" />
         </a>
       </Button>
