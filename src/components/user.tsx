@@ -64,7 +64,11 @@ export const User = () => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/api/auth/logout" className="!text-destructive">
+          <Link
+            href="/api/auth/logout"
+            className="!text-destructive"
+            prefetch={false}
+          >
             <LogOut className="w-4 mr-2" />
             Logout
           </Link>
