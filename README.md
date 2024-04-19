@@ -151,7 +151,7 @@ To bypass the rate limit of the GitHub API, you can [create a personal access to
 
 To run the project locally, follow the steps below:
 
-1. Install [Node.js LTS](https://nodejs.org/), [pnpm](https://pnpm.io/installation), and [Git](https://git-scm.com/), `brew install node pnpm git` is the recommended way to install it on macOS.
+1. Install [Node.js LTS](https://nodejs.org/), [pnpm 9](https://pnpm.io/installation), and [Git](https://git-scm.com/), `brew install node pnpm git` is the recommended way to install it on macOS.
 2. Clone the repository:
 
    ```bash

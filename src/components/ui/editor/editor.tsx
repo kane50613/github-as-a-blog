@@ -29,10 +29,15 @@ export const Editor = ({
             async: false,
           }),
         ),
-        // @ts-expect-error: @tiptap/core version conflict from the novel package.
         defaultExtensions,
       ),
     [initialContent],
+  );
+
+  console.log(
+    marked(initialContent, {
+      async: false,
+    }),
   );
 
   return (

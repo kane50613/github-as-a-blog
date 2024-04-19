@@ -10,17 +10,15 @@ type Components = Partial<{
 
 const components: Components = {
   img: (props) => (
-    <span className="aspect-video w-full flex items-center justify-center">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        {...props}
-        className="rounded-md w-full h-full object-contain"
-        loading="lazy"
-        decoding="async"
-        alt={"alt" in props && typeof props.alt === "string" ? props.alt : ""}
-        key={null}
-      />
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      {...props}
+      className="rounded-lg w-full h-full object-contain aspect-video"
+      loading="lazy"
+      decoding="async"
+      alt={"alt" in props && typeof props.alt === "string" ? props.alt : ""}
+      key={null}
+    />
   ),
   a: (props, children) => (
     <a

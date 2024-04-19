@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { themeScript } from "@/lib/script";
+import { themeScript } from "@/lib/theme-script";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { type Metadata } from "next";

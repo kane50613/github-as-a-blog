@@ -4,6 +4,7 @@ import {
   TaskItem,
   StarterKit,
   Placeholder,
+  TiptapImage,
 } from "novel/extensions";
 
 import { cx } from "class-variance-authority";
@@ -14,6 +15,16 @@ const tiptapLink = TiptapLink.configure({
       "text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer",
     ),
   },
+});
+
+const tiptapImage = TiptapImage.configure({
+  allowBase64: true,
+  HTMLAttributes: {
+    class: cx(
+      "rounded-lg border border-muted aspect-video object-contain w-full",
+    ),
+  },
+  inline: true,
 });
 
 const taskList = TaskList.configure({
@@ -79,4 +90,5 @@ export const defaultExtensions = [
   tiptapLink,
   taskList,
   taskItem,
+  tiptapImage,
 ];

@@ -1,6 +1,6 @@
 "use client";
 
-import { themeScript } from "@/lib/script";
+import { themeScript } from "@/lib/theme-script";
 import Error from "next/error";
 import { useEffect } from "react";
 import { toast } from "sonner";
