@@ -4,7 +4,15 @@ import { Avatar } from "@/components/avatar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useUser } from "@/hooks/use-user";
-import { LogIn } from "lucide-react";
+import { LayoutList, LogIn, LogOut } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const User = () => {
   const { data: user, isLoading } = useUser();
@@ -27,12 +35,41 @@ export const User = () => {
     );
 
   return (
-    <Link href="/posts" className="w-8">
-      <Avatar
-        className="w-8 h-8"
-        src={`${user.avatar_url}&s=64`}
-        alt={user.name ?? "User avatar"}
-      />
-    </Link>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar
+          className="w-8 h-8"
+          src={`${user.avatar_url}&s=64`}
+          alt={user.name ?? "User avatar"}
+        />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel asChild>
+          <a
+            target="_blank"
+            href={`https://github.com/${user.login}`}
+            className="flex flex-col"
+          >
+            {user.login}
+            <span className="block text-muted-foreground font-normal">
+              {user.email}
+            </span>
+          </a>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/posts">
+            <LayoutList className="w-4 mr-2" />
+            My Posts
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/api/auth/logout" className="!text-destructive">
+            <LogOut className="w-4 mr-2" />
+            Log out
+          </Link>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

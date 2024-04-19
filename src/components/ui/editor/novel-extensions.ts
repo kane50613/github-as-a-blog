@@ -18,7 +18,6 @@ const tiptapLink = TiptapLink.configure({
 });
 
 const tiptapImage = TiptapImage.configure({
-  allowBase64: true,
   HTMLAttributes: {
     class: cx(
       "rounded-lg border border-muted aspect-video object-contain w-full",
