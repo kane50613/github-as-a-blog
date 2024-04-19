@@ -66,7 +66,7 @@ export const User = () => {
         <DropdownMenuItem asChild>
           <Link href="/api/auth/logout" className="!text-destructive">
             <LogOut className="w-4 mr-2" />
-            Log out
+            Logout
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
