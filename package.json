@@ -32,7 +32,7 @@
     "lucide-react": "^0.371.0",
     "markdown-to-jsx": "^7.4.7",
     "marked": "^12.0.1",
-    "next": "^14.2.2",
+    "next": "14.3.0-canary.14",
     "next-safe-action": "^6.2.0",
     "novel": "^0.3.1",
     "react": "18.2.0",

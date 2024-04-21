@@ -9,6 +9,9 @@ await import("./src/env.js");
 const config = {
   // disable the `X-Powered-By` header to improve security
   poweredByHeader: false,
+  experimental: {
+    ppr: true,
+  },
 };
 
 export default config;
