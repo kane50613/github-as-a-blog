@@ -137,6 +137,8 @@ To use GaaB, you need to create a GitHub OAuth App to authenticate users and fet
 
 To adhere to Next.js caching rules, dynamic functions, such as getUser, must be converted into server actions to resolve the issue, using the [useUser](src/hooks/use-user.ts) hook to fetch the user data on the client-side.
 
+If the page is public, for example, `/posts/[slug]`, [Partial Pre-rendering](https://nextjs.org/docs/app/api-reference/next-config-js/partial-prerendering) is used to speed up the rendering process.
+
 ### Bypassing the Rate Limit (Optional)
 
 To bypass the rate limit of the GitHub API, you can [create a personal access token](https://github.com/settings/tokens/new) with the `public_repo` scope and set it as the `GITHUB_TOKEN` environment variable in `.env`.
