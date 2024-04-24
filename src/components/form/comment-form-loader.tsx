@@ -22,9 +22,6 @@ export const CommentFormLoader = ({ post }: { post: Post }) => {
   if (user.login === post.user?.login)
     return <CommentUnavailable message="You can't comment on your own post" />;
 
-  if (user.login !== post.user?.login)
-    return <CommentUnavailable message="You can only view comments" />;
-
   return <CommentForm post={post} />;
 };
 
