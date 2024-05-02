@@ -5,6 +5,10 @@ import { type RouteGenericInterface } from "fastify/types/route";
 // this is a mock server to simulate the GitHub API,
 // it's not a complete implementation, only the parts used in the app
 
+// Why not just mock the Octokit fetch method?
+// Because we use Node.js and next.js edge runtime, mocked state won't persist between runtime,
+// and edge runtime doesn't have access to the file system to store the state.
+
 type Issue =
   Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"][0];
 
