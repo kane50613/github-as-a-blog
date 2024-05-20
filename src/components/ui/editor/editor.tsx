@@ -1,5 +1,5 @@
 import { EditorBubble, EditorContent, EditorRoot } from "novel";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { defaultExtensions } from "@/components/ui/editor/novel-extensions";
 import { Separator } from "@/components/ui/separator";
 import { LinkSelector } from "@/components/ui/editor/bubble-actions/link-selector";
@@ -20,24 +20,14 @@ export const Editor = ({
 }) => {
   const [dialog, setDialog] = useState<Dialog | null>(null);
 
-  const initialJSON = useMemo(
-    () =>
-      generateJSON(
-        xss(
-          // @ts-expect-error: marked didn't get the type definition right, it still returns Promise<string> instead of string at type level.
-          marked(initialContent, {
-            async: false,
-          }),
-        ),
-        defaultExtensions,
-      ),
-    [initialContent],
-  );
-
-  console.log(
-    marked(initialContent, {
-      async: false,
-    }),
+  const initialJSON = generateJSON(
+    xss(
+      // @ts-expect-error: marked didn't get the type definition right, it still returns Promise<string> instead of string at type level.
+      marked(initialContent, {
+        async: false,
+      }),
+    ),
+    defaultExtensions,
   );
 
   return (

@@ -11,6 +11,7 @@ const config = {
   poweredByHeader: false,
   experimental: {
     ppr: true,
+    reactCompiler: true,
   },
 };
 
