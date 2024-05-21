@@ -8,6 +8,7 @@ import {
 } from "novel/extensions";
 
 import { cx } from "class-variance-authority";
+import { Markdown } from "tiptap-markdown";
 
 const tiptapLink = TiptapLink.configure({
   HTMLAttributes: {
@@ -83,6 +84,13 @@ const starterKit = StarterKit.configure({
   gapcursor: false,
 });
 
+const markdown = Markdown.configure({
+  // for safety reasons, we don't want to allow raw HTML
+  html: false,
+  transformCopiedText: true,
+  transformPastedText: true,
+});
+
 export const defaultExtensions = [
   starterKit,
   Placeholder,
@@ -90,4 +98,5 @@ export const defaultExtensions = [
   taskList,
   taskItem,
   tiptapImage,
+  markdown,
 ];
