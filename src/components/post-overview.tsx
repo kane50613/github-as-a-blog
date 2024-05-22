@@ -3,11 +3,10 @@ import { AuthorContent } from "@/components/author";
 import { Stats } from "@/components/stats";
 import { Heart, MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { memo } from "react";
 import removeMarkdown from "remove-markdown";
 
-// Rendering mdx content in overview is not necessary and could break the LightHouse score, so we remove it.
-export const PostOverview = memo(({ post }: { post: Post }) => (
+// Rendering mdx content in overview is not necessary and could break the LightHouse score, so only render plain text.
+export const PostOverview = ({ post }: { post: Post }) => (
   <Link
     href={`/posts/${post.number}`}
     className="!no-underline"
@@ -34,6 +33,4 @@ export const PostOverview = memo(({ post }: { post: Post }) => (
       </div>
     </article>
   </Link>
-));
-
-PostOverview.displayName = "PostOverview";
+);
