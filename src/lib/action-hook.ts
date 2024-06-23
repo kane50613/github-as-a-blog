@@ -1,9 +1,7 @@
 import { useAction } from "next-safe-action/hooks";
 import { toast } from "sonner";
 
-export function useActionWithHandler<T extends Parameters<typeof useAction>[0]>(
-  func: T,
-) {
+export const useActionWithHandler: typeof useAction = (func, utils) => {
   return useAction(func, {
     onError(error) {
       console.error(error);
@@ -15,8 +13,9 @@ export function useActionWithHandler<T extends Parameters<typeof useAction>[0]>(
 
       if (error.fetchError) toast.error("Failed to fetch data");
     },
+    ...utils,
   });
-}
+};
 
 export function wrapInfiniteSafeAction<Data>(
   func: (input: number) => Promise<{
