@@ -12,9 +12,9 @@ const schema = zfd.formData({
   body: zfd.text(z.string().min(1)),
 });
 
-export const createComment = authAction(
-  schema,
-  async ({ issue_number, body }) => {
+export const createComment = authAction
+  .schema(schema)
+  .action(async ({ parsedInput: { issue_number, body } }) => {
     const session = await getSession();
 
     return client(session).issues.createComment({
@@ -23,5 +23,4 @@ export const createComment = authAction(
       issue_number,
       body,
     });
-  },
-);
+  });

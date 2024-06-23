@@ -5,18 +5,18 @@ import { getUser } from "@/common/github";
 
 export const action = createSafeActionClient();
 
-export const authAction = createSafeActionClient({
-  async middleware() {
-    const session = await getSession();
+export const authAction = action.use(async ({ next }) => {
+  const session = await getSession();
 
-    const user = await getUser(session);
+  const user = await getUser(session);
 
-    if (!whitelistCheckWithFallback(user.login))
-      throw new Error("You are not allowed to perform this action");
+  if (!whitelistCheckWithFallback(user.login))
+    throw new Error("You are not allowed to perform this action");
 
-    return {
+  return next({
+    ctx: {
       user,
       session,
-    };
-  },
+    },
+  });
 });

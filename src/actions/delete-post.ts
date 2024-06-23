@@ -7,19 +7,22 @@ import { authAction } from "@/common/action";
 import { z } from "zod";
 import { revalidatePost } from "@/actions/helpers/revalidate-post";
 
-export const deletePost = authAction(z.number(), async (id, { session }) => {
-  const issue = await getIssue(id).catch(notFound);
+export const deletePost = authAction
+  .schema(z.number())
+  .action(async ({ parsedInput, ctx: { session } }) => {
+    const issue = await getIssue(parsedInput).catch(notFound);
 
-  const result = await client(session).issues.update({
-    issue_number: id,
-    owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
-    repo: env.NEXT_PUBLIC_GITHUB_REPO,
-    state: "closed",
+    const result = await client(session).issues.update({
+      issue_number: parsedInput,
+      owner: env.NEXT_PUBLIC_GITHUB_REPO_OWNER,
+      repo: env.NEXT_PUBLIC_GITHUB_REPO,
+      state: "closed",
+    });
+
+    if (result.data.state !== "closed")
+      throw new Error("Failed to delete post");
+
+    revalidatePost(issue);
+
+    redirect("/posts");
   });
-
-  if (result.data.state !== "closed") throw new Error("Failed to delete post");
-
-  revalidatePost(issue);
-
-  redirect("/posts");
-});

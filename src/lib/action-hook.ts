@@ -3,10 +3,15 @@ import { toast } from "sonner";
 
 export const useActionWithHandler: typeof useAction = (func, utils) => {
   return useAction(func, {
-    onError(error) {
+    onError({ error }) {
       console.error(error);
 
-      if (error.serverError) toast.error(error.serverError);
+      if (error.serverError)
+        toast.error(
+          typeof error.serverError === "string"
+            ? error.serverError
+            : JSON.stringify(error.serverError),
+        );
 
       if (error.validationErrors)
         toast.error(JSON.stringify(error.validationErrors));
@@ -18,26 +23,29 @@ export const useActionWithHandler: typeof useAction = (func, utils) => {
 };
 
 export function wrapInfiniteSafeAction<Data>(
-  func: (input: number) => Promise<{
-    data?: Data;
-    serverError?: string;
-    validationErrors?: Partial<Record<string, string[]>>;
-  }>,
+  func: (input: number) => Promise<
+    | {
+        data?: Data;
+        serverError?: string;
+        validationErrors?: unknown;
+      }
+    | undefined
+  >,
 ) {
   return async function (page: number) {
     const data = await func(page);
 
-    if (data.serverError) {
+    if (data?.serverError) {
       toast.error(JSON.stringify(data.serverError));
       throw new Error(data.serverError);
     }
 
-    if (data.validationErrors) {
+    if (data?.validationErrors) {
       toast.error(JSON.stringify(data.validationErrors));
       throw new Error("Validation error");
     }
 
-    if (!data.data) throw new Error("No data returned");
+    if (!data?.data) throw new Error("No data returned");
 
     return data.data;
   };

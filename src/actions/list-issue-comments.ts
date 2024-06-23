@@ -11,9 +11,9 @@ const schema = z.object({
   page: z.number(),
 });
 
-export const listIssueComments = action(
-  schema,
-  async ({ issue_number, page }) => {
+export const listIssueComments = action
+  .schema(schema)
+  .action(async ({ parsedInput: { issue_number, page } }) => {
     const session = await getUnsafeSession();
 
     return client(session)
@@ -25,9 +25,8 @@ export const listIssueComments = action(
         page,
       })
       .then((r) => r.data);
-  },
-);
+  });
 
 export type ListIssueComments = NonNullable<
-  Awaited<ReturnType<typeof listIssueComments>>["data"]
+  NonNullable<Awaited<ReturnType<typeof listIssueComments>>>["data"]
 >;

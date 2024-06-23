@@ -17,13 +17,15 @@ const schema = zfd.formData({
 
 type Schema = z.infer<typeof schema>;
 
-export const upsertPost = authAction(schema, async ({ id, ...data }) => {
-  const issue = id ? await updatePost(id, data) : await createPost(data);
+export const upsertPost = authAction
+  .schema(schema)
+  .action(async ({ parsedInput: { id, ...data } }) => {
+    const issue = id ? await updatePost(id, data) : await createPost(data);
 
-  revalidatePost(issue);
+    revalidatePost(issue);
 
-  redirect(`/posts/${issue.number}`);
-});
+    redirect(`/posts/${issue.number}`);
+  });
 
 async function updatePost(id: number, data: Schema) {
   const session = await getSession();

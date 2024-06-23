@@ -42,6 +42,8 @@ async function grabToken(req: Request, code: string) {
 
   const token = await exchangeToken(req, code);
 
+  if ("error" in token) throw new Error(JSON.stringify(token));
+
   const givenScopes = token.scope.match(/[a-z:_]+/g) ?? [];
 
   if (
@@ -90,8 +92,12 @@ async function exchangeToken(req: Request, code: string) {
     },
   );
 
-  return (await tokenRequest.json()) as {
-    access_token: string;
-    scope: string;
-  };
+  return (await tokenRequest.json()) as
+    | {
+        access_token: string;
+        scope: string;
+      }
+    | {
+        error: string;
+      };
 }
